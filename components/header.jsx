@@ -6,7 +6,7 @@ import {
   StatusBar,
   StyleSheet,
 } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -16,10 +16,11 @@ import Tournament from "./Tournament";
 import { fonts } from "@/utils/fonts";
 
 const Header = () => {
+  const navigation = useNavigation(); // Hook to access navigation
   const [activeTab, setActiveTab] = useState("NINZAMANIA");
   const [gradientColors, setGradientColors] = useState([
     "#1A2B4C",
-    "#1A2B4C", //#204173
+    "#1A2B4C",//#204173
     "#006eb0",
   ]);
   const [headerColor, setHeaderColor] = useState("#143A5A");
@@ -72,7 +73,10 @@ const Header = () => {
       <LinearGradient colors={gradientColors} style={styles.container}>
         {/* Header */}
         <View style={[styles.navbar, { backgroundColor: headerColor }]}>
-          <Icon name="person-circle-outline" size={30} color="#ffffff" />
+           {/* Navigate to ProfilePage */}
+           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+            <Icon name="person-circle-outline" size={30} color="#ffffff" />
+          </TouchableOpacity>
           <View style={styles.walletContainer}>
             <Icon
               name="wallet-outline"
@@ -174,8 +178,9 @@ const styles = StyleSheet.create({
   activeTabButton: {
     borderBottomWidth: 3,
     borderBottomColor: "#e4be00",
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    borderBottomLeftRadius:10,
+    borderBottomRightRadius:10,
+    
   },
   headerTab: {
     color: "#A9C1E8",
@@ -189,3 +194,5 @@ const styles = StyleSheet.create({
 });
 
 export default Header;
+
+  
