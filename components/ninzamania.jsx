@@ -1,279 +1,3 @@
-// import React, { useState } from "react";
-// import {
-//   View,
-//   Text,
-//   Image,
-//   ScrollView,
-//   StyleSheet,
-//   TouchableOpacity,
-//   StatusBar,
-//   Modal,
-//   Pressable,
-// } from "react-native";
-// import { LinearGradient } from "expo-linear-gradient";
-// import { SafeAreaView } from "react-native-safe-area-context";
-// import { useFonts, Poppins_700Bold, Poppins_400Regular } from "@expo-google-fonts/poppins";
-// import CurvedDivider from "./curvedDivider";
-// import { fonts } from "@/utils/fonts";
-// import { XIcon } from "lucide-react-native";
-// import { BlurView } from "expo-blur";
-// const NinzaMania = () => {
-//   const [modalVisible, setModalVisible] = useState(false);
-//   const [selectedGame, setSelectedGame] = useState(null);
-//   const [showBanner, setShowBanner] = useState(true);
-
-//   const openModal = (game) => {
-//     setSelectedGame(game);
-//     setModalVisible(true);
-//   };
-
-//   const closeModal = () => {
-//     setModalVisible(false);
-//     setSelectedGame(null);
-//   };
-
-//   return (
-//     <SafeAreaView style={styles.safeArea}>
-//       <StatusBar barStyle="light-content" backgroundColor="#1A2B4C" />
-//       <LinearGradient colors={["#1A2B4C", "#204173", "#006eb0"]} style={styles.container}>
-//         {/* Submenu */}
-//         <View style={styles.submenu}>
-//           <Text style={styles.submenuText}>OFFERS</Text>
-//           <Text style={styles.submenuText}>SEARCH</Text>
-//           <Text style={styles.submenuText}>WORLD WAR</Text>
-//         </View>
-
-//         {/* Game Sections */}
-//         <ScrollView style={styles.scrollContainer}>
-//           <Section title="TRENDING" items={dummyGames} onCardPress={openModal} />
-//           <Section title="FOR YOU" items={dummyGames} onCardPress={openModal} />
-//           <Section title="POPULAR ON Ninza" items={dummyGames} onCardPress={openModal} />
-//           <Section title="POPULAR ON Ninza" items={dummyGames} onCardPress={openModal} />
-
-//         </ScrollView>
-
-//         {/* Modal */}
-//         <Modal
-//           visible={modalVisible}
-//           animationType="slide"
-//           transparent={true}
-//           onRequestClose={closeModal}
-//         >
-//           <View style={styles.modalOverlay}>
-//             <View style={styles.modalContent}>
-//               {selectedGame && (
-//                 <>
-//                   <Image source={selectedGame.image} style={styles.modalImage} />
-//                   <Text style={styles.modalTitle}>{selectedGame.name}</Text>
-//                   <Text style={styles.modalDescription}>
-//                     Play {selectedGame.name} and enjoy the best experience!
-//                   </Text>
-//                   <Pressable style={styles.closeButton} onPress={closeModal}>
-//                     <Text style={styles.closeButtonText}>Close</Text>
-//                   </Pressable>
-//                 </>
-//               )}
-//             </View>
-//           </View>
-//         </Modal>
-//       </LinearGradient>
-
-//       {/* Bottom Banner */}
-//       {showBanner && (
-//         <View style={styles.banner}>
-//           <View style={styles.bannerIcon} />
-//           <View style={{ flex: 1 }}>
-//             <Text style={styles.bannerText}>60% off Fantasy Coupon</Text>
-//             <Text style={styles.bannerDescription}>
-//               Make your Fantasy team. Max. discount up to ₹5
-//             </Text>
-//           </View>
-//           <TouchableOpacity onPress={() => setShowBanner(false)}>
-//             <XIcon size={24} color="white" />
-//           </TouchableOpacity>
-//         </View>
-//       )}
-//     </SafeAreaView>
-//   );
-// };
-
-// // Dummy game data
-// const dummyGames = [
-//   { name: "Rummy", image: require("../assets/images/gameslogo/rummy.jpg") },
-//   { name: "Callbreak", image: require("../assets/images/gameslogo/callbreak.jpg") },
-//   { name: "Poker", image: require("../assets/images/gameslogo/pokar.jpg") },
-//   { name: "Ludo", image: require("../assets/images/gameslogo/ludo.jpg") },
-//   { name: "Snakes & Ladders", image: require("../assets/images/gameslogo/snake.jpg") },
-// ];
-
-// // Section Component
-// const Section = ({ title, items, onCardPress }) => (
-
-//   <View style={styles.section}>
-//   <CurvedDivider />
-//   <Text style={styles.sectionTitle}>{title}</Text>
-//   <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-//     {items.map((item, index) => (
-//       <TouchableOpacity
-//         key={index}
-//         style={styles.gameCardContainer}
-//         onPress={() => onCardPress(item)}
-//       >
-//         {/* Blurred Background */}
-//         <BlurView
-//           intensity={30}
-//           tint="light"
-//           style={StyleSheet.absoluteFill}
-//         />
-//         {/* Content */}
-//         <Image source={item.image} style={styles.gameImage} />
-//         <Text style={styles.gameText}>{item.name}</Text>
-//       </TouchableOpacity>
-//     ))}
-//   </ScrollView>
-// </View>
-
-// );
-
-// const styles = StyleSheet.create({
-//   safeArea: {
-//     flex: 1,
-//     backgroundColor: "#1A2B4C",
-//   },
-//   container: {
-//     flex: 1,
-//     padding: 0,
-//     paddingLeft:10
-//   },
-//   submenu: {
-//     flexDirection: "row",
-//     justifyContent: "space-evenly",
-//     backgroundColor: "#1E4D73",
-//     paddingVertical: 7,
-//     borderRadius: 20,
-//     marginTop: 10,
-//     // marginLeft:30,
-//      marginRight:20,
-//     margin:10
-//   },
-//   submenuText: {
-//     color: "#D0E7FF",
-//     fontSize: 14,
-//     fontFamily: fonts.Poppins,
-//   },
-//   scrollContainer: {
-//     paddingVertical: 0,
-//   },
-
-//   section: {
-//     marginBottom: 10,
-//   },
-//   sectionTitle: {
-//     color: "#D0E7FF",
-//     fontSize: 18,
-//     fontWeight: "bold",
-//     fontFamily: fonts.Poppins,
-//     marginBottom: 5,
-//   },
-//   gameCardContainer: {
-//     borderRadius: 10,
-//     marginRight: 10,
-//     alignItems: "center",
-//     width: 120,
-//     overflow: "hidden", // Ensures the blur effect is contained
-//     position: "relative", // Allows layering of BlurView and content
-//   },
-//   gameImage: {
-//     width: 120,
-//     height: 90,
-//     borderTopRightRadius: 10,
-//     borderTopLeftRadius: 10,
-//     zIndex: 1, // Ensures it appears above the blurred background
-//   },
-//   gameText: {
-//     color: "#ffffff",
-//     fontSize: 14,
-//     textAlign: "center",
-//     paddingTop: 5,
-//     fontFamily: fonts.Poppins,
-//     zIndex: 1, // Ensures it appears above the blurred background
-//   },
-
-//   /////
-//   modalOverlay: {
-//     flex: 1,
-//     backgroundColor: "rgba(0, 0, 0, 0.7)",
-//     justifyContent: "flex-end",
-//     alignItems: "center",
-//   },
-//   modalContent: {
-//     backgroundColor: "#1A2B4C",
-//     borderRadius: 20,
-//     padding: 20,
-//     alignItems: "center",
-//     width: "100%",
-//   },
-//   modalImage: {
-//     width: 150,
-//     height: 100,
-//     borderRadius: 10,
-//     marginBottom: 20,
-//   },
-//   modalTitle: {
-//     fontSize: 18,
-//     fontWeight: "bold",
-//     color: "#fff",
-//     fontFamily: fonts.Poppins,
-//     marginBottom: 10,
-//   },
-//   modalDescription: {
-//     fontSize: 14,
-//     color: "#D0E7FF",
-//     fontFamily: fonts.Poppins,
-//     textAlign: "center",
-//     marginBottom: 20,
-//   },
-//   closeButton: {
-//     backgroundColor: "#00CFFD",
-//     paddingVertical: 10,
-//     paddingHorizontal: 40,
-//     borderRadius: 5,
-//   },
-//   closeButtonText: {
-//     color: "#fff",
-//     fontWeight: "bold",
-//     fontSize: 14,
-//     fontFamily: fonts.Poppins,
-//   },
-//   banner: {
-//     position: "absolute",
-//     bottom: 2,
-//     left: 10,
-//     right: 10,
-//     backgroundColor: "#002f53",
-//     borderRadius: 20,
-//     padding: 16,
-//     flexDirection: "row",
-//     alignItems: "center",
-//   },
-//   bannerIcon: {
-//     width: 48,
-//     height: 48,
-//     borderRadius: 24,
-//     backgroundColor: "white",
-//     marginRight: 16,
-//   },
-//   bannerText: {
-//     color: "#00c9ff",
-//     fontWeight: "bold",
-//   },
-//   bannerDescription: {
-//     color: "white",
-//     fontSize: 12,
-//   },
-// });
-
-// export default NinzaMania;
 import React, { useState } from "react";
 import {
   View,
@@ -285,7 +9,7 @@ import {
   StatusBar,
   Modal,
   Pressable,
-  ImageBackground, // Import ImageBackground
+  ImageBackground,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fonts } from "@/utils/fonts";
@@ -358,17 +82,34 @@ const NinzaMania = () => {
             <View style={styles.modalContent}>
               {selectedGame && (
                 <>
+                  {/* Game Image and Title */}
                   <Image
                     source={selectedGame.image}
                     style={styles.modalImage}
                   />
                   <Text style={styles.modalTitle}>{selectedGame.name}</Text>
-                  <Text style={styles.modalDescription}>
-                    Play {selectedGame.name} and enjoy the best experience!
-                  </Text>
-                  <Pressable style={styles.closeButton} onPress={closeModal}>
-                    <Text style={styles.closeButtonText}>Close</Text>
-                  </Pressable>
+
+                  {/* Scrollable How to Play Section */}
+                  <ScrollView style={styles.howToPlayContainer}>
+                    <Text style={styles.howToPlayTitle}>How to Play</Text>
+                    <Text style={styles.howToPlayText}>
+                      {selectedGame.howToPlay ||
+                        "No instructions available for this game."}
+                    </Text>
+                  </ScrollView>
+
+                  {/* Fixed Buttons */}
+                  <View style={styles.buttonRow}>
+                    <Pressable style={[styles.button, styles.playButton]}>
+                      <Text style={styles.buttonText}>Play Now</Text>
+                    </Pressable>
+                    <Pressable
+                      style={[styles.button, styles.closeButton]}
+                      onPress={closeModal}
+                    >
+                      <Text style={styles.buttonText}>Close</Text>
+                    </Pressable>
+                  </View>
                 </>
               )}
             </View>
@@ -397,16 +138,109 @@ const NinzaMania = () => {
 
 // Dummy game data
 const dummyGames = [
-  { name: "Rummy", image: require("../assets/images/gameslogo/rummy.png") },
+  {
+    name: "Rummy",
+    image: require("../assets/images/gameslogo/rummy1.png"),
+    howToPlay: `  
+1. Players: 2-6 players. A standard deck of 52 cards is used (2 decks for 4+ players).  
+2. Objective: Form valid sets and sequences to reduce points in your hand to zero.  
+3. Dealing: Each player gets 13 cards.  
+4. Game Play:  
+   - Draw a card from the deck or discard pile.  
+   - Discard one card to maintain 13 cards.  
+5. Winning: Declare when you have a valid hand (at least one pure sequence).  
+
+Rules of Rummy  
+1. Pure Sequence: A sequence of consecutive cards of the same suit without a joker.  
+2. Impure Sequence: A sequence that includes a joker.  
+3. Sets: A group of 3 or 4 cards of the same rank but different suits.  
+4. Joker: Can be used as a wildcard to replace any card.  
+5. Declaration: A valid declaration must include at least one pure sequence.
+    `,
+  },
   {
     name: "Callbreak",
     image: require("../assets/images/gameslogo/callbreak.png"),
+    howToPlay: ` 
+1. Players: 4 players.  
+2. Objective: Win exactly the number of tricks (rounds) you bid at the beginning of each game.  
+3. Dealing: Each player gets 13 cards.  
+4. Bidding: Players declare how many tricks they aim to win.  
+5. Gameplay:  
+   - Play proceeds in tricks, starting with the player to the dealer’s left.  
+   - The highest card of the suit led wins the trick unless a trump (spade) is played.  
+
+Rules of Call Break  
+1. Trumps: Spades are the trump suit and can beat cards of other suits.  
+2. Follow Suit: Players must follow the suit led if possible; otherwise, they can play any card.  
+3. Scoring:  
+   - Meet or exceed your bid to score points equal to your bid.  
+   - Failing to meet the bid results in negative points equal to the bid.  
+4. Winning: The player with the highest score after a set number of rounds wins.  
+5. Breaking Spades: Spades can be played only if a player cannot follow the suit led or spades are led intentionally.
+    `,
   },
-  { name: "Poker", image: require("../assets/images/gameslogo/poker.png") },
-  { name: "Ludo", image: require("../assets/images/gameslogo/ludo (2).png") },
+  {
+    name: "Poker",
+    image: require("../assets/images/gameslogo/poker.png"),
+    howToPlay: ` 
+1. Players: 2-10 players.  
+2. Objective: Form the best 5-card hand or bluff opponents to win the pot.  
+3. Game Rounds:  
+   -Pre-Flop: Players get 2 private cards (hole cards).  
+   -Flop: 3 community cards are dealt face up.  
+   -Turn: 1 more community card is dealt.  
+   -River: Final community card is dealt.  
+   -Showdown: Remaining players reveal cards to determine the winner.  
+4. Betting: Players can *check*, *bet*, *call*, *raise*, or *fold* during betting rounds.  
+
+Rules of Poker  
+1. Hand Rankings: Follow standard poker hand rankings (e.g., Royal Flush, Full House, etc.).  
+2. Bluffing: You can bluff to make opponents fold.  
+3. Betting Limits: Stick to the game’s limit (No-Limit, Pot-Limit, Fixed-Limit).  
+4. Community Cards: Combine hole cards with community cards to form the best hand.  
+5. Winning: Win by having the best hand or making all others fold.
+    `,
+  },
+  {
+    name: "Ludo",
+    image: require("../assets/images/gameslogo/ludo (2).png"),
+    howToPlay: `
+How to Play Ludo  
+1. Players: 2-4 players. Each player chooses a color and gets four tokens.  
+2. Start: Roll a 6 to move a token out of the home base onto the starting square.  
+3. Movement: Roll the dice and move the token forward by the number rolled.  
+4. Goal: Move all four tokens from the starting square to the center of the board (home).  
+5. Winning: The first player to get all four tokens to the home wins.
+
+Rules of Ludo  
+1. Rolling a 6: A 6 allows you to roll again.  
+2. Safe Squares: Tokens on safe squares (marked with a star) cannot be captured.  
+3. Capturing Tokens: Land on an opponent's token to send it back to their base.  
+4. Exact Roll: You need an exact roll to move your token into the home.  
+5. Blockade: Two tokens of the same color on a square form a blockade; no other token can pass it.
+    `,
+  },
   {
     name: "Snakes & Ladders",
     image: require("../assets/images/gameslogo/snake.jpeg"),
+    howToPlay: `
+How to Play Snake and Ladder  
+1. Players: 2 or more players.  
+2. Objective: Reach square 100 first.  
+3. Start: Roll a 6 to begin.  
+4. Gameplay:  
+   - Roll the dice and move forward by the number rolled.  
+   - Land on a *ladder* to climb up.  
+   - Land on a *snake* to slide down.  
+
+Rules of Snake and Ladder  
+1. Exact Roll: You need an exact roll to land on square 100 to win.  
+2. One Token Per Player: Only one token is used per player.  
+3. No Backward Move: If the dice roll exceeds square 100, wait for the next turn.  
+4. Climbing and Sliding: Ladders advance you upward, snakes send you downward.  
+5. No Blocking: Two players can occupy the same square.
+    `,
   },
 ];
 
@@ -429,6 +263,8 @@ const Section = ({ title, items, onCardPress }) => (
 );
 
 const styles = StyleSheet.create({
+  // All styles remain the same as your original code
+  // Including modal styles, submenu, banner, etc.
   safeArea: {
     flex: 1,
     backgroundColor: "#1A2B4C",
@@ -473,14 +309,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 10,
     alignItems: "center",
-    width: 120, // Adjusted width
-    height: 120, // Adjusted height
+    width: 120,
+    height: 120,
     overflow: "hidden",
   },
   gameImage: {
     width: "100%",
     height: "100%",
-    borderRadius: 10, // Optional rounded corners
+    borderRadius: 10,
   },
   modalOverlay: {
     flex: 1,
@@ -489,15 +325,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalContent: {
-    backgroundColor: "#1A2B4C",
+    backgroundColor: "rgba(0, 78, 112, 0.9)",
     borderRadius: 20,
     padding: 20,
     alignItems: "center",
     width: "100%",
+    height: "80%",
   },
   modalImage: {
-    width: 150,
-    height: 100,
+    width: 130,
+    height: 120,
     borderRadius: 10,
     marginBottom: 20,
   },
@@ -508,52 +345,70 @@ const styles = StyleSheet.create({
     fontFamily: fonts.Poppins,
     marginBottom: 10,
   },
-  modalDescription: {
-    fontSize: 14,
-    color: "#D0E7FF",
+  howToPlayContainer: {
+    flex: 1,
+    marginVertical: 10,
+    paddingHorizontal: 10,
+  },
+  howToPlayTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#E6F7FF",
     fontFamily: fonts.Poppins,
-    textAlign: "center",
-    marginBottom: 20,
+    marginBottom: -15,
+  },
+  howToPlayText: {
+    fontSize: 12,
+    color: "#E6F7FF",
+    fontFamily: fonts.Poppins,
+    lineHeight: 20,
+  },
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    marginTop: 10,
+    marginBottom:60
+  },
+  button: {
+    borderRadius: 10,
+    padding: 15,
+    flex: 1,
+    marginHorizontal: 5,
+  },
+  playButton: {
+    backgroundColor: "#20B954",
   },
   closeButton: {
-    backgroundColor: "#00CFFD",
-    paddingVertical: 10,
-    paddingHorizontal: 40,
-    borderRadius: 5,
+    backgroundColor: "#FF5C5C",
   },
-  closeButtonText: {
-    color: "#fff",
+  buttonText: {
+    textAlign: "center",
+    color: "white",
     fontWeight: "bold",
-    fontSize: 14,
     fontFamily: fonts.Poppins,
   },
   banner: {
-    position: "absolute",
-    bottom: 2,
-    left: 10,
-    right: 10,
-    backgroundColor: "#002f53",
-    borderRadius: 20,
-    padding: 16,
     flexDirection: "row",
     alignItems: "center",
+    backgroundColor: "#204173",
+    padding: 10,
   },
   bannerIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: "white",
-    marginRight: 16,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: "orange",
+    marginRight: 10,
   },
   bannerText: {
-    color: "#00c9ff",
+    color: "white",
     fontWeight: "bold",
   },
   bannerDescription: {
-    color: "white",
+    color: "#D0E7FF",
     fontSize: 12,
   },
 });
 
 export default NinzaMania;
-
