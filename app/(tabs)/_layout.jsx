@@ -18,6 +18,7 @@ const Tab = createBottomTabNavigator();
 export default function Tabs() {
   return (
     <Tab.Navigator
+    initialRouteName="Main"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           if (route.name === "Main") {
@@ -32,7 +33,7 @@ export default function Tabs() {
             );
           } else {
             let iconName;
-            if (route.name === "Home") {
+            if (route.name === "Games") {
               iconName = focused
                 ? "game-controller"
                 : "game-controller-outline";
@@ -66,7 +67,7 @@ export default function Tabs() {
       })}
     >
       <Tab.Screen
-        name="Home"
+        name="Games"
         component={Header}
         options={{ headerShown: false, tabBarLabel: () => null }}
       />

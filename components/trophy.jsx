@@ -1,189 +1,195 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StatusBar,
-  StyleSheet,
-} from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
-import Icon from "react-native-vector-icons/Ionicons";
-import BoardScreen from "@/app/(tabs)/boardScreen";
-import NinzaMania from "./ninzamania";
-import Tournament from "./Tournament";
-import { fonts } from "@/utils/fonts";
+import React from 'react';
+import { View, Text, StyleSheet, Image, ScrollView,StatusBar } from 'react-native';
+import playersData from "@/playerdata.json";
 
-const Trophy = () => {
-  const [activeTab, setActiveTab] = useState("LEADERBOARD"); // Default to LEADERBOARD
-  const [gradientColors, setGradientColors] = useState([
-    "#14bf98",
-    "#14bf98",
-    "#14bf98",
-  ]); // Colors for LEADERBOARD
-  const [headerColor, setHeaderColor] = useState("#004845"); // Header color for LEADERBOARD
-  const [tabBlockColor, setTabBlockColor] = useState("#004B4A"); // Tab block color for LEADERBOARD
+const avatarMap = {
+  avatar2: require('../assets/images/5.png'),
+  avatar1: require('../assets/images/6.png'),
+  // Add other avatar mappings here if needed
+};
 
-  useFocusEffect(
-    React.useCallback(() => {
-      // Reset active tab to "LEADERBOARD" when screen is focused
-      setActiveTab("LEADERBOARD");
-      setGradientColors(["#14bf98", "#14bf98", "#14bf98"]);
-      setHeaderColor("#004845");
-      setTabBlockColor("#004B4A");
-    }, [])
-  );
-
-  const handleTabPress = (tab) => {
-    setActiveTab(tab);
-
-    // Update colors based on the selected tab
-    switch (tab) {
-      case "LEADERBOARD":
-        setGradientColors(["#14bf98", "#14bf98", "#14bf98"]);
-        setHeaderColor("#004845");
-        setTabBlockColor("#004B4A");
-        break;
-      case "NINZAMANIA":
-        setGradientColors(["#1A2B4C", "#204173", "#006eb0"]);
-        setHeaderColor("#1A2B4C");
-        setTabBlockColor("#1A2B4C");
-        break;
-      case "TOURNAMENT":
-        setGradientColors(["#58003b", "#b8007a", "#ff0090"]);
-        setHeaderColor("#58003b");
-        setTabBlockColor("#5A003C");
-        break;
-      default:
-        setGradientColors(["#1A2B4C", "#204173", "#006eb0"]);
-        setHeaderColor("#143A5A");
-        setTabBlockColor("#143A5A");
-    }
-  };
+const LeaderboardScreen = () => {
+  const { topPlayers, otherPlayers } = playersData;
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      {/* Dynamic StatusBar */}
+    <View style={styles.container}>
       <StatusBar
         barStyle="light-content"
-        backgroundColor={headerColor} // Dynamically change StatusBar color
+        backgroundColor="#3A2B2B" // Synchronize StatusBar with header
       />
-      <LinearGradient colors={gradientColors} style={styles.container}>
-        {/* Header */}
-        <View style={[styles.navbar, { backgroundColor: headerColor }]}>
-          <Icon name="person-circle-outline" size={30} color="#ffffff" />
-          <View style={styles.walletContainer}>
-            <Icon
-              name="wallet-outline"
-              size={20}
-              color="#00CFFD"
-              style={styles.walletIcon}
-            />
-            <Text style={styles.walletLabel}>₹</Text>
-            <Text style={styles.walletBalance}>200</Text>
-          </View>
-          <Icon
-            name="notifications-outline"
-            size={24}
-            color="#ffffff"
-            style={styles.iconSpacing}
-          />
-        </View>
+      {/* Header */}
+      <View style={styles.head}>
+        <Text style={styles.headertext}>←</Text>
+        <Text style={styles.headertext1}>LeaderBoard</Text>
+      </View>
 
-        {/* Tabs */}
-        <View style={[styles.headerTabs, { backgroundColor: tabBlockColor }]}>
-          {["NINZAMANIA", "LEADERBOARD", "TOURNAMENT"].map((tab) => (
-            <TouchableOpacity
-              key={tab}
-              onPress={() => handleTabPress(tab)}
+      {/* Top Players */}
+      <View style={styles.topPlayersContainer}>
+        {topPlayers.map((player, index) => (
+          <View key={index} style={styles.playerCard}>
+            <Image
+              source={avatarMap[player.avatar]} // Map the avatar key to the actual image
               style={[
-                styles.tabButton,
-                activeTab === tab && styles.activeTabButton,
+                styles.avatar,
+                player.rank === 1 && styles.avatarLarge,
               ]}
-            >
-              <Text
-                style={[
-                  styles.headerTab,
-                  activeTab === tab && styles.activeTabText,
-                ]}
-              >
-                {tab}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+            />
+            <Text style={styles.rank}>{player.rank}</Text>
+            <Text style={styles.playerName}>{player.name}</Text>
+            <Text style={styles.points}>{player.points} pts</Text>
+          </View>
+        ))}
+      </View>
 
-        {/* Dynamic Content */}
-        {activeTab === "NINZAMANIA" && <NinzaMania />}
-        {activeTab === "LEADERBOARD" && <BoardScreen />}
-        {activeTab === "TOURNAMENT" && <Tournament />}
-      </LinearGradient>
-    </SafeAreaView>
+      {/* Info Bar */}
+      <View style={styles.infoBar}>
+        <View style={styles.infoContainer}>
+          <Text style={styles.infoText}>Time Left: 3 Days</Text>
+        </View>
+        <View style={styles.infoContainer}>
+          <Text style={styles.infoText}>Today: ▲ 1 Place</Text>
+        </View>
+      </View>
+
+      {/* Other Players */}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {otherPlayers.map((player, index) => (
+          <View key={index} style={styles.listItem}>
+            <Text style={styles.rank}>{player.rank}</Text>
+            <Image source={avatarMap[player.avatar]} style={styles.avatarSmall} />
+            <View style={styles.playerInfo}>
+              <Text style={styles.playerNameSmall}>{player.name}</Text>
+              <Text style={styles.pointsSmall}>Score  {player.points} pts</Text>
+            </View>
+            <Text
+              style={player.status === 'up' ? styles.statusUp : styles.statusDown}
+            >
+              {player.status === 'up' ? '▲' : '▼'}
+            </Text>
+          </View>
+        ))}
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#1A2B4C",
-  },
   container: {
     flex: 1,
+    backgroundColor: '#3A2B2B',
+    padding: 10,
+    paddingBottom: 0,
   },
-  navbar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 17,
-    paddingBottom: 10,
-    paddingTop: 10,
+  head: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    marginBottom:20
   },
-  walletContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#143F62",
+  headertext: {
+    color: '#fff',
+    fontSize: 35,
+    fontWeight:'bold',
+    marginBottom:10
+  },
+  headertext1: {
+    flex: 1,
+    color: '#ffffff',
+    fontSize: 25,
+    textAlign: 'center',
+  },
+  topPlayersContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 10,
+  },
+  playerCard: {
+    alignItems: 'center',
+  },
+  avatar: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 3,
+    borderColor: '#FFD700',
+  },
+  avatarLarge: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+  },
+  rank: {
+    fontSize: 18,
+    color: '#FFD700',
+    fontWeight: 'bold',
+  },
+  playerName: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 5,
+  },
+  points: {
+    color: '#FFD700',
+    fontSize: 14,
+  },
+  infoBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 10,
+    height: 40,
+  },
+  infoContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: '#D3B58A',
     borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    marginHorizontal: 5,
   },
-  walletIcon: {
-    marginRight: 5,
+  infoText: {
+    fontSize: 14,
+    color: '#000',
+    fontWeight: 'bold',
   },
-  walletLabel: {
-    color: "#00CFFD",
-    fontFamily: "Poppins_700Bold",
+  listItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#A57A4C',
+    marginVertical: 5,
+    padding: 15,
+    borderRadius: 10,
+  },
+  avatarSmall: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+  },
+  playerInfo: {
+    flex: 1,
+    marginLeft:10
+  },
+  playerNameSmall: {
     fontSize: 16,
-    marginRight: 5,
+    color: '#FFF',
+    fontWeight: 'bold',
   },
-  walletBalance: {
-    color: "#ffffff",
-    fontFamily: "Poppins_700Bold",
-    fontSize: 16,
+  pointsSmall: {
+    fontSize: 14,
+    color: '#FFD700',
   },
-  headerTabs: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  statusUp: {
+    color: '#00FF00',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
-  tabButton: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  activeTabButton: {
-    borderBottomWidth: 3,
-    borderBottomColor: "#e4be00",
-  },
-  headerTab: {
-    color: "#A9C1E8",
-    fontSize: 16,
-    fontFamily: fonts.Poppins,
-  },
-  activeTabText: {
-    color: "#e4be00",
-    fontSize: 20,
+  statusDown: {
+    color: '#FF0000',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
-export default Trophy;
+export default LeaderboardScreen;

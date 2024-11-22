@@ -27,7 +27,7 @@ const ProfilePage = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar/>
+      <StatusBar  barStyle="light-content"/>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity 
