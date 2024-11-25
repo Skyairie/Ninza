@@ -8,16 +8,17 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { Image, StyleSheet, View, Text } from "react-native";
 import WalletScreen from "../(tabs)/wallet";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Main3 from "@/components/trophy";
 import ReferEarn from "@/components/referEarn";
 import Header from "@/components/header";
 import Trophy from "@/components/trophy";
+import ProfilePage from "@/components/profile";
 
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
   return (
     <Tab.Navigator
+      initialRouteName="Main"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           if (route.name === "Main") {
@@ -32,48 +33,48 @@ export default function Tabs() {
             );
           } else {
             let iconName;
-            if (route.name === "Home") {
+            if (route.name === "Profile") {
               iconName = focused
-                ? "game-controller"
-                : "game-controller-outline";
+                ? "person"
+                : "person-outline";
             } else if (route.name === "Leaderboard") {
               iconName = focused ? "trophy" : "trophy-outline";
             } else if (route.name === "Share") {
               iconName = focused ? "share-social" : "share-social-outline";
             } else if (route.name === "Wallet") {
-              iconName = focused ? "wallet" : "wallet-outline";
+              iconName = focused ? "wallet-sharp" : "wallet-sharp";
             }
             return (
-              <Icon name={iconName} size={focused ? 30 : 27} color={color} />
+              <Icon name={iconName} size={focused ? 28 : 25} color={color} />
             );
           }
         },
         tabBarStyle: {
-          height: 80,
-          paddingTop: 10,
-          paddingBottom: 10,
+          height: 75,
+          paddingTop: 5,
+          paddingBottom: 0,
           backgroundColor: "#1A2B4C",
           borderTopWidth: 0,
         },
 
-        // tabBarLabelStyle: {
-        //   fontSize: 12, // Increase this value to make text larger
-        //   fontWeight: "normal",
-
-        // },
+        tabBarLabelStyle: {
+          fontSize: 11, // Increase this value to make text larger
+          fontWeight: "normal",
+          marginTop: 8,
+        },
         tabBarActiveTintColor: "#fff",
         tabBarInactiveTintColor: "#7C7D90",
       })}
     >
       <Tab.Screen
-        name="Home"
-        component={Header}
-        options={{ headerShown: false, tabBarLabel: () => null }}
+        name="Profile"
+        component={ProfilePage}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Leaderboard"
         component={Trophy}
-        options={{ headerShown: false, tabBarLabel: () => null }}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Main"
@@ -83,12 +84,12 @@ export default function Tabs() {
       <Tab.Screen
         name="Share"
         component={ReferEarn}
-        options={{ headerShown: false, tabBarLabel: () => null }}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Wallet"
         component={WalletScreen}
-        options={{ headerShown: false, tabBarLabel: () => null }}
+        options={{ headerShown: false }}
       />
     </Tab.Navigator>
   );
@@ -96,12 +97,13 @@ export default function Tabs() {
 
 const styles = StyleSheet.create({
   playButton: {
-    padding: 10,
+    padding: 11,
     backgroundColor: "white",
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
     borderColor: "yellow",
     borderWidth: 2,
+    marginTop:10
   },
 });
