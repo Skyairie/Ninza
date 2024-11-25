@@ -13,10 +13,10 @@ const LeaderboardScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar
+      {/* <StatusBar
         barStyle="light-content"
         backgroundColor="#3A2B2B" // Synchronize StatusBar with header
-      />
+      /> */}
       {/* Header */}
       <View style={styles.head}>
         <Text style={styles.headertext}>←</Text>

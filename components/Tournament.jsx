@@ -72,7 +72,7 @@ export default function Tournament() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" backgroundColor="#58003b" />
+      {/* <StatusBar barStyle="light-content" backgroundColor="#58003b" /> */}
       {/* <LinearGradient
         colors={["#58003b", "#b8007a", "#006eb0"]}
         style={styles.container1}

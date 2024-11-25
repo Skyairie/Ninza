@@ -8,7 +8,8 @@ import {
   Dimensions, 
   Platform, 
   Modal, 
-  TextInput 
+  TextInput, 
+  SafeAreaView
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import for navigation
 import { StatusBar } from 'expo-status-bar';
@@ -26,16 +27,13 @@ const ProfilePage = () => {
   const saveData = () => closeModal();
 
   return (
+    <SafeAreaView style={styles.safearea}>
+      {/* <StatusBar barStyle="light-content" backgroundColor="#58003b" /> */}
+      
     <View style={styles.container}>
-      <StatusBar  barStyle="light-content"/>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity 
-          style={styles.backButton} 
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={styles.backButtonText}>←</Text>
-        </TouchableOpacity>
+       
         <Text style={styles.headerTitle}>Profile</Text>
       </View>
 
@@ -112,17 +110,21 @@ const ProfilePage = () => {
         </View>
       </Modal>
     </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safearea:{
+    flex:1
+  },
   container: {
     flex: 1,
     backgroundColor: '#f9f9f9',
   },
   header: {
     backgroundColor: '#143A5A',
-    height: 150,
+    height: 180,
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: Platform.OS === 'ios' ? 40 : 20,
@@ -140,8 +142,9 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
+    
   },
   avatarContainer: {
     alignItems: 'center',
