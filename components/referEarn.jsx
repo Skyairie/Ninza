@@ -1,105 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView,SafeAreaView,StatusBar } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import LottieView from 'lottie-react-native'; // Import Lottie
 import { LinearGradient } from "expo-linear-gradient";
-import { Ionicons } from '@expo/vector-icons';
-const ReferEarn = () => {
-  const [showAnimation, setShowAnimation] = useState(true);
+import { useFocusEffect } from '@react-navigation/native';
 
-  useEffect(() => {
-    // Here we no longer wait for 3 seconds or animation completion,
-    // just display the content immediately after mounting the component.
-    setShowAnimation(false);  // Hide animation immediately after mounting.
-  }, []);
+const ReferEarn = () => {
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // Set specific status bar for this screen
+      StatusBar.setBarStyle('light-content', true);
+      StatusBar.setBackgroundColor('#58003b', true);
+
+      // Clean up when navigating away
+      return () => {
+        StatusBar.setBarStyle('dark-content', true); // Reset to default
+        StatusBar.setBackgroundColor('#FFFFFF', true); // Set back to light background
+      };
+    }, [])
+  );
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" backgroundColor="#58003b" />
-      <LinearGradient colors={["#58003b", "#b8007a", "#006eb0"]} style={styles.container1}>
-      {showAnimation && (
-        <View style={styles.animationContainer}>
-          <LottieView
-            source={require('@/assets/images/jdf.json')} // Ensure the path is correct
-            autoPlay
-            loop={false}  // Only play animation once
-          />
-        </View>
-      )}
+      <LinearGradient colors={["#58003b", "#b8007a", "#1c7d3b"]} style={styles.container1}>
+        <ScrollView style={styles.container}>
+          {/* Header */}
+          <View style={styles.header}>
+            <Text style={styles.headerText}>REFER AND EARN</Text>
+          </View>
 
-      {/* Main Content */}
-      <ScrollView style={styles.container}>
-        {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.headerText}>REFER AND EARN</Text>
-          {/* <TouchableOpacity style={styles.languageSwitch}>
-            <Text style={styles.languageText}>अ</Text>
-          </TouchableOpacity> */}
-        </View>
+          {/* Banner */}
+          <View style={styles.banner}>
+            <Image
+              style={styles.bannerImage}
+              source={require('@/assets/images/bring-friend.jpg')} // Ensure the path is correct
+            />
+          </View>
 
-        {/* Banner */}
-        <View style={styles.banner}>
-          <Image
-            style={styles.bannerImage}
-            source={require('@/assets/images/dummy-currency.jpg')} // Ensure the path is correct
+          {/* Earning Info */}
+          <View style={styles.earningSection}>
+            <TouchableOpacity>
+              <LinearGradient colors={["#FFD700", "#FF8C00"]} style={styles.earningItem}>
+                <Icon name="emoji-events" size={30} color="#000" />
+                <Text style={styles.earningText}>GET ₹30 NOW</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
 
-            
-          />
-        </View>
-
-        {/* Earning Info */}
-        <View style={styles.earningSection}>
-          <Text style={styles.earnTitle}>Earn money when a friend:</Text>
-          <TouchableOpacity>
-            <View style={styles.earningItem}>
-              <Icon name="smartphone" size={30} color="white" />
-              <Text style={styles.earningText}>₹10</Text>
-              <Text style={styles.earningDescription}>signs up</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View style={styles.earningItem}>
-              <Icon name="attach-money" size={30} color="#fff" />
-              <Text style={styles.earningText}>₹125</Text>
-              <Text style={styles.earningDescription}>adds cash</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View style={styles.earningItem}>
-              <Icon name="sports-esports" size={30} color="#fff" />
-              <Text style={styles.earningText}>₹865</Text>
-              <Text style={styles.earningDescription}>plays games</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        {/* Footer */}
-        <View style={styles.footer}>
-          <Text style={styles.link}>Terms & Conditions</Text>
-          <Text style={styles.link}> | </Text>
-          <Text style={styles.link}>Read more in FAQs</Text>
-        </View>
-
-        {/* Share Buttons */}
-        <View style={styles.shareButtons}>
-          <TouchableOpacity style={styles.whatsappButton}>
-            <Ionicons name="logo-whatsapp" size={30} color="#fff" />
-            <Text style={styles.buttonText}>WhatsApp</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.shareButton}>
-            <Icon name="share" size={30} color="#fff" />
-            <Text style={styles.buttonText}>Share</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Earnings Info */}
-        <View style={styles.earningsInfo}>
-          <Text style={styles.earningsText}>Diwakar from RJ earned ₹19,125</Text>
-        </View>
-      </ScrollView>
+          {/* Footer */}
+          <View style={styles.footer}>
+            <Text style={styles.link}>Terms & Conditions</Text>
+            <Text style={styles.link}> | </Text>
+            <Text style={styles.link}>Read more in FAQs</Text>
+          </View>
+        </ScrollView>
       </LinearGradient>
-      </SafeAreaView>
+    </SafeAreaView>
   );
 };
 
@@ -115,119 +71,67 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    //backgroundColor: '#1A2B4C',
     padding: 10,
-  },
-  animationContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#1A1A2E',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
-    top:20
+    marginBottom: 0,
+    marginTop: 10,
   },
   headerText: {
     color: '#fff',
-    fontSize: 24,
-    fontWeight: 'bold',
-    //textAlign:'center'
-  },
-  languageSwitch: {
-    backgroundColor: '#333',
-    borderRadius: 20,
-    padding: 10,
-  },
-  languageText: {
-    color: '#fff',
-    fontSize: 18,
+    fontSize: 30,
+    fontFamily: 'PressStart2P-Regular', // Use a gaming font
+    textShadowColor: '#000',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 10,
   },
   banner: {
-    marginTop:20,
-    marginBottom: 20,
+    marginTop: 0,
+    marginBottom: 0,
+    padding: 30,
   },
   bannerImage: {
     width: '100%',
-    height: 150,
-    borderRadius: 10,
+    height: 200,
+    borderRadius: 20,
+    borderColor: '#FFD700', // Gold border
+    borderWidth: 3,
   },
   earningSection: {
-    marginBottom: 20,
-  },
-  earnTitle: {
-    color: '#fff',
-    fontSize: 18,
-    marginBottom: 10,
-    textAlign: 'center',
+    marginBottom: 0,
   },
   earningItem: {
     flexDirection: 'row',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'yellow',
     padding: 10,
+    margin:10,
     borderRadius: 10,
-    marginBottom: 10,
-    backgroundColor:'#1E4D73'
+    marginBottom: 20,
   },
   earningText: {
-    color: '#FFD700',
+    color: '#000',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'PressStart2P-Regular', // Use a gaming font
     marginLeft: 10,
-  },
-  earningDescription: {
-    color: '#fff',
-    fontSize: 16,
-    marginLeft: 10,
+    textShadowColor: '#FFD700',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 20,
-    
+    marginTop: 20,
   },
   link: {
-    color: '#4ECDC4',
+    color: '#FFD700',
     fontSize: 14,
-  },
-  shareButtons: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginBottom: 20,
-  },
-  whatsappButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#25D366',
-    padding: 10,
-    borderRadius: 10,
-  },
-  shareButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#3498DB',
-    padding: 10,
-    borderRadius: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    marginLeft: 5,
-    fontSize: 16,
-  },
-  earningsInfo: {
-    backgroundColor: '#1E4D73',
-    padding: 10,
-    borderRadius: 10,
-  },
-  earningsText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 16,
+    fontFamily: 'PressStart2P-Regular', // Use a gaming font
+    textShadowColor: '#000',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
   },
 });
 

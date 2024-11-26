@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView,StatusBar } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, StatusBar } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';  // Import the useFocusEffect hook
 import playersData from "@/playerdata.json";
 
 const avatarMap = {
@@ -11,15 +12,24 @@ const avatarMap = {
 const LeaderboardScreen = () => {
   const { topPlayers, otherPlayers } = playersData;
 
+  useFocusEffect(
+    React.useCallback(() => {
+      // Set the StatusBar when the screen is focused
+      StatusBar.setBarStyle("light-content", true); // Light text color for better contrast
+      StatusBar.setBackgroundColor("#1C1C1C", true); // Dark background for status bar
+
+      return () => {
+        // Reset the StatusBar when the screen is unfocused
+        StatusBar.setBarStyle("dark-content", true); // Reset to dark content style
+        //StatusBar.setBackgroundColor("#FFFFFF", true); // Reset to default background color
+      };
+    }, [])
+  );
+
   return (
     <View style={styles.container}>
-      {/* <StatusBar
-        barStyle="light-content"
-        backgroundColor="#3A2B2B" // Synchronize StatusBar with header
-      /> */}
       {/* Header */}
       <View style={styles.head}>
-        <Text style={styles.headertext}>←</Text>
         <Text style={styles.headertext1}>LeaderBoard</Text>
       </View>
 
@@ -29,10 +39,7 @@ const LeaderboardScreen = () => {
           <View key={index} style={styles.playerCard}>
             <Image
               source={avatarMap[player.avatar]} // Map the avatar key to the actual image
-              style={[
-                styles.avatar,
-                player.rank === 1 && styles.avatarLarge,
-              ]}
+              style={[styles.avatar, player.rank === 1 && styles.avatarLarge]}
             />
             <Text style={styles.rank}>{player.rank}</Text>
             <Text style={styles.playerName}>{player.name}</Text>
@@ -59,7 +66,7 @@ const LeaderboardScreen = () => {
             <Image source={avatarMap[player.avatar]} style={styles.avatarSmall} />
             <View style={styles.playerInfo}>
               <Text style={styles.playerNameSmall}>{player.name}</Text>
-              <Text style={styles.pointsSmall}>Score  {player.points} pts</Text>
+              <Text style={styles.pointsSmall}>Score {player.points} pts</Text>
             </View>
             <Text
               style={player.status === 'up' ? styles.statusUp : styles.statusDown}
@@ -76,7 +83,7 @@ const LeaderboardScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3A2B2B',
+    backgroundColor: '#1C1C1C', // Dark background for a gaming touch
     padding: 10,
     paddingBottom: 0,
   },
@@ -85,17 +92,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
-    marginBottom:20
-  },
-  headertext: {
-    color: '#fff',
-    fontSize: 35,
-    fontWeight:'bold',
-    marginBottom:10
+    marginBottom: 20,
   },
   headertext1: {
     flex: 1,
-    color: '#ffffff',
+    color: '#FFFFFF',
     fontSize: 25,
     textAlign: 'center',
   },
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     borderWidth: 3,
-    borderColor: '#FFD700',
+    borderColor: '#FFD700', // Gold border for avatars
   },
   avatarLarge: {
     width: 80,
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
   },
   rank: {
     fontSize: 18,
-    color: '#FFD700',
+    color: '#FFD700', // Gold for ranking numbers
     fontWeight: 'bold',
   },
   playerName: {
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   points: {
-    color: '#FFD700',
+    color: '#FFD700', // Gold for points
     fontSize: 14,
   },
   infoBar: {
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
   listItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#A57A4C',
+    backgroundColor: '#A57A4C', // Dark gaming background for players
     marginVertical: 5,
     padding: 15,
     borderRadius: 10,
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
   },
   playerInfo: {
     flex: 1,
-    marginLeft:10
+    marginLeft: 10,
   },
   playerNameSmall: {
     fontSize: 16,
@@ -178,15 +179,15 @@ const styles = StyleSheet.create({
   },
   pointsSmall: {
     fontSize: 14,
-    color: '#FFD700',
+    color: '#FFD700', // Gold points for smaller player info
   },
   statusUp: {
-    color: '#00FF00',
+    color: '#00FF00', // Green for players moving up
     fontSize: 18,
     fontWeight: 'bold',
   },
   statusDown: {
-    color: '#FF0000',
+    color: '#FF0000', // Red for players moving down
     fontSize: 18,
     fontWeight: 'bold',
   },

@@ -62,8 +62,8 @@ export default function Tabs() {
           fontWeight: "normal",
           marginTop: 8,
         },
-        tabBarActiveTintColor: "#fff",
-        tabBarInactiveTintColor: "#7C7D90",
+        tabBarActiveTintColor: "#FFD700",
+        tabBarInactiveTintColor: "#C0C0C0",
       })}
     >
       <Tab.Screen
