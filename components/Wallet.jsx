@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons'; // Install expo icons if nee
 const Wallet = ({ amount = '₹0' }) => {
     return (
         <View style={styles.walletContainer}>
-            <MaterialIcons name="account-balance-wallet" size={24} color="white" style={styles.walletIcon} />
+            <MaterialIcons name="account-balance-wallet" size={20} color="white" style={styles.walletIcon} />
             <Text style={styles.walletAmount}>{amount}</Text>
         </View>
     );

@@ -6,7 +6,9 @@ import {
   StyleSheet,
   StatusBar,
   SafeAreaView,
+  Image,
 } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   WalletIcon,
   InfoIcon,
@@ -18,26 +20,43 @@ import { LinearGradient } from "expo-linear-gradient";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-export default function WalletScreen() {
+export default function GamingWalletScreen() {
+  useFocusEffect(
+    React.useCallback(() => {
+      StatusBar.setBarStyle("light-content", true);
+      StatusBar.setBackgroundColor("#1e063c", true);
+
+      return () => {
+        StatusBar.setBarStyle("dark-content", true);
+        StatusBar.setBackgroundColor("#FFFFFF", true);
+      };
+    }, [])
+  );
+
   return (
     <SafeAreaView style={styles.safeArea}>
-      {/* <StatusBar barStyle="light-content" backgroundColor="#58003b" /> */}
       <LinearGradient
-        colors={["#58003b", "#b8007a", "#006eb0"]}
-        style={styles.container1}
+        colors={["#1e063c", "#4c0080", "#1e063c"]}
+        style={styles.container}
       >
-        <View style={styles.container1}>
+        <View style={styles.container}>
           {/* Header */}
           <View style={styles.header}>
             <TouchableOpacity>
-              <FontAwesome5 name="user-circle" size={34} color="white" />
+              <FontAwesome5 name="user-circle" size={25} color="#FFC107" />
             </TouchableOpacity>
             <View style={{ alignItems: "center", justifyContent: "center" }}>
               <TouchableOpacity>
-                <MaterialIcons name="contact-support" size={34} color="white" />
+                <MaterialIcons
+                  name="contact-support"
+                  size={24}
+                  color="#FFC107"
+                />
               </TouchableOpacity>
-              <Text style={{ color: "white", fontSize: 10 }}>
-                {"Transaction,\n & support."}
+              <Text
+                style={{ color: "#FFC107", fontSize: 10, textAlign: "center" }}
+              >
+                {"Transaction,\n & Support"}
               </Text>
             </View>
           </View>
@@ -118,11 +137,10 @@ export default function WalletScreen() {
                   <Text style={styles.subLabel}>View All Offers</Text>
                 </View>
               </View>
-              <ChevronRightIcon size={24} color="#9ca3af"  />
+              {/* Make sure the arrow stays to the right */}
+              <ChevronRightIcon size={24} color="#9ca3af" />
             </View>
           </View>
-          
-
         </View>
       </LinearGradient>
     </SafeAreaView>
@@ -132,15 +150,25 @@ export default function WalletScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    
   },
-  container1: {
-    padding: 0,
+  container: {
     flex: 1,
-    
+  },
+  bannerImage: {
+    width: "100%",
+    height: 150,
+    resizeMode: "cover",
+    borderRadius: 10,
+    marginHorizontal: 18,
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  banner: {
+    marginRight: 35,
+    marginTop: 50,
   },
   header: {
-    marginTop:20,
+    marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -150,7 +178,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#FFC107",
   },
   balanceContainer: {
     alignItems: "center",
@@ -159,39 +187,29 @@ const styles = StyleSheet.create({
   balanceText: {
     fontSize: 35,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#FFC107",
   },
   cardContainer: {
     paddingHorizontal: 18,
-    paddingVertical:0,
-    backgroundColor:'white',
+    backgroundColor: "rgba(255, 255, 255, 0.15)", // Translucent background
     padding: 10,
-    margin:20,
-    borderRadius:10,
-    marginTop:30,
-    paddingTop:30,
-    
+    margin: 20,
+    borderRadius: 10,
+    marginTop: 30,
+    paddingTop: 30,
   },
   card: {
-    // backgroundColor: "#fff",
-    // borderRadius: 12,
-    // padding: 16,
-    // marginBottom: 10,
-    // shadowColor: "#000",
-    // shadowOpacity: 0.1,
-    // shadowRadius: 10,
-    // elevation: 1,
-    paddingBottom:30,
+    paddingBottom: 30,
   },
   offerCard: {
-    backgroundColor: "#fff",
+    backgroundColor: "rgba(31, 41, 55, 0.5)", // Translucent background
     borderRadius: 10,
     padding: 18,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-between", // Ensures the content is spaced out
     marginHorizontal: 18,
-    marginTop: 10, // Adjust position closer to wallet cards
+    marginTop: 10,
   },
   infoRow: {
     flexDirection: "row",
@@ -200,9 +218,9 @@ const styles = StyleSheet.create({
   },
   infoRow1: {
     flexDirection: "row",
-    justifyContent:'space-between',
+    justifyContent: "space-between", // This ensures that the arrow stays to the right
     alignItems: "center",
-
+    width: "100%", // Ensure the row takes full width
   },
   iconTextContainer: {
     flexDirection: "row",
@@ -217,29 +235,31 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontWeight: "500",
+    color: "#E5E7EB",
   },
   subLabel: {
     fontSize: 12,
-    color: "#6b7280",
+    color: "#9CA3AF",
   },
   amount: {
     fontSize: 21,
     fontWeight: "bold",
+    color: "#FFFFFF",
   },
   addButton: {
-    backgroundColor: "#22c55e",
+    backgroundColor: "#2563EB",
     paddingVertical: 12,
     paddingHorizontal: 34,
     borderRadius: 10,
   },
   earnButton: {
-    backgroundColor: "#22c55e",
+    backgroundColor: "#10B981",
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 10,
   },
   withdrawButton: {
-    backgroundColor: "#22c55e",
+    backgroundColor: "#EF4444",
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 10,
