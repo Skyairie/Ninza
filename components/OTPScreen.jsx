@@ -48,7 +48,7 @@ const OTPScreen = ({ route, navigation }) => {
   const handleVerifyOtp = () => {
     const validOtp = '123456'; // Hardcoded OTP
     if (otp === validOtp) {
-      navigation.navigate('home'); // Navigate to Home screen
+      navigation.navigate('Home'); // Navigate to Home screen
     } else {
       setErrorMessage('Invalid OTP. Please try again.');
     }

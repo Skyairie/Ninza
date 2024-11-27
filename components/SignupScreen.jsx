@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Image,
   StatusBar,
   Animated,
   Easing,
@@ -50,40 +49,13 @@ const SignupScreen = ({ navigation }) => {
   );
 
   const handleVerify = () => {
-    const validMobileNumber = '9519783808'; // Replace with your hardcoded number
-    if (mobileNumber === validMobileNumber) {
-      navigation.navigate('OTP', { mobileNumber });
+    const mobileNumberPattern = /^[6-9]\d{9}$/; // Regex pattern for a valid 10-digit mobile number starting with 6-9
+    if (mobileNumberPattern.test(mobileNumber)) {
+      navigation.navigate('OTPScreen', { mobileNumber });
     } else {
-      setErrorMessage('Invalid mobile number. Please try again.');
+      setErrorMessage('Please enter a valid 10-digit mobile number.');
     }
   };
-  // const handleVerify = async () => {
-  //   if (!mobileNumber || mobileNumber.length !== 10) {
-  //     setErrorMessage('Please enter a valid 10-digit mobile number.');
-  //     return;
-  //   }
-  
-  //   try {
-  //     // Replace with your API endpoint
-  //     const response = await fetch('https://your-api.com/send-otp', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({ mobile: mobileNumber }),
-  //     });
-  
-  //     const data = await response.json();
-  
-  //     if (response.ok) {
-  //       navigation.navigate('OTP', { mobileNumber });
-  //     } else {
-  //       setErrorMessage(data.message || 'Failed to send OTP. Please try again.');
-  //     }
-  //   } catch (error) {
-  //     setErrorMessage('An error occurred. Please try again later.');
-  //     console.error('Error sending OTP:', error);
-  //   }
-  // };
-  
 
   return (
     <View style={styles.container}>
@@ -108,7 +80,7 @@ const SignupScreen = ({ navigation }) => {
             placeholderTextColor="#ccc"
           />
         </View>
-        <TouchableOpacity style={[styles.button]} onPress={handleVerify}>
+        <TouchableOpacity style={styles.button} onPress={handleVerify}>
           <Text style={styles.buttonText}>VERIFY</Text>
         </TouchableOpacity>
         {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
@@ -133,8 +105,7 @@ const SignupScreen = ({ navigation }) => {
   );
 };
 
-  
-const styles=StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1A2B4C',
@@ -227,10 +198,10 @@ const styles=StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
   },
-  TitleText:{
-    fontSize:45,
-    color:'#ffff',
-  }
+  TitleText: {
+    fontSize: 45,
+    color: '#ffff',
+  },
 });
 
 export default SignupScreen;

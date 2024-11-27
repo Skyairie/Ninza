@@ -8,10 +8,9 @@ import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
 import { UserIcon, ClockIcon, FilterIcon, XIcon } from "lucide-react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 export default function Tournament() {
   const [showBanner, setShowBanner] = useState(true);
@@ -72,7 +71,7 @@ export default function Tournament() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" backgroundColor="#58003b" />
+      {/* <StatusBar barStyle="light-content" backgroundColor="#58003b" /> */}
       {/* <LinearGradient
         colors={["#58003b", "#b8007a", "#006eb0"]}
         style={styles.container1}
@@ -114,7 +113,6 @@ export default function Tournament() {
 
           {/* Tournament List */}
           <ScrollView style={{ flex: 1, paddingBottom: 80 }}>
-           
             <View style={{ padding: 10 }}>
               {tournaments.map((tournament, i) => (
                 <View
@@ -226,7 +224,6 @@ export default function Tournament() {
               ))}
             </View>
           </ScrollView>
-          
 
           {/* Banner */}
           {showBanner && (
@@ -246,8 +243,7 @@ export default function Tournament() {
             </View>
           )}
         </View>
-        </ImageBackground>
-      
+      </ImageBackground>
     </SafeAreaView>
   );
 }
@@ -260,7 +256,6 @@ const styles = {
   container: {
     flex: 1,
     padding: 0,
-    
   },
   container1: {
     padding: 0,
