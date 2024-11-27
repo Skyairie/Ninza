@@ -10,6 +10,7 @@ import {
   Modal,
   Pressable,
   ImageBackground,
+  TextInput,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { fonts } from '@/utils/fonts';
@@ -83,10 +84,7 @@ const NinzaMania = () => {
               {selectedGame && (
                 <>
                   {/* Game Image and Title */}
-                  <Image
-                    source={selectedGame.image}
-                    style={styles.modalImage}
-                  />
+                  <Image source={selectedGame.image} style={styles.modalImage} />
                   <Text style={styles.modalTitle}>{selectedGame.name}</Text>
 
                   {/* Scrollable How to Play Section */}
@@ -97,6 +95,19 @@ const NinzaMania = () => {
                         'No instructions available for this game.'}
                     </Text>
                   </ScrollView>
+
+                  {/* Input Box for Room Code (only for Ludo) */}
+                  {selectedGame.name === 'Ludo' && (
+                    <View style={styles.inputContainer}>
+                      <TextInput
+                        style={styles.input}
+                        placeholder="Enter Room Code Here"
+                        placeholderTextColor="black"
+                        keyboardType="default"
+                      // Add state and logic for room code if needed
+                      />
+                    </View>
+                  )}
 
                   {/* Fixed Buttons */}
                   <View style={styles.buttonRow}>
@@ -115,6 +126,7 @@ const NinzaMania = () => {
             </View>
           </View>
         </Modal>
+
       </ImageBackground>
 
       {/* Bottom Banner */}
@@ -363,6 +375,22 @@ const styles = StyleSheet.create({
     fontFamily: fonts.Poppins,
     lineHeight: 20,
   },
+  inputContainer: {
+    marginVertical: 10,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: 'red',
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    elevation: 3,
+    width: '95%',
+    padding:6
+  },
+  input: {
+    fontSize: 16,
+    paddingVertical: 10,
+    color: '#333',
+  },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -408,7 +436,7 @@ const styles = StyleSheet.create({
   },
   bannerText: {
     color: '#00c9ff',
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
   },
   bannerDescription: {
     color: '#D0E7FF',

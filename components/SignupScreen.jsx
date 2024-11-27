@@ -67,7 +67,7 @@ const SignupScreen = ({ navigation }) => {
       keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0} // Offset for iOS
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <StatusBar hidden={true} />
+        <StatusBar barStyle='light-content' backgroundColor="#1A2B4C"/>
         <View style={styles.formContainer}>
           <Text style={styles.TitleText}>Welcome to NinzaGames</Text>
           <Animated.Image
