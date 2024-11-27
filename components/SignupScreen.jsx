@@ -8,6 +8,9 @@ import {
   StatusBar,
   Animated,
   Easing,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -58,50 +61,59 @@ const SignupScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar hidden={true} />
-      <View style={styles.formContainer}>
-        <Text style={styles.TitleText}>Welcome to NinzaGames</Text>
-        <Animated.Image
-          source={require('@/assets/images/signupimages/game.png')}
-          style={[styles.illustration, { transform: [{ scale: scaleAnim }] }]} // Animated scale
-          resizeMode="contain"
-        />
-        <Text style={styles.title}>Signup & Get ₹45 Bonus</Text>
-        <Text style={styles.label}>Enter your mobile number</Text>
-        <View style={styles.inputContainer}>
-          <Text style={styles.countryCode}>+91</Text>
-          <TextInput
-            style={styles.input}
-            keyboardType="phone-pad"
-            value={mobileNumber}
-            onChangeText={setMobileNumber}
-            placeholder="Mobile Number"
-            placeholderTextColor="#ccc"
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined} // Adjust behavior for iOS
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0} // Offset for iOS
+    >
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <StatusBar hidden={true} />
+        <View style={styles.formContainer}>
+          <Text style={styles.TitleText}>Welcome to NinzaGames</Text>
+          <Animated.Image
+            source={require('@/assets/images/signupimages/game.png')}
+            style={[styles.illustration, { transform: [{ scale: scaleAnim }] }]} // Animated scale
+            resizeMode="contain"
           />
+          <Text style={styles.title}>Signup & Get ₹45 Bonus</Text>
+          <Text style={styles.label}>Enter your mobile number</Text>
+          <View style={styles.inputContainer}>
+            <Text style={styles.countryCode}>+91</Text>
+            <TextInput
+              style={styles.input}
+              keyboardType="phone-pad"
+              value={mobileNumber}
+              onChangeText={setMobileNumber}
+              placeholder="Mobile Number"
+              placeholderTextColor="#ccc"
+            />
+          </View>
+          <TouchableOpacity style={styles.button} onPress={handleVerify}>
+            <Text style={styles.buttonText}>VERIFY</Text>
+          </TouchableOpacity>
+          {errorMessage ? (
+            <Text style={styles.errorText}>{errorMessage}</Text>
+          ) : null}
+          <View style={styles.checkboxContainer}>
+            <Text style={styles.checkboxText}>
+              I accept Ninza games{' '}
+              <Text style={styles.link}>Terms & Conditions</Text> and{' '}
+              <Text style={styles.link}>Privacy Policy</Text>
+            </Text>
+          </View>
+          <View style={styles.checkboxContainer}>
+            <Text style={styles.checkboxText}>
+              NinzaGames may inform me about ongoing offers and promotions on
+              WhatsApp
+            </Text>
+          </View>
         </View>
-        <TouchableOpacity style={styles.button} onPress={handleVerify}>
-          <Text style={styles.buttonText}>VERIFY</Text>
-        </TouchableOpacity>
-        {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
-        <View style={styles.checkboxContainer}>
-          <Text style={styles.checkboxText}>
-            I accept Ninza games{' '}
-            <Text style={styles.link}>Terms & Conditions</Text> and{' '}
-            <Text style={styles.link}>Privacy Policy</Text>
-          </Text>
-        </View>
-        <View style={styles.checkboxContainer}>
-          <Text style={styles.checkboxText}>
-            NinzaGames may inform me about ongoing offers and promotions on WhatsApp
-          </Text>
-        </View>
-      </View>
-      <Text style={styles.footer}>
-        By proceeding, your phone number will be verified by Truecaller and you
-        thereby accept the <Text style={styles.link}>Terms of Service</Text>.
-      </Text>
-    </View>
+        <Text style={styles.footer}>
+          By proceeding, your phone number will be verified by Truecaller and
+          you thereby accept the <Text style={styles.link}>Terms of Service</Text>.
+        </Text>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
