@@ -62,11 +62,11 @@ const ReferEarn = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#1A2B4C",
+    //backgroundColor: "#1A2B4C",
   },
   container1: {
     padding: 0,
-    paddingLeft: 5,
+    paddingLeft: 0,
     flex: 1,
   },
   container: {

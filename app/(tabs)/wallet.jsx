@@ -210,6 +210,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between", // Ensures the content is spaced out
     marginHorizontal: 18,
     marginTop: 10,
+    borderColor:'yellow',
+    borderWidth:1
   },
   infoRow: {
     flexDirection: "row",

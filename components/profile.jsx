@@ -30,7 +30,7 @@
 
     useFocusEffect(
       React.useCallback(() => {
-        StatusBar.setBackgroundColor("#0b0d2d");
+        StatusBar.setBackgroundColor("#520864");
         StatusBar.setBarStyle("light-content");
         StatusBar.setHidden(false);
 
@@ -62,7 +62,7 @@
               style={styles.avatarCircle}
             />
             <Text style={styles.userName}>{name}</Text>
-            <Text style={styles.userLevel}>Level 25 • Champion</Text>
+            <Text style={styles.userLevel}>Level 20 • Champion</Text>
           </View>
 
           {/* Info Section */}
@@ -158,7 +158,7 @@
       height: 130,
       borderRadius: 65,
       backgroundColor: "#444",
-      borderWidth: 3,
+      borderWidth: 1,
       borderColor: "#ff4d4d",
     },
     userName: {
