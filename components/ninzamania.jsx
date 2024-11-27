@@ -383,7 +383,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#fff',
     elevation: 3,
-    width: '95%',
+    width: '97%',
     padding:6
   },
   input: {

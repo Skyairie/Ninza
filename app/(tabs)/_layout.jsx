@@ -18,9 +18,9 @@ const Tab = createBottomTabNavigator();
 export default function Tabs() {
   const tabColors = {
     Profile:"#0b0d2d", // Blue
-    Leaderboard:"#D0021B", // Red
+    Leaderboard:"dark", // Red
     Main: "#1A2B4C", // Orange
-    Share: "#7ED321", // Green
+    Share: "#155F2D", // Green
     Wallet: "#3B0066", // Purple
   };
   return (
