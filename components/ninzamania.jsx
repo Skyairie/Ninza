@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -10,11 +10,11 @@ import {
   Modal,
   Pressable,
   ImageBackground,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { fonts } from "@/utils/fonts";
-import { XIcon } from "lucide-react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { fonts } from '@/utils/fonts';
+import { XIcon } from 'lucide-react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const NinzaMania = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -37,7 +37,7 @@ const NinzaMania = () => {
 
       {/* Use ImageBackground instead of LinearGradient */}
       <ImageBackground
-        source={require("../assets/images/tabbackimg/1.png")} // Your image here
+        source={require('../assets/images/tabbackimg/1.png')} // Your image here
         style={styles.container}
       >
         {/* Submenu */}
@@ -94,7 +94,7 @@ const NinzaMania = () => {
                     <Text style={styles.howToPlayTitle}>How to Play</Text>
                     <Text style={styles.howToPlayText}>
                       {selectedGame.howToPlay ||
-                        "No instructions available for this game."}
+                        'No instructions available for this game.'}
                     </Text>
                   </ScrollView>
 
@@ -139,8 +139,8 @@ const NinzaMania = () => {
 // Dummy game data
 const dummyGames = [
   {
-    name: "Rummy",
-    image: require("../assets/images/gameslogo/rummy1.png"),
+    name: 'Rummy',
+    image: require('../assets/images/gameslogo/rummy1.png'),
     howToPlay: `  
 1. Players: 2-6 players. A standard deck of 52 cards is used (2 decks for 4+ players).  
 2. Objective: Form valid sets and sequences to reduce points in your hand to zero.  
@@ -159,8 +159,8 @@ Rules of Rummy
     `,
   },
   {
-    name: "Callbreak",
-    image: require("../assets/images/gameslogo/callbreak.png"),
+    name: 'Callbreak',
+    image: require('../assets/images/gameslogo/callbreak.png'),
     howToPlay: ` 
 1. Players: 4 players.  
 2. Objective: Win exactly the number of tricks (rounds) you bid at the beginning of each game.  
@@ -181,8 +181,8 @@ Rules of Call Break
     `,
   },
   {
-    name: "Poker",
-    image: require("../assets/images/gameslogo/poker.png"),
+    name: 'Poker',
+    image: require('../assets/images/gameslogo/poker.png'),
     howToPlay: ` 
 1. Players: 2-10 players.  
 2. Objective: Form the best 5-card hand or bluff opponents to win the pot.  
@@ -203,8 +203,8 @@ Rules of Poker
     `,
   },
   {
-    name: "Ludo",
-    image: require("../assets/images/gameslogo/ludo (2).png"),
+    name: 'Ludo',
+    image: require('../assets/images/gameslogo/ludo (2).png'),
     howToPlay: `
 How to Play Ludo  
 1. Players: 2-4 players. Each player chooses a color and gets four tokens.  
@@ -222,8 +222,8 @@ Rules of Ludo
     `,
   },
   {
-    name: "Snakes & Ladders",
-    image: require("../assets/images/gameslogo/snake.jpeg"),
+    name: 'Snakes & Ladders',
+    image: require('../assets/images/gameslogo/snake.jpeg'),
     howToPlay: `
 How to Play Snake and Ladder  
 1. Players: 2 or more players.  
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
   // Including modal styles, submenu, banner, etc.
   safeArea: {
     flex: 1,
-    backgroundColor: "#1A2B4C",
+    backgroundColor: '#1A2B4C',
   },
   container: {
     flex: 1,
@@ -275,22 +275,22 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   submenu: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
     padding: 10,
     marginTop: 0,
     borderRadius: 20,
   },
   submenuText: {
-    color: "#ffffff",
+    color: '#ffffff',
     fontSize: 10,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginLeft: 5,
   },
   searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   scrollContainer: {
     paddingVertical: 10,
@@ -299,38 +299,38 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   sectionTitle: {
-    color: "white",
+    color: 'white',
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontFamily: fonts.Poppins,
     marginBottom: 5,
   },
   gameCardContainer: {
     borderRadius: 10,
     marginRight: 10,
-    alignItems: "center",
+    alignItems: 'center',
     width: 120,
     height: 120,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   gameImage: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
     borderRadius: 10,
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-    justifyContent: "flex-end",
-    alignItems: "center",
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   modalContent: {
-    backgroundColor: "rgba(0, 78, 112, 0.9)",
+    backgroundColor: 'rgba(0, 78, 112, 0.9)',
     borderRadius: 20,
     padding: 20,
-    alignItems: "center",
-    width: "100%",
-    height: "80%",
+    alignItems: 'center',
+    width: '100%',
+    height: '80%',
   },
   modalImage: {
     width: 130,
@@ -340,8 +340,8 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     fontSize: 18,
-    fontWeight: "bold",
-    color: "#fff",
+    fontWeight: 'bold',
+    color: '#fff',
     fontFamily: fonts.Poppins,
     marginBottom: 10,
   },
@@ -352,23 +352,23 @@ const styles = StyleSheet.create({
   },
   howToPlayTitle: {
     fontSize: 16,
-    fontWeight: "bold",
-    color: "#E6F7FF",
+    fontWeight: 'bold',
+    color: '#E6F7FF',
     fontFamily: fonts.Poppins,
     marginBottom: -15,
   },
   howToPlayText: {
     fontSize: 12,
-    color: "#E6F7FF",
+    color: '#E6F7FF',
     fontFamily: fonts.Poppins,
     lineHeight: 20,
   },
   buttonRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-    marginTop: 10,
-    marginBottom:60
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginTop: 0,
+    marginBottom: 10,
   },
   button: {
     borderRadius: 10,
@@ -377,36 +377,41 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   playButton: {
-    backgroundColor: "#20B954",
+    backgroundColor: '#20B954',
   },
   closeButton: {
-    backgroundColor: "#FF5C5C",
+    backgroundColor: '#FF5C5C',
   },
   buttonText: {
-    textAlign: "center",
-    color: "white",
-    fontWeight: "bold",
+    textAlign: 'center',
+    color: 'white',
+    fontWeight: 'bold',
     fontFamily: fonts.Poppins,
   },
   banner: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#204173",
-    padding: 10,
+    position: 'absolute',
+    bottom: 2,
+    left: 10,
+    right: 10,
+    backgroundColor: '#002f53',
+    borderRadius: 20,
+    padding: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   bannerIcon: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: "orange",
-    marginRight: 10,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: 'white',
+    marginRight: 16,
   },
   bannerText: {
-    color: "white",
-    fontWeight: "bold",
+    color: '#00c9ff',
+    fontWeight: 'bold', 
   },
   bannerDescription: {
-    color: "#D0E7FF",
+    color: '#D0E7FF',
     fontSize: 12,
   },
 });
