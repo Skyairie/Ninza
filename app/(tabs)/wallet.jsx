@@ -43,15 +43,15 @@ export default function GamingWalletScreen() {
           {/* Header */}
           <View style={styles.header}>
             <TouchableOpacity>
-              <FontAwesome5 name="user-circle" size={25} color="#FFC107" />
+              <FontAwesome5 name="wallet" size={30} color="#FFC107" />
             </TouchableOpacity>
             <View style={{ alignItems: "center", justifyContent: "center" }}>
               <TouchableOpacity>
-                <MaterialIcons
+                {/* <MaterialIcons
                   name="contact-support"
                   size={24}
                   color="#FFC107"
-                />
+                /> */}
               </TouchableOpacity>
               <Text
                 style={{ color: "#FFC107", fontSize: 10, textAlign: "center" }}
@@ -64,7 +64,7 @@ export default function GamingWalletScreen() {
           {/* Balance Display */}
           <View style={styles.balanceContainer}>
             <Text style={styles.headerText}>Wallet Balance</Text>
-            <Text style={styles.balanceText}>₹119.41</Text>
+            <Text style={styles.balanceText}>₹ 999.41</Text>
           </View>
 
           {/* Wallet Info */}
@@ -168,17 +168,20 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   header: {
-    marginTop: 20,
+    marginTop: 30,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 26,
-    marginBottom: 16,
+    marginBottom: 20,
   },
   headerText: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#FFC107",
+    color: '#fff',
+    fontSize: 30,
+    fontFamily: 'PressStart2P-Regular', // Use a gaming font
+    textShadowColor: 'pink',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 10,
   },
   balanceContainer: {
     alignItems: "center",
@@ -187,7 +190,8 @@ const styles = StyleSheet.create({
   balanceText: {
     fontSize: 35,
     fontWeight: "bold",
-    color: "#FFC107",
+    color: "#fff",
+    marginTop:10
   },
   cardContainer: {
     paddingHorizontal: 18,
