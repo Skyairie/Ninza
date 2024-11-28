@@ -114,7 +114,7 @@ const OTPScreen = ({ route, navigation }) => {
     <View style={styles.container}>
         <StatusBar barStyle='light-content' backgroundColor="#1A2B4C"/>
         <Animated.Image
-        source={require('../assets/images/signupimages/pin.png')}
+        source={require('../assets/images/signup-images/pin.png')}
         style={[styles.illustration, { transform: [{ translateY: slideAnim }], opacity: fadeAnim }]} // Apply animations
         resizeMode="contain"
       />

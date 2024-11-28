@@ -71,7 +71,7 @@ const SignupScreen = ({ navigation }) => {
         <View style={styles.formContainer}>
           <Text style={styles.TitleText}>Welcome to NinzaGames</Text>
           <Animated.Image
-            source={require('@/assets/images/signupimages/game.png')}
+            source={require('@/assets/images/signup-images/game.png')}
             style={[styles.illustration, { transform: [{ scale: scaleAnim }] }]} // Animated scale
             resizeMode="contain"
           />

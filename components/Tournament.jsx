@@ -19,7 +19,7 @@ export default function Tournament() {
   const tournaments = [
     {
       game: "LUDO",
-      image: require("../assets/images/gameslogo/ludo.jpg"),
+      image: require("@/assets/images/tournment-images/ludo.jpg"),
       prizePool: 140,
       winUpto: 60,
       participants: "8/16",
@@ -29,7 +29,7 @@ export default function Tournament() {
     },
     {
       game: "Chess",
-      image: require("../assets/images/gameslogo/ludo.jpg"),
+      image: require("@/assets/images/tournment-images/ludo.jpg"),
       prizePool: 200,
       winUpto: 80,
       participants: "10/20",
@@ -39,7 +39,7 @@ export default function Tournament() {
     },
     {
       game: "Carrom",
-      image: require("../assets/images/gameslogo/ludo.jpg"),
+      image: require("@/assets/images/tournment-images/ludo.jpg"),
       prizePool: 120,
       winUpto: 50,
       participants: "5/16",
@@ -49,7 +49,7 @@ export default function Tournament() {
     },
     {
       game: "PUBG",
-      image: require("../assets/images/gameslogo/ludo.jpg"),
+      image: require("@/assets/images/tournment-images/ludo.jpg"),
       prizePool: 500,
       winUpto: 250,
       participants: "30/50",
@@ -59,7 +59,7 @@ export default function Tournament() {
     },
     {
       game: "Call of Duty",
-      image: require("../assets/images/gameslogo/ludo.jpg"),
+      image: require("@/assets/images/tournment-images/ludo.jpg"),
       prizePool: 400,
       winUpto: 180,
       participants: "18/30",
@@ -77,7 +77,7 @@ export default function Tournament() {
         style={styles.container1}
       > */}
       <ImageBackground
-        source={require("../assets/images/tabbackimg/3.png")} // Your image here
+        source={require("@/assets/images/tabback-imgs/3.png")} // Your image here
         style={styles.container}
       >
         <View style={{ flex: 1 }}>

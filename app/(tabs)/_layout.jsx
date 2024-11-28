@@ -32,7 +32,7 @@ export default function Tabs() {
             return (
               <TouchableOpacity style={styles.playButton}>
                 <Image
-                  source={require("@/assets/images/5.png")} // Replace with your logo path
+                  source={require("@/assets/images/logo-images/main-logo.png")} // Replace with your logo path
                   style={{ width: 25, height: 30 }}
                   resizeMode="contain"
                 />
