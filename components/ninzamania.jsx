@@ -10,6 +10,7 @@ import {
   Modal,
   Pressable,
   ImageBackground,
+  TextInput,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { fonts } from '@/utils/fonts';
@@ -37,7 +38,7 @@ const NinzaMania = () => {
 
       {/* Use ImageBackground instead of LinearGradient */}
       <ImageBackground
-        source={require('../assets/images/tabbackimg/1.png')} // Your image here
+        source={require('../assets/images/tabback-imgs/1.png')} // Your image here
         style={styles.container}
       >
         {/* Submenu */}
@@ -83,10 +84,7 @@ const NinzaMania = () => {
               {selectedGame && (
                 <>
                   {/* Game Image and Title */}
-                  <Image
-                    source={selectedGame.image}
-                    style={styles.modalImage}
-                  />
+                  <Image source={selectedGame.image} style={styles.modalImage} />
                   <Text style={styles.modalTitle}>{selectedGame.name}</Text>
 
                   {/* Scrollable How to Play Section */}
@@ -97,6 +95,19 @@ const NinzaMania = () => {
                         'No instructions available for this game.'}
                     </Text>
                   </ScrollView>
+
+                  {/* Input Box for Room Code (only for Ludo) */}
+                  {selectedGame.name === 'Ludo' && (
+                    <View style={styles.inputContainer}>
+                      <TextInput
+                        style={styles.input}
+                        placeholder="Enter Room Code Here"
+                        placeholderTextColor="black"
+                        keyboardType="default"
+                      // Add state and logic for room code if needed
+                      />
+                    </View>
+                  )}
 
                   {/* Fixed Buttons */}
                   <View style={styles.buttonRow}>
@@ -115,6 +126,7 @@ const NinzaMania = () => {
             </View>
           </View>
         </Modal>
+
       </ImageBackground>
 
       {/* Bottom Banner */}
@@ -140,7 +152,7 @@ const NinzaMania = () => {
 const dummyGames = [
   {
     name: 'Rummy',
-    image: require('../assets/images/gameslogo/rummy1.png'),
+    image: require('@/assets/images/games-images/rummy.png'),
     howToPlay: `  
 1. Players: 2-6 players. A standard deck of 52 cards is used (2 decks for 4+ players).  
 2. Objective: Form valid sets and sequences to reduce points in your hand to zero.  
@@ -160,7 +172,7 @@ Rules of Rummy
   },
   {
     name: 'Callbreak',
-    image: require('../assets/images/gameslogo/callbreak.png'),
+    image: require('@/assets/images/games-images/callbreak.png'),
     howToPlay: ` 
 1. Players: 4 players.  
 2. Objective: Win exactly the number of tricks (rounds) you bid at the beginning of each game.  
@@ -182,7 +194,7 @@ Rules of Call Break
   },
   {
     name: 'Poker',
-    image: require('../assets/images/gameslogo/poker.png'),
+    image: require('@/assets/images/games-images/poker.png'),
     howToPlay: ` 
 1. Players: 2-10 players.  
 2. Objective: Form the best 5-card hand or bluff opponents to win the pot.  
@@ -204,7 +216,7 @@ Rules of Poker
   },
   {
     name: 'Ludo',
-    image: require('../assets/images/gameslogo/ludo (2).png'),
+    image: require('@/assets/images/games-images/ludo.png'),
     howToPlay: `
 How to Play Ludo  
 1. Players: 2-4 players. Each player chooses a color and gets four tokens.  
@@ -223,7 +235,7 @@ Rules of Ludo
   },
   {
     name: 'Snakes & Ladders',
-    image: require('../assets/images/gameslogo/snake.jpeg'),
+    image: require('@/assets/images/games-images/snake.jpeg'),
     howToPlay: `
 How to Play Snake and Ladder  
 1. Players: 2 or more players.  
@@ -363,6 +375,22 @@ const styles = StyleSheet.create({
     fontFamily: fonts.Poppins,
     lineHeight: 20,
   },
+  inputContainer: {
+    marginVertical: 10,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: 'red',
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    elevation: 3,
+    width: '97%',
+    padding:6
+  },
+  input: {
+    fontSize: 16,
+    paddingVertical: 10,
+    color: '#333',
+  },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -408,7 +436,7 @@ const styles = StyleSheet.create({
   },
   bannerText: {
     color: '#00c9ff',
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
   },
   bannerDescription: {
     color: '#D0E7FF',

@@ -51,14 +51,14 @@
           <View style={styles.header}>
             <Image
               style={styles.bannerImage}
-              source={require("@/assets/images/profileBanner.jpg")} // Replace with gaming banner
+              source={require("@/assets/images/profile-images/banner.jpg")} // Replace with gaming banner
             />
           </View>
 
           {/* Avatar */}
           <View style={styles.avatarContainer}>
             <Image
-              source={require("@/assets/images/6.png")} // Replace with a gaming avatar
+              source={require("@/assets/images/logo-images/app.png")} // Replace with a gaming avatar
               style={styles.avatarCircle}
             />
             <Text style={styles.userName}>{name}</Text>
