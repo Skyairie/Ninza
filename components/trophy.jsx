@@ -12,8 +12,8 @@ import playersData from '@/playerdata.json';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const avatarMap = {
-  avatar2: require('../assets/images/5.png'),
-  avatar1: require('../assets/images/6.png'),
+  avatar2: require('@/assets/images/logo-images/app.png'),
+  avatar1: require('@/assets/images/logo-images/leaderboard-avtar.png'),
   // Add other avatar mappings here if needed
 };
 

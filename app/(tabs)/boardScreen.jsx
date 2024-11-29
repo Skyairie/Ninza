@@ -10,7 +10,7 @@ const BoardScreen = () => {
           style={styles.container}
         > */}
         <ImageBackground
-        source={require("@/assets/images/tabbackimg/2.png")} // Your image here
+        source={require("@/assets/images/tabback-imgs/2.png")} // Your image here
         style={styles.container}
       >
       <View style={styles.container}>

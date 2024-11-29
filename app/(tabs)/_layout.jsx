@@ -16,6 +16,13 @@ import ProfilePage from "@/components/profile";
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
+  const tabColors = {
+    Profile:"#0b0d2d", // Blue
+    Leaderboard:"dark", // Red
+    Main: "#1A2B4C", // Orange
+    Share: "#155F2D", // Green
+    Wallet: "#3B0066", // Purple
+  };
   return (
     <Tab.Navigator
       initialRouteName="Main"
@@ -25,7 +32,7 @@ export default function Tabs() {
             return (
               <TouchableOpacity style={styles.playButton}>
                 <Image
-                  source={require("@/assets/images/5.png")} // Replace with your logo path
+                  source={require("@/assets/images/logo-images/main-logo.png")} // Replace with your logo path
                   style={{ width: 25, height: 30 }}
                   resizeMode="contain"
                 />
@@ -53,7 +60,7 @@ export default function Tabs() {
           height: 75,
           paddingTop: 5,
           paddingBottom: 0,
-          backgroundColor: "#1A2B4C",
+          backgroundColor: tabColors[route.name],
           borderTopWidth: 0,
         },
 
