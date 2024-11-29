@@ -20,7 +20,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-export default function GamingWalletScreen() {
+export default function GamingWalletScreen({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       StatusBar.setBarStyle("light-content", true);
@@ -32,6 +32,10 @@ export default function GamingWalletScreen() {
       };
     }, [])
   );
+
+  const addcash = () => {
+    navigation.navigate("addCash");
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -64,7 +68,7 @@ export default function GamingWalletScreen() {
           {/* Balance Display */}
           <View style={styles.balanceContainer}>
             <Text style={styles.headerText}>Wallet Balance</Text>
-            <Text style={styles.balanceText}>₹ 999.41</Text>
+            <Text style={styles.balanceText}>₹ 254.00</Text>
           </View>
 
           {/* Wallet Info */}
@@ -82,7 +86,7 @@ export default function GamingWalletScreen() {
                     <Text style={styles.amount}>₹0</Text>
                   </View>
                 </View>
-                <TouchableOpacity style={styles.addButton}>
+                <TouchableOpacity style={styles.addButton} onPress={addcash}>
                   <Text style={styles.buttonText}>ADD CASH</Text>
                 </TouchableOpacity>
               </View>
