@@ -11,6 +11,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -48,6 +49,15 @@ const SignupScreen = ({ navigation }) => {
     useCallback(() => {
       setMobileNumber(''); // Clear input
       setErrorMessage(''); // Clear error message (optional)
+      // Set StatusBar for SignupScreen
+      StatusBar.setBarStyle('light-content');
+      StatusBar.setBackgroundColor('#1A2B4C');
+
+      return () => {
+        // Reset StatusBar when leaving SignupScreen
+        StatusBar.setBarStyle('default');
+        StatusBar.setBackgroundColor('#FFFFFF'); // Adjust as needed for your app
+      };
     }, [])
   );
 
@@ -61,6 +71,9 @@ const SignupScreen = ({ navigation }) => {
   };
 
   return (
+    <SafeAreaView style={styles.SafeArea}>
+    <StatusBar barStyle="light-content" backgroundColor='#1A2B4C'  />
+
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined} // Adjust behavior for iOS
@@ -69,6 +82,7 @@ const SignupScreen = ({ navigation }) => {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <StatusBar barStyle='light-content' backgroundColor="#1A2B4C"/>
         <View style={styles.formContainer}>
+
           <Text style={styles.TitleText}>Welcome to NinzaGames</Text>
           <Animated.Image
             source={require('@/assets/images/signup-images/game.png')}
@@ -114,10 +128,14 @@ const SignupScreen = ({ navigation }) => {
         </Text>
       </ScrollView>
     </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  SafeArea: {
+    flex: 1
+  },
   container: {
     flex: 1,
     backgroundColor: '#1A2B4C',

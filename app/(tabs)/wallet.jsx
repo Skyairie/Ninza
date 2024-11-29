@@ -20,7 +20,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-export default function GamingWalletScreen() {
+export default function GamingWalletScreen({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       StatusBar.setBarStyle("light-content", true);
@@ -33,6 +33,10 @@ export default function GamingWalletScreen() {
     }, [])
   );
 
+  const addcash = () => {
+    navigation.navigate("addCash");
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <LinearGradient
@@ -43,15 +47,15 @@ export default function GamingWalletScreen() {
           {/* Header */}
           <View style={styles.header}>
             <TouchableOpacity>
-              <FontAwesome5 name="user-circle" size={25} color="#FFC107" />
+              <FontAwesome5 name="wallet" size={30} color="#FFC107" />
             </TouchableOpacity>
             <View style={{ alignItems: "center", justifyContent: "center" }}>
               <TouchableOpacity>
-                <MaterialIcons
+                {/* <MaterialIcons
                   name="contact-support"
                   size={24}
                   color="#FFC107"
-                />
+                /> */}
               </TouchableOpacity>
               <Text
                 style={{ color: "#FFC107", fontSize: 10, textAlign: "center" }}
@@ -64,7 +68,7 @@ export default function GamingWalletScreen() {
           {/* Balance Display */}
           <View style={styles.balanceContainer}>
             <Text style={styles.headerText}>Wallet Balance</Text>
-            <Text style={styles.balanceText}>₹119.41</Text>
+            <Text style={styles.balanceText}>₹ 254.00</Text>
           </View>
 
           {/* Wallet Info */}
@@ -82,7 +86,7 @@ export default function GamingWalletScreen() {
                     <Text style={styles.amount}>₹0</Text>
                   </View>
                 </View>
-                <TouchableOpacity style={styles.addButton}>
+                <TouchableOpacity style={styles.addButton} onPress={addcash}>
                   <Text style={styles.buttonText}>ADD CASH</Text>
                 </TouchableOpacity>
               </View>
@@ -168,17 +172,20 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   header: {
-    marginTop: 20,
+    marginTop: 30,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 26,
-    marginBottom: 16,
+    marginBottom: 20,
   },
   headerText: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#FFC107",
+    color: '#fff',
+    fontSize: 30,
+    fontFamily: 'PressStart2P-Regular', // Use a gaming font
+    textShadowColor: 'pink',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 10,
   },
   balanceContainer: {
     alignItems: "center",
@@ -187,7 +194,8 @@ const styles = StyleSheet.create({
   balanceText: {
     fontSize: 35,
     fontWeight: "bold",
-    color: "#FFC107",
+    color: "#fff",
+    marginTop:10
   },
   cardContainer: {
     paddingHorizontal: 18,
@@ -210,6 +218,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between", // Ensures the content is spaced out
     marginHorizontal: 18,
     marginTop: 10,
+    borderColor:'yellow',
+    borderWidth:1
   },
   infoRow: {
     flexDirection: "row",

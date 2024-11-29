@@ -9,6 +9,9 @@ import {
   StatusBar,
   Animated,
   Easing,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -31,6 +34,16 @@ const OTPScreen = ({ route, navigation }) => {
       setErrorMessage('');
       setTimer(30);
       setIsTimeUp(false);
+
+      // Set StatusBar for OTPScreen
+      StatusBar.setBarStyle('light-content');
+      StatusBar.setBackgroundColor('#1A2B4C');
+
+      return () => {
+        // Reset StatusBar when leaving OTPScreen
+        StatusBar.setBarStyle('default');
+        StatusBar.setBackgroundColor('#FFFFFF'); // Adjust as needed for your app
+      };
     }, [])
   );
 
@@ -53,34 +66,6 @@ const OTPScreen = ({ route, navigation }) => {
       setErrorMessage('Invalid OTP. Please try again.');
     }
   };
-  // const handleVerifyOtp = async () => {
-  //   if (!otp || otp.length !== 6) {
-  //     setErrorMessage('Please enter a valid 6-digit OTP.');
-  //     return;
-  //   }
-  
-  //   try {
-  //     // Replace with your API endpoint
-  //     const response = await fetch('https://your-api.com/verify-otp', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({ mobile: mobileNumber, otp }),
-  //     });
-  
-  //     const data = await response.json();
-  
-  //     if (response.ok) {
-  //       navigation.navigate('Home'); // Navigate to the Home screen on success
-  //     } else {
-  //       setErrorMessage(data.message || 'Invalid OTP. Please try again.');
-  //     }
-  //   } catch (error) {
-  //     setErrorMessage('An error occurred. Please try again later.');
-  //     console.error('Error verifying OTP:', error);
-  //   }
-  // };
-  
-
 
   // Resend OTP functionality
   const handleResendOtp = () => {
@@ -111,48 +96,55 @@ const OTPScreen = ({ route, navigation }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
-        <StatusBar barStyle='light-content' backgroundColor="#1A2B4C"/>
+    <SafeAreaView style={styles.safearea}>
+      <KeyboardAvoidingView 
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
+        style={styles.container}
+      >
         <Animated.Image
-        source={require('../assets/images/signup-images/pin.png')}
-        style={[styles.illustration, { transform: [{ translateY: slideAnim }], opacity: fadeAnim }]} // Apply animations
-        resizeMode="contain"
-      />
-      <Text style={styles.title}>Verify OTP</Text>
-      <Text style={styles.label}>OTP sent to +91 {mobileNumber}</Text>
-      <TextInput
-        style={styles.input}
-        keyboardType="numeric"
-        maxLength={6}
-        value={otp}
-        onChangeText={setOtp}
-        placeholder="Enter OTP"
-        placeholderTextColor="#ccc"
-        editable={!isTimeUp}
-      />
-      <TouchableOpacity
-        style={[styles.button, isTimeUp && styles.disabledButton]}
-        onPress={handleVerifyOtp}
-        disabled={otp.length !== 6 || isTimeUp}
-      >
-        <Text style={styles.buttonText}>SUBMIT OTP</Text>
-      </TouchableOpacity>
-      {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
+          source={require('../assets/images/signup-images/pin.png')}
+          style={[styles.illustration, { transform: [{ translateY: slideAnim }], opacity: fadeAnim }]} // Apply animations
+          resizeMode="contain"
+        />
+        <Text style={styles.title}>Verify OTP</Text>
+        <Text style={styles.label}>OTP sent to +91 {mobileNumber}</Text>
+        <TextInput
+          style={styles.input}
+          keyboardType="numeric"
+          maxLength={6}
+          value={otp}
+          onChangeText={setOtp}
+          placeholder="Enter OTP"
+          placeholderTextColor="#ccc"
+          editable={!isTimeUp}
+        />
+        <TouchableOpacity
+          style={[styles.button, isTimeUp && styles.disabledButton]}
+          onPress={handleVerifyOtp}
+          disabled={otp.length !== 6 || isTimeUp}
+        >
+          <Text style={styles.buttonText}>SUBMIT OTP</Text>
+        </TouchableOpacity>
+        {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
 
-      <TouchableOpacity
-        style={styles.resendButton}
-        onPress={handleResendOtp}
-        disabled={!isTimeUp}
-      >
-        <Text style={styles.resendText}>
-          {isTimeUp ? 'Resend OTP ?' : `Resend available in ${timer}s`}
-        </Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity
+          style={styles.resendButton}
+          onPress={handleResendOtp}
+          disabled={!isTimeUp}
+        >
+          <Text style={styles.resendText}>
+            {isTimeUp ? 'Resend OTP ?' : `Resend available in ${timer}s`}
+          </Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safearea: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: '#1A2B4C',
