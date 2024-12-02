@@ -8,10 +8,14 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-import { ArrowLeft, ChevronRight, Wallet } from 'lucide-react-native';
+import { ArrowLeft, ChevronRight, Wallet, LayoutGrid } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function PaymentInterface() {
+export default function PaymentInterface({ navigation }) {
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#1e063c" />
@@ -24,6 +28,7 @@ export default function PaymentInterface() {
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.backButton}
+            onPress={goBack}
           >
             <ArrowLeft size={24} color="#fff" />
           </TouchableOpacity>
@@ -33,7 +38,7 @@ export default function PaymentInterface() {
 
       {/* Main Content */}
       <ScrollView contentContainerStyle={styles.content}>
-        {/* UPI Section */}
+        {/* Wallets Section */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Image
@@ -46,7 +51,7 @@ export default function PaymentInterface() {
             <View style={styles.cardContent}>
               <Image
                 source={require('@/assets/images/payment/gpay.png')}
-                style={{height:30,width:35,marginRight:10}}
+                style={{height:30,width:30,marginRight:18}}
                 resizeMode="contain"
               />
               <Text style={styles.cardText}>GPay</Text>
@@ -54,27 +59,23 @@ export default function PaymentInterface() {
             <ChevronRight size={24} color="#999" />
           </TouchableOpacity>
         </View>
-
-        {/* Wallets Section */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Wallet size={24} color="#6A0DAD" />
+            <Wallet size={17} color="#6A0DAD" />
             <Text style={styles.sectionTitle}>Wallets</Text>
           </View>
           <View style={styles.card}>
             <View style={styles.cardContent}>
               <Image
                 source={require('@/assets/images/payment/amazonpay.png')}
-                style={{height:30,width:35,marginRight:10}}
+                style={{ height: 30, width: 30, marginRight: 18 }}
                 resizeMode="contain"
               />
-              <View>
+              <View style={styles.cardTextContainer}>
                 <Text style={styles.cardText}>Amazon Pay</Text>
                 <Text style={styles.cardSubtitle}>
-                  <Text style={styles.cardSubtitle} numberOfLines={2}>
-                    <Text style={styles.greenDot}>●</Text> Amazon Pay scratch
-                    card of up to ₹25 cashback on min deposit of ₹50.
-                  </Text>
+                  <Text style={styles.greenDot}>●</Text> Amazon Pay scratch
+                  card of up to ₹25 cashback on min deposit of ₹50.
                 </Text>
               </View>
             </View>
@@ -86,8 +87,8 @@ export default function PaymentInterface() {
 
         {/* More Payment Options */}
         <View style={styles.section}>
-        <View style={styles.sectionHeader}>
-            <Wallet size={24} color="#6A0DAD" />
+          <View style={styles.sectionHeader}>
+            <LayoutGrid size={17} color="#6A0DAD" />
             <Text style={styles.sectionTitle}>More Payment Option</Text>
           </View>
           <TouchableOpacity style={styles.card}>
@@ -95,8 +96,8 @@ export default function PaymentInterface() {
               <View style={styles.iconContainer}>
                 <Image
                   source={require('@/assets/images/payment/netbanking.png')}
-                  style={{height:40,width:30,marginRight:10}}
-                  resizeMode='contain'
+                  style={{ height: 30, width: 25, marginRight: 18 }}
+                  resizeMode="contain"
                 />
               </View>
               <Text style={styles.cardText}>Net Banking</Text>
@@ -107,11 +108,10 @@ export default function PaymentInterface() {
       </ScrollView>
 
       {/* Footer */}
-       <View style={styles.footer}>
+      <View style={styles.footer}>
         <View style={styles.footerIcons}>
-          
           <Image
-            source={require('@/assets/images/payment/master.png')}
+            source={require('@/assets/images/payment/visa.png')}
             style={styles.footerIcon}
           />
           <Image
@@ -119,17 +119,14 @@ export default function PaymentInterface() {
             style={styles.footerIcon}
           />
           <Image
-            source={require('@/assets/images/payment/visa.png')}
+            source={require('@/assets/images/payment/master.png')}
             style={styles.footerIcon}
           />
         </View>
-         
-      </View> 
+      </View>
       <View style={styles.ft}>
         <Text style={styles.footerText}>
-          Card/Bank Details will be handled and processed by a third party &
-          user must understand third party's privacy policies on how data is
-          used. Amount collected from you is inclusive of GST at 28%.
+          Card/Bank Details will be handled and processed by a third party & user must understand third party's privacy policies on how data is used. Amount collected from you is inclusive of GST at 28%.
         </Text>
       </View>
     </View>
@@ -143,7 +140,6 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     paddingTop: StatusBar.currentHeight, // Adjust for the status bar height
-    
   },
   header: {
     flexDirection: 'row',
@@ -151,11 +147,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    
   },
   backButton: {
     marginRight: 16,
-    marginTop:-35
+    marginTop: -35,
   },
   headerTitle: {
     color: '#fff',
@@ -163,7 +158,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     flex: 1,
-    marginTop:-35
+    marginTop: -35,
   },
   content: {
     padding: 15,
@@ -172,20 +167,21 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 20,
   },
+  upiLogo: {
+    height: 15,
+    width: 30,
+    borderRadius:2
+  },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 8,
   },
   sectionTitle: {
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: 13,
+    fontWeight: 'bold',
     marginBottom: 5,
     marginLeft: 10,
-  },
-  upiLogo: {
-    height: 15,
-    width: 30,
   },
   card: {
     backgroundColor: '#fff',
@@ -204,42 +200,37 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1, // Ensures the content inside the card uses available space
   },
+  cardTextContainer: {
+    flexDirection: 'column', // Makes the text and subtitle stack vertically
+    flex: 1, // Take up available space
+  },
+  cardText: {
+    fontSize: 16,
+    marginBottom: 5, // Adds space between card text and subtitle
+  },
   cardSubtitle: {
     fontSize: 12,
     color: '#999',
     flexShrink: 1, // Prevents the text from overflowing
     flexWrap: 'wrap', // Ensures the text wraps within the container
-    marginTop: 0, // Adds space between the text and other elements
-  },
-  cardText: {
-    fontSize: 16,
   },
   greenDot: {
     color: '#28A745',
   },
   linkButton: {
-    paddingVertical: 1,
-    paddingHorizontal: 12,
+    paddingVertical: 4,
+    paddingHorizontal: 6,
     borderWidth: 0,
-    borderColor: '#007BFF',
+    borderColor: '#4afcfc',
     borderRadius: 5,
-    margin: 0,
+    marginLeft: 10, // Ensures the button is on the right side
+    borderWidth:1
   },
   linkButtonText: {
-    fontSize: 14,
-    color: '#007BFF',
-    fontWeight: 'bold',
-  },
-  iconContainer: {
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 0,
-  },
-  bankIcon: {
-    height: 32,
-    width: 32,
+    fontSize: 10,
+    color: '#4afcfc',
+    fontWeight: '500',
+    
   },
   footer: {
     padding: 16,

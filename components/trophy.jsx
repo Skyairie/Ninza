@@ -24,19 +24,19 @@ const LeaderboardScreen = () => {
     React.useCallback(() => {
       // Set the StatusBar when the screen is focused
       StatusBar.setBarStyle('light-content', true); // Light text color for better contrast
-      StatusBar.setBackgroundColor('#af0b0b', true); // Dark background for status bar
+      StatusBar.setBackgroundColor('#1e3c72', true); // Dark background for status bar
 
       return () => {
         // Reset the StatusBar when the screen is unfocused
         StatusBar.setBarStyle('dark-content', true); // Reset to dark content style
-        //StatusBar.setBackgroundColor("#FFFFFF", true); // Reset to default background color
+        StatusBar.setBackgroundColor("#FFFFFF", true); // Reset to default background color
       };
     }, []),
   );
 
   return (
     <LinearGradient
-      colors={['#af0b0b', '#4f055e', '#4f055e']}
+      colors={['#1e3c72', '#2a5298']}
       style={styles.container1}
     >
       <View style={styles.container}>
@@ -81,7 +81,7 @@ const LeaderboardScreen = () => {
               <View style={styles.playerInfo}>
                 <Text style={styles.playerNameSmall}>{player.name}</Text>
                 <Text style={styles.pointsSmall}>
-                  Score : {player.points} pts
+                  Score: {player.points} pts
                 </Text>
               </View>
               <Text
@@ -102,13 +102,10 @@ const LeaderboardScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //backgroundColor: '#1C1C1C', // Dark background for a gaming touch
     padding: 10,
     paddingBottom: 0,
   },
   container1: {
-    padding: 0,
-    paddingLeft: 0,
     flex: 1,
   },
   head: {
@@ -170,19 +167,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff44', // Translucent white background
     borderRadius: 10,
     marginHorizontal: 5,
   },
   infoText: {
     fontSize: 14,
-    color: '#000',
+    color: '#fff',
     fontWeight: 'bold',
   },
   listItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'dark', // Dark gaming background for players
+    backgroundColor: '#2a5298aa', // Semi-transparent dark background for players
     marginVertical: 5,
     padding: 15,
     borderRadius: 10,
