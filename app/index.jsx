@@ -7,6 +7,9 @@ import Header from '@/components/header';
 import Tabs from './(tabs)/_layout';
 import AddCash from '@/components/addCash';
 import PaymentInterface from '@/components/payment';
+import ProfilePage from '@/components/profile';
+import GamingWalletScreen from './(tabs)/wallet';
+import ReferEarn from '@/components/referEarn';
 
 const Stack = createStackNavigator();
 
@@ -14,7 +17,7 @@ export default function App() {
   return (
     <NavigationIndependentTree>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SignupScreen" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="SignupScreen" component={SignupScreen} />
         <Stack.Screen name="OTPScreen" component={OTPScreen} />
         <Stack.Screen name="Home" component={Tabs} />
@@ -27,6 +30,21 @@ export default function App() {
           name="payment"
           component={PaymentInterface}
           options={{ title: "Add Cash"}}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfilePage}
+          options={{ title: "progile"}}
+        />
+        <Stack.Screen
+          name="wallet"
+          component={GamingWalletScreen}
+          options={{ title: "progile"}}
+        />
+        <Stack.Screen
+          name="share"
+          component={ReferEarn}
+          options={{ title: "progile"}}
         />
 
 

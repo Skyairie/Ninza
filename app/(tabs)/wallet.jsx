@@ -15,6 +15,7 @@ import {
   TrophyIcon,
   PercentIcon,
   ChevronRightIcon,
+  IndianRupee
 } from "lucide-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -27,7 +28,7 @@ export default function GamingWalletScreen({ navigation }) {
       StatusBar.setBackgroundColor("#1e063c", true);
 
       return () => {
-        StatusBar.setBarStyle("dark-content", true);
+        StatusBar.setBarStyle("light-content", true);
         StatusBar.setBackgroundColor("#FFFFFF", true);
       };
     }, [])
@@ -35,6 +36,9 @@ export default function GamingWalletScreen({ navigation }) {
 
   const addcash = () => {
     navigation.navigate("addCash");
+  };
+  const earn = () => {
+    navigation.navigate("Refer");
   };
 
   return (
@@ -46,9 +50,9 @@ export default function GamingWalletScreen({ navigation }) {
         <View style={styles.container}>
           {/* Header */}
           <View style={styles.header}>
-            <TouchableOpacity>
-              <FontAwesome5 name="wallet" size={30} color="#FFC107" />
-            </TouchableOpacity>
+            {/* <TouchableOpacity onPress={goBack}>
+              <FontAwesome5 name="arrow-left" size={20} color="#FFC107" />
+            </TouchableOpacity> */}
             <View style={{ alignItems: "center", justifyContent: "center" }}>
               <TouchableOpacity>
                 {/* <MaterialIcons
@@ -57,11 +61,11 @@ export default function GamingWalletScreen({ navigation }) {
                   color="#FFC107"
                 /> */}
               </TouchableOpacity>
-              <Text
+              {/* <Text
                 style={{ color: "#FFC107", fontSize: 10, textAlign: "center" }}
               >
                 {"Transaction,\n & Support"}
-              </Text>
+              </Text> */}
             </View>
           </View>
 
@@ -77,7 +81,8 @@ export default function GamingWalletScreen({ navigation }) {
             <View style={styles.card}>
               <View style={styles.infoRow}>
                 <View style={styles.iconTextContainer}>
-                  <WalletIcon size={30} color="#7c3aed" />
+                
+                  <IndianRupee size={30} color="yellow" />
                   <View>
                     <View style={styles.labelContainer}>
                       <Text style={styles.label}>Unplayed</Text>
@@ -96,7 +101,7 @@ export default function GamingWalletScreen({ navigation }) {
             <View style={styles.card}>
               <View style={styles.infoRow}>
                 <View style={styles.iconTextContainer}>
-                  <WalletIcon size={30} color="#7c3aed" />
+                  <IndianRupee size={30} color="yellow" />
                   <View>
                     <View style={styles.labelContainer}>
                       <Text style={styles.label}>Bonus</Text>
@@ -105,7 +110,7 @@ export default function GamingWalletScreen({ navigation }) {
                     <Text style={styles.amount}>₹115.87</Text>
                   </View>
                 </View>
-                <TouchableOpacity style={styles.earnButton}>
+                <TouchableOpacity style={styles.earnButton} onPress={earn}>
                   <Text style={styles.buttonText}>EARN BONUS</Text>
                 </TouchableOpacity>
               </View>
@@ -115,7 +120,7 @@ export default function GamingWalletScreen({ navigation }) {
             <View style={styles.card}>
               <View style={styles.infoRow}>
                 <View style={styles.iconTextContainer}>
-                  <TrophyIcon size={30} color="#7c3aed" />
+                  <TrophyIcon size={30} color="yellow" />
                   <View>
                     <View style={styles.labelContainer}>
                       <Text style={styles.label}>Winnings</Text>

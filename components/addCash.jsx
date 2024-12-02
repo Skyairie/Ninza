@@ -7,7 +7,7 @@ import {
   StyleSheet,
   StatusBar
 } from 'react-native';
-import { Shield, Zap, Users } from 'lucide-react-native';
+import { Shield, Zap, Users ,ArrowLeft } from 'lucide-react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import PaymentInterface from './payment';
 
@@ -18,6 +18,9 @@ export default function AddCash({ navigation }) {
 
   const paymentinterface = () => {
     navigation.navigate("payment");
+  };
+  const goBack = () => {
+    navigation.goBack();
   };
 
   return (
@@ -31,6 +34,12 @@ export default function AddCash({ navigation }) {
         colors={["#1e063c", "#4c0080"]}
         style={styles.container}
       >
+        <TouchableOpacity
+            style={styles.backButton}
+            onPress={goBack}
+          >
+            <ArrowLeft size={24} color="#fff" />
+          </TouchableOpacity>
         <Text style={styles.headerTitle}>ADD CASH</Text>
         <View style={styles.balanceContainer}>
           <Text style={styles.balanceLabel}>Wallet Balance</Text>
@@ -107,12 +116,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop:30
+    marginTop:20
   },
   balanceContainer: {
     position: 'absolute',
     right: 20,
-    top: 30,
+    top: 10,
   },
   balanceLabel: {
     color: 'white',
@@ -205,5 +214,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     fontStyle: 'italic',
+  },
+  backButton: {
+    marginLeft: 15,
+    marginTop:10
   },
 });

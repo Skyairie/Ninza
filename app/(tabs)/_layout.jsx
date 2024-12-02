@@ -4,6 +4,7 @@ import {
   NavigationContainer,
   NavigationIndependentTree,
 } from "@react-navigation/native";
+
 import Icon from "react-native-vector-icons/Ionicons";
 import { Image, StyleSheet, View, Text } from "react-native";
 import WalletScreen from "../(tabs)/wallet";
@@ -12,16 +13,17 @@ import ReferEarn from "@/components/referEarn";
 import Header from "@/components/header";
 import Trophy from "@/components/trophy";
 import ProfilePage from "@/components/profile";
+import Chat from "@/components/chat";
 
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
   const tabColors = {
-    Profile:"#0b0d2d", // Blue
-    Leaderboard:"dark", // Red
+    Help:"#1A2B4C", // Blue
+    Leaderboard:"1A2B4C", // Red
     Main: "#1A2B4C", // Orange
-    Share: "#155F2D", // Green
-    Wallet: "#3B0066", // Purple
+    Refer: "#1A2B4C", // Green
+    Wallet: "#1A2B4C", // Purple
   };
   return (
     <Tab.Navigator
@@ -40,13 +42,13 @@ export default function Tabs() {
             );
           } else {
             let iconName;
-            if (route.name === "Profile") {
+            if (route.name === "Help") {
               iconName = focused
-                ? "person"
-                : "person-outline";
+                ? "chatbubble-ellipses"
+                : "chatbubble-ellipses-outline";
             } else if (route.name === "Leaderboard") {
               iconName = focused ? "trophy" : "trophy-outline";
-            } else if (route.name === "Share") {
+            } else if (route.name === "Refer") {
               iconName = focused ? "share-social" : "share-social-outline";
             } else if (route.name === "Wallet") {
               iconName = focused ? "wallet-sharp" : "wallet-sharp";
@@ -62,10 +64,11 @@ export default function Tabs() {
           paddingBottom: 0,
           backgroundColor: tabColors[route.name],
           borderTopWidth: 0,
+          
         },
 
         tabBarLabelStyle: {
-          fontSize: 11, // Increase this value to make text larger
+          fontSize: 10, // Increase this value to make text larger
           fontWeight: "normal",
           marginTop: 8,
         },
@@ -74,13 +77,13 @@ export default function Tabs() {
       })}
     >
       <Tab.Screen
-        name="Profile"
-        component={ProfilePage}
+        name="Leaderboard"
+        component={Trophy}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Leaderboard"
-        component={Trophy}
+        name="Help"
+        component={Chat}
         options={{ headerShown: false }}
       />
       <Tab.Screen
@@ -89,7 +92,7 @@ export default function Tabs() {
         options={{ headerShown: false, tabBarLabel: () => null }}
       />
       <Tab.Screen
-        name="Share"
+        name="Refer"
         component={ReferEarn}
         options={{ headerShown: false }}
       />
