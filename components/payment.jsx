@@ -16,7 +16,7 @@ export default function PaymentInterface({ navigation }) {
     navigation.goBack();
   };
   const net = () => {
-    navigation.navigate('bank');
+    navigation.navigate('banks');
   };
 
   return (

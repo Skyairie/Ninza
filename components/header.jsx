@@ -1,53 +1,36 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  View,
-  Text,
-  StatusBar,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  Modal,
-} from 'react-native';
+import { View, Text, StatusBar, Image, TouchableOpacity, TextInput, Modal, Animated, StyleSheet, SafeAreaView, Easing } from 'react-native';  // Ensure Easing is imported
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { SafeAreaView, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useFocusEffect } from '@react-navigation/native';
 import BoardScreen from '@/app/(tabs)/boardScreen';
 import NinzaMania from './ninzamania';
 import Tournament from './Tournament';
 import { fonts } from '@/utils/fonts';
+import GamingWalletScreen from "@/app/(tabs)/wallet";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Tab = createMaterialTopTabNavigator();
 
 const getColors = (routeName) => {
   switch (routeName) {
     case 'LeaderBoard':
-      return {
-        bgColor: '#004845',
-        navbarColor: '#004845',
-        walletColor: '#003D3C',
-      };
+      return { bgColor: '#004845', navbarColor: '#004845', walletColor: '#003D3C' };
     case 'Tournament':
-      return {
-        bgColor: '#58003b',
-        navbarColor: '#58003b',
-        walletColor: '#46002f',
-      };
+      return { bgColor: '#58003b', navbarColor: '#58003b', walletColor: '#46002f' };
     default:
-      return {
-        bgColor: '#1A2B4C',
-        navbarColor: '#1A2B4C',
-        walletColor: '#143F62',
-      };
+      return { bgColor: '#1A2B4C', navbarColor: '#1A2B4C', walletColor: '#143F62' };
   }
 };
 
 const Header = ({ navigation }) => {
   const [colors, setColors] = useState(getColors('NinzaMania'));
+  const [modalVisible, setModalVisible] = useState(false); // Modal visibility state for input
+  const [notificationModalVisible, setNotificationModalVisible] = useState(false); // Modal visibility state for notification
+  const [spinModalVisible, setSpinModalVisible] = useState(false); // Modal visibility state for spin
+  const [spinValue] = useState(new Animated.Value(0)); // Spinner animation value
 
-  const [notificationModalVisible, setNotificationModalVisible] =
-    useState(false); // Modal visibility state for notification
-
+  // Handle StatusBar changes
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBackgroundColor(colors.navbarColor);
@@ -59,15 +42,21 @@ const Header = ({ navigation }) => {
         StatusBar.setBarStyle('dark-content');
         StatusBar.setHidden(false);
       };
-    }, [colors]),
+    }, [colors])
   );
 
+  // Profile and Wallet navigation
   const Profile = () => {
-    navigation.navigate('Profile');
+    navigation.navigate("profile");
   };
 
   const wallet = () => {
-    navigation.navigate('Wallet');
+    navigation.navigate("Wallet");
+  };
+
+  // Modal control functions
+  const closeModal = () => {
+    setModalVisible(false);
   };
 
   const openNotificationModal = () => {
@@ -78,11 +67,55 @@ const Header = ({ navigation }) => {
     setNotificationModalVisible(false);
   };
 
+  const openSpinModal = () => {
+    setSpinModalVisible(true);
+    // Start the spinner animation when the modal opens
+    spinWheel();
+  };
+
+  const closeSpinModal = () => {
+    setSpinModalVisible(false);
+  };
+
+  // Spinner animation function
+  const spinWheel = () => {
+    spinValue.setValue(0); // Reset to 0 before starting the animation
+    Animated.timing(spinValue, {
+      toValue: 1, // Rotate the wheel to 1 full rotation
+      duration: 5000, // Time taken for 1 rotation
+      easing: Easing.linear, // Use Easing.linear for smooth animation
+      useNativeDriver: true, // Use native driver for performance
+    }).start();
+  };
+
+  // Interpolating the rotation value from spinValue
+  const rotate = spinValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'], // Rotate from 0deg to 360deg
+  });
+
   return (
-    <SafeAreaView
-      style={[styles.safeArea, { backgroundColor: colors.bgColor }]}
-    >
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.bgColor }]}>
       {/* Modal for Input and Image */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={closeModal}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Image source={require('@/assets/images/logo-images/app.png')} style={styles.modalImage} />
+            <Text style={styles.modalTitle}>Welcome to the App</Text>
+            <TextInput style={styles.inputBox} placeholder="Enter your name" placeholderTextColor="#ccc" />
+            <TextInput style={styles.inputBox} placeholder="Enter your Email" placeholderTextColor="#ccc" />
+            <TextInput style={styles.inputBox} placeholder="Enter your Username" placeholderTextColor="#ccc" />
+            <TouchableOpacity style={styles.submitButton} onPress={closeModal}>
+              <Text style={styles.submitButtonText}>Submit</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 
       {/* Notification Modal */}
       <Modal
@@ -93,16 +126,32 @@ const Header = ({ navigation }) => {
       >
         <View style={styles.notificationModalOverlay}>
           <View style={styles.notificationModalContent}>
-            <Text style={styles.notificationTitle}>
-              You have a new notification!
-            </Text>
-            <Text style={styles.notificationMessage}>
-              This is a test notification message.
-            </Text>
-            <TouchableOpacity
-              style={styles.submitButton}
-              onPress={closeNotificationModal}
-            >
+            <Text style={styles.notificationTitle}>You have a new notification!</Text>
+            <Text style={styles.notificationMessage}>This is a test notification message.</Text>
+            <TouchableOpacity style={styles.submitButton} onPress={closeNotificationModal}>
+              <Text style={styles.submitButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Spin Modal */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={spinModalVisible}
+        onRequestClose={closeSpinModal}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Spin the Wheel!</Text>
+
+            <Animated.View style={[styles.spinnerContainer, { transform: [{ rotate }] }]}>
+              {/* Wheel Image */}
+              <Image source={require('@/assets/images/wheel.png')} style={styles.spinnerImage} />
+            </Animated.View>
+
+            <TouchableOpacity style={styles.submitButton} onPress={closeSpinModal}>
               <Text style={styles.submitButtonText}>Close</Text>
             </TouchableOpacity>
           </View>
@@ -113,26 +162,14 @@ const Header = ({ navigation }) => {
       <View style={[styles.container, { backgroundColor: colors.bgColor }]}>
         <View style={[styles.navbar, { backgroundColor: colors.navbarColor }]}>
           <TouchableOpacity onPress={Profile}>
-            <Icon name="person-circle" size={30} color="#ffffff" />
+            <Icon name="person-circle-outline" size={30} color="#ffffff" />
           </TouchableOpacity>
 
           <TouchableOpacity onPress={wallet}>
-            <View
-              style={[
-                styles.walletContainer,
-                { backgroundColor: colors.walletColor },
-              ]}
-            >
-              <Icon
-                name="wallet-outline"
-                size={20}
-                color="#FFD700"
-                style={styles.walletIcon}
-              />
+            <View style={[styles.walletContainer, { backgroundColor: colors.walletColor }]}>
+              <Icon name="wallet-outline" size={20} color="#FFD700" style={styles.walletIcon} />
               <Text style={[styles.walletLabel, { color: '#FFD700' }]}>₹</Text>
-              <Text style={[styles.walletBalance, { color: '#ffffff' }]}>
-                200
-              </Text>
+              <Text style={[styles.walletBalance, { color: '#ffffff' }]}>200</Text>
             </View>
           </TouchableOpacity>
 
@@ -140,12 +177,12 @@ const Header = ({ navigation }) => {
             <TouchableOpacity onPress={openNotificationModal}>
               <Icon name="notifications" size={24} color="#ffffff" />
             </TouchableOpacity>
-            <Image
-              source={{
-                uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/spin.png',
-              }}
-              style={styles.spin}
-            />
+            <TouchableOpacity onPress={openSpinModal}>
+              <Image
+                source={require('@/assets/images/spin.png')}
+                style={styles.spin}
+              />
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -250,46 +287,41 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Overlay color
   },
   modalContent: {
-    width: 300,
+    width: '80%',
+    backgroundColor: 'white',
     padding: 20,
-    backgroundColor: '#fff',
     borderRadius: 10,
     alignItems: 'center',
   },
-  modalImage: {
-    width: 100,
-    height: 100,
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
     marginBottom: 20,
   },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
+  spinnerContainer: {
+    width: 200,
+    height: 200,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
   },
-  inputBox: {
+  spinnerImage: {
     width: '100%',
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 15,
+    height: '100%',
+    resizeMode: 'contain', // Adjusts the image size to fit the container
   },
   submitButton: {
-    backgroundColor: '#1A2B4C',
-    width: '100%',
-    paddingVertical: 10,
+    backgroundColor: '#e4be00',
+    padding: 10,
     borderRadius: 5,
-    alignItems: 'center',
   },
   submitButtonText: {
     color: '#fff',
-    fontWeight: 'bold',
+    fontSize: 16,
   },
-
   // Notification Modal Styles
   notificationModalOverlay: {
     flex: 1,
@@ -298,21 +330,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   notificationModalContent: {
-    width: 300,
-    padding: 20,
+    width: '80%',
     backgroundColor: '#fff',
+    padding: 20,
     borderRadius: 10,
     alignItems: 'center',
   },
   notificationTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
   },
   notificationMessage: {
     fontSize: 16,
     marginBottom: 20,
-    color: '#444',
   },
 });
 

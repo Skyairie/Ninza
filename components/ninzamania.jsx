@@ -38,7 +38,9 @@ const NinzaMania = () => {
 
       {/* Use ImageBackground instead of LinearGradient */}
       <ImageBackground
-        source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/tabback-imgs/1.png'}} // Your image here
+        source={{
+          uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/tabback-imgs/1.png',
+        }} // Your image here
         style={styles.container}
       >
         {/* Submenu */}
@@ -84,7 +86,10 @@ const NinzaMania = () => {
               {selectedGame && (
                 <>
                   {/* Game Image and Title */}
-                  <Image source={selectedGame.image} style={styles.modalImage} />
+                  <Image
+                    source={selectedGame.image}
+                    style={styles.modalImage}
+                  />
                   <Text style={styles.modalTitle}>{selectedGame.name}</Text>
 
                   {/* Scrollable How to Play Section */}
@@ -104,7 +109,7 @@ const NinzaMania = () => {
                         placeholder="Enter Room Code Here"
                         placeholderTextColor="black"
                         keyboardType="default"
-                      // Add state and logic for room code if needed
+                        // Add state and logic for room code if needed
                       />
                     </View>
                   )}
@@ -126,7 +131,6 @@ const NinzaMania = () => {
             </View>
           </View>
         </Modal>
-
       </ImageBackground>
 
       {/* Bottom Banner */}
@@ -152,7 +156,9 @@ const NinzaMania = () => {
 const dummyGames = [
   {
     name: 'Rummy',
-    image: {uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/rummy.png'},
+    image: {
+      uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/rummy.png',
+    },
     howToPlay: `  
 1. Players: 2-6 players. A standard deck of 52 cards is used (2 decks for 4+ players).  
 2. Objective: Form valid sets and sequences to reduce points in your hand to zero.  
@@ -172,7 +178,9 @@ Rules of Rummy
   },
   {
     name: 'Callbreak',
-    image: {uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/callbreak.png'},
+    image: {
+      uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/callbreak.png',
+    },
     howToPlay: ` 
 1. Players: 4 players.  
 2. Objective: Win exactly the number of tricks (rounds) you bid at the beginning of each game.  
@@ -194,7 +202,9 @@ Rules of Call Break
   },
   {
     name: 'Poker',
-    image: {uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/poker.png'},
+    image: {
+      uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/poker.png',
+    },
     howToPlay: ` 
 1. Players: 2-10 players.  
 2. Objective: Form the best 5-card hand or bluff opponents to win the pot.  
@@ -216,7 +226,9 @@ Rules of Poker
   },
   {
     name: 'Ludo',
-    image: {uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/ludo.png'},
+    image: {
+      uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/ludo.png',
+    },
     howToPlay: `
 How to Play Ludo  
 1. Players: 2-4 players. Each player chooses a color and gets four tokens.  
@@ -235,7 +247,9 @@ Rules of Ludo
   },
   {
     name: 'Snakes & Ladders',
-    image: {uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/snake.jpeg'},
+    image: {
+      uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/snake.jpeg',
+    },
     howToPlay: `
 How to Play Snake and Ladder  
 1. Players: 2 or more players.  
@@ -338,8 +352,8 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: 'rgba(0, 78, 112, 0.9)',
-    borderTopLeftRadius:20,
-    borderTopRightRadius:20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     padding: 20,
     alignItems: 'center',
     width: '100%',
@@ -385,7 +399,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     elevation: 3,
     width: '97%',
-    padding:6
+    padding: 6,
   },
   input: {
     fontSize: 16,

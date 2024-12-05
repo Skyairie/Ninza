@@ -41,6 +41,10 @@ export default function GamingWalletScreen({ navigation }) {
   const withdrowall = () => {
     navigation.navigate('withdroll');
   };
+ 
+  const withdroll = () => {
+    navigation.navigate("withdraw");
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -129,10 +133,7 @@ export default function GamingWalletScreen({ navigation }) {
                     <Text style={styles.amount}>₹3.53</Text>
                   </View>
                 </View>
-                <TouchableOpacity
-                  style={styles.withdrawButton}
-                  onPress={withdrowall}
-                >
+                <TouchableOpacity style={styles.withdrawButton} onPress={withdroll}>
                   <Text style={styles.buttonText}>WITHDRAW</Text>
                 </TouchableOpacity>
               </View>
