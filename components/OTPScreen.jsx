@@ -102,7 +102,7 @@ const OTPScreen = ({ route, navigation }) => {
         style={styles.container}
       >
         <Animated.Image
-          source={require('../assets/images/signup-images/pin.png')}
+          source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/signup-images/pin.png'}}
           style={[styles.illustration, { transform: [{ translateY: slideAnim }], opacity: fadeAnim }]} // Apply animations
           resizeMode="contain"
         />

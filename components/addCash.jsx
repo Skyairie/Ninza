@@ -9,9 +9,24 @@ import {
 } from 'react-native';
 import { Shield, Zap, Users ,ArrowLeft } from 'lucide-react-native';
 import { LinearGradient } from "expo-linear-gradient";
-import PaymentInterface from './payment';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function AddCash({ navigation }) {
+
+  useFocusEffect(
+    React.useCallback(() => {
+      StatusBar.setBarStyle('light-content', true);
+      StatusBar.setBackgroundColor('#1e063c', true);
+
+      return () => {
+        StatusBar.setBarStyle('dark-content', true);
+        StatusBar.setBackgroundColor('#ffff', true);
+      };
+    }, [])
+  );
+
+
+
   const [amount, setAmount] = useState('100');
 
   const quickAmounts = [{ value: '50' }, { value: '200' }, { value: '500' }];
@@ -25,9 +40,8 @@ export default function AddCash({ navigation }) {
 
   return (
     <View style={styles.container}>
-    <StatusBar barStyle='light-content' backgroundColor="#1e063c"/>
 
-      {/* Header Section */}
+     
       
       <View style={styles.header}>
       <LinearGradient

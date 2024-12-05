@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Image,
@@ -11,17 +11,17 @@ import {
   TextInput,
   SafeAreaView,
   StatusBar,
-} from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get('window');
 
 const ProfilePage = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [name, setName] = useState("GamerX");
-  const [email, setEmail] = useState("gamerx@ggmail.com");
+  const [name, setName] = useState('GamerX');
+  const [email, setEmail] = useState('gamerx@ggmail.com');
 
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
@@ -29,25 +29,29 @@ const ProfilePage = ({ navigation }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBackgroundColor("#520864");
-      StatusBar.setBarStyle("light-content");
+      StatusBar.setBackgroundColor('#520864');
+      StatusBar.setBarStyle('light-content');
       StatusBar.setHidden(false);
 
       return () => {
-        StatusBar.setBackgroundColor("#ffff");
-        StatusBar.setBarStyle("default");
+        StatusBar.setBackgroundColor('#ffff');
+        StatusBar.setBarStyle('default');
       };
-    }, [])
+    }, []),
   );
 
   const goBack = () => {
     navigation.goBack();
   };
+  
+  
+
+
 
   return (
     <SafeAreaView style={styles.safearea}>
       <LinearGradient
-        colors={["#0b0d2d", "#2a0845", "#521262"]}
+        colors={['#0b0d2d', '#2a0845', '#521262']}
         style={styles.container1}
       >
         {/* Header */}
@@ -57,14 +61,14 @@ const ProfilePage = ({ navigation }) => {
           </TouchableOpacity>
           <Image
             style={styles.bannerImage}
-            source={require("@/assets/images/profile-images/banner.jpg")} // Replace with gaming banner
+            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/profile-images/banner.jpg'}} // Replace with gaming banner
           />
         </View>
 
         {/* Avatar */}
         <View style={styles.avatarContainer}>
           <Image
-            source={require("@/assets/images/logo-images/app.png")} // Replace with a gaming avatar
+            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/logo-images/app.png'}} // Replace with a gaming avatar
             style={styles.avatarCircle}
           />
           <Text style={styles.userName}>{name}</Text>
@@ -85,16 +89,18 @@ const ProfilePage = ({ navigation }) => {
             <FontAwesome5 name="comments" style={styles.icon} />
             <Text style={styles.infoText}>Discord: GamerX#1234</Text>
           </View>
-          <View style={styles.infoItem}>
-            <FontAwesome5 name="coins" style={styles.icon} />
-            <Text style={styles.infoText}>Transaction History</Text>
-          </View>
-          <View style={styles.infoItem}>
-          <FontAwesome5 name="gamepad" style={styles.icon} />
-
-            <Text style={styles.infoText}>Game History</Text>
-          </View>
-          
+          <TouchableOpacity>
+            <View style={styles.infoItem}>
+              <FontAwesome5 name="coins" style={styles.icon} />
+              <Text style={styles.infoText}>Transaction History</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity >
+            <View style={styles.infoItem} >
+              <FontAwesome5 name="gamepad" style={styles.icon} />
+              <Text style={styles.infoText}>Game History</Text>
+            </View>
+          </TouchableOpacity>
         </View>
 
         {/* Edit Button */}
@@ -125,10 +131,7 @@ const ProfilePage = ({ navigation }) => {
                   value={email}
                   onChangeText={(text) => setEmail(text)}
                 />
-                <TouchableOpacity
-                  style={styles.saveButton}
-                  onPress={saveData}
-                >
+                <TouchableOpacity style={styles.saveButton} onPress={saveData}>
                   <Text style={styles.saveButtonText}>Save</Text>
                 </TouchableOpacity>
               </View>
@@ -149,38 +152,38 @@ const styles = StyleSheet.create({
   },
   header: {
     height: 180,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: Platform.OS === "ios" ? 40 : 20,
-    position: "relative",
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: Platform.OS === 'ios' ? 40 : 20,
+    position: 'relative',
   },
   backButton: {
-    position: "absolute",
-    top: Platform.OS === "ios" ? 50 : 20,
+    position: 'absolute',
+    top: Platform.OS === 'ios' ? 50 : 20,
     left: 25,
     zIndex: 10,
   },
   avatarContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: -50,
   },
   avatarCircle: {
-    width: 130,
-    height: 130,
+    width: 100,
+    height: 100,
     borderRadius: 65,
-    backgroundColor: "#444",
+    backgroundColor: '#444',
     borderWidth: 1,
-    borderColor: "#ff4d4d",
+    borderColor: '#ff4d4d',
   },
   userName: {
     marginTop: 10,
     fontSize: 20,
-    fontWeight: "bold",
-    color: "#fff",
+    fontWeight: 'bold',
+    color: '#fff',
   },
   userLevel: {
     fontSize: 16,
-    color: "#d1d1d1",
+    color: '#d1d1d1',
     marginTop: 5,
   },
   infoSection: {
@@ -188,13 +191,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   infoItem: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 15,
     padding: 15,
     borderRadius: 10,
-    backgroundColor: "#1e1e2e",
-    shadowColor: "#000",
+    backgroundColor: '#1e1e2e',
+    shadowColor: '#000',
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 3,
@@ -202,79 +205,79 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: 10,
     fontSize: 24,
-    color: "#f06543",
+    color: '#f06543',
   },
   infoText: {
     fontSize: 16,
-    color: "#f0f0f0",
+    color: '#f0f0f0',
   },
   editButton: {
     margin: 20,
-    backgroundColor: "#f06543",
+    backgroundColor: '#f06543',
     borderRadius: 25,
     paddingVertical: 12,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     elevation: 5,
   },
   editButtonText: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   modalOverlay: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
     width: width * 0.9,
-    backgroundColor: "#1e1e2e",
+    backgroundColor: '#1e1e2e',
     borderRadius: 20,
     padding: 20,
-    alignItems: "center",
+    alignItems: 'center',
   },
   modalTitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 20,
-    color: "#fff",
+    color: '#fff',
   },
   modalForm: {
-    width: "100%",
+    width: '100%',
   },
   formLabel: {
     fontSize: 16,
-    color: "#fff",
+    color: '#fff',
     marginBottom: 5,
   },
   formInput: {
-    width: "100%",
+    width: '100%',
     fontSize: 16,
     borderBottomWidth: 1,
-    borderColor: "#555",
+    borderColor: '#555',
     marginBottom: 20,
-    color: "#fff",
+    color: '#fff',
     padding: 5,
   },
   saveButton: {
     marginTop: 10,
-    backgroundColor: "#f06543",
+    backgroundColor: '#f06543',
     paddingVertical: 12,
     borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
   },
   saveButtonText: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   bannerImage: {
     height: 200,
-    width: "100%",
+    width: '100%',
   },
 });
 

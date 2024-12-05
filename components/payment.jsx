@@ -15,6 +15,9 @@ export default function PaymentInterface({ navigation }) {
   const goBack = () => {
     navigation.goBack();
   };
+  const net = () => {
+    navigation.navigate('bank');
+  };
 
   return (
     <View style={styles.container}>
@@ -42,7 +45,7 @@ export default function PaymentInterface({ navigation }) {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Image
-              source={require('@/assets/images/payment/upilogo.png')}
+              source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/upilogo.png'}}
               style={styles.upiLogo}
             />
             <Text style={styles.sectionTitle}>Pay by any UPI app</Text>
@@ -50,7 +53,7 @@ export default function PaymentInterface({ navigation }) {
           <TouchableOpacity style={styles.card}>
             <View style={styles.cardContent}>
               <Image
-                source={require('@/assets/images/payment/gpay.png')}
+                source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/gpay.png'}}
                 style={{height:30,width:30,marginRight:18}}
                 resizeMode="contain"
               />
@@ -67,7 +70,7 @@ export default function PaymentInterface({ navigation }) {
           <View style={styles.card}>
             <View style={styles.cardContent}>
               <Image
-                source={require('@/assets/images/payment/amazonpay.png')}
+                source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/amazonpay.png'}}
                 style={{ height: 30, width: 30, marginRight: 18 }}
                 resizeMode="contain"
               />
@@ -91,11 +94,11 @@ export default function PaymentInterface({ navigation }) {
             <LayoutGrid size={17} color="#6A0DAD" />
             <Text style={styles.sectionTitle}>More Payment Option</Text>
           </View>
-          <TouchableOpacity style={styles.card}>
+          <TouchableOpacity style={styles.card} onPress={net}>
             <View style={styles.cardContent}>
               <View style={styles.iconContainer}>
                 <Image
-                  source={require('@/assets/images/payment/netbanking.png')}
+                  source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/netbanking.png'}}
                   style={{ height: 30, width: 25, marginRight: 18 }}
                   resizeMode="contain"
                 />
@@ -111,15 +114,15 @@ export default function PaymentInterface({ navigation }) {
       <View style={styles.footer}>
         <View style={styles.footerIcons}>
           <Image
-            source={require('@/assets/images/payment/visa.png')}
+            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/visa.png'}}
             style={styles.footerIcon}
           />
           <Image
-            source={require('@/assets/images/payment/ss.png')}
+            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/ss.png'}}
             style={styles.footerIcon}
           />
           <Image
-            source={require('@/assets/images/payment/master.png')}
+            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/master.png'}}
             style={styles.footerIcon}
           />
         </View>

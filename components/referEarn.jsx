@@ -15,9 +15,13 @@ import { useFocusEffect } from '@react-navigation/native';
 
 const ReferEarn = () => {
   const [history, setHistory] = useState([
-    { id: '1', name: 'John Doe', date: '2024-11-01', reward: '₹30' },
-    { id: '2', name: 'Jane Smith', date: '2024-11-03', reward: '₹30' },
-    { id: '3', name: 'Mark Wilson', date: '2024-11-05', reward: '₹30' },
+    { id: '1', name: 'John Doe', date: '2024-11-01', reward: '₹ 30' },
+    { id: '2', name: 'Jane Smith', date: '2024-11-03', reward: '₹ 30' },
+    { id: '3', name: 'Mark Wilson', date: '2024-11-05', reward: '₹ 30' },
+    { id: '4', name: 'Emily Davis', date: '2024-11-06', reward: '₹ 30' },
+    { id: '5', name: 'Michael Brown', date: '2024-11-07', reward: '₹ 30' },
+    { id: '6', name: 'Sarah Lee', date: '2024-11-08', reward: '₹ 30' },
+    { id: '7', name: 'Chris Johnson', date: '2024-11-09', reward: '₹ 30' },
   ]);
 
   useFocusEffect(
@@ -37,7 +41,7 @@ const ReferEarn = () => {
       <Icon name="account-circle" size={30} color="#FFD700" style={styles.avatar} />
       <View>
         <Text style={styles.historyName}>{item.name}</Text>
-        <Text style={styles.historyDate}>Referred on {item.date}</Text>
+        <Text style={styles.historyDate}>Referred on : {item.date}</Text>
       </View>
       <Text style={styles.reward}>{item.reward}</Text>
     </View>
@@ -55,7 +59,7 @@ const ReferEarn = () => {
         <View style={styles.banner}>
           <Image
             style={styles.bannerImage}
-            source={require('@/assets/images/bring-friend.jpg')}
+            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/bring-friend.jpg'}}
           />
         </View>
 
@@ -74,8 +78,10 @@ const ReferEarn = () => {
           <Text style={styles.historyHeader}>Refer History</Text>
           <FlatList
             data={history}
+            showsVerticalScrollIndicator={false}
             renderItem={renderHistoryItem}
             keyExtractor={(item) => item.id}
+            contentContainerStyle={styles.historyListContent}
           />
         </View>
 
@@ -84,7 +90,7 @@ const ReferEarn = () => {
           <TouchableOpacity>
             <Text style={styles.footerLink}>Terms & Conditions</Text>
           </TouchableOpacity>
-          <Text style={styles.footerDivider}>|</Text>
+          <Text style={styles.footerDivider}>?</Text>
           <TouchableOpacity>
             <Text style={styles.footerLink}>FAQs</Text>
           </TouchableOpacity>
@@ -104,7 +110,7 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: 10,
   },
   headerText: {
     fontSize: 32,
@@ -117,7 +123,7 @@ const styles = StyleSheet.create({
   banner: {
     alignItems: 'center',
     marginVertical: 0,
-    padding:20
+    padding: 20,
   },
   bannerImage: {
     width: '100%',
@@ -134,7 +140,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
   },
   earningText: {
@@ -144,15 +150,19 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   historySection: {
+    flex: 1,
     marginVertical: 0,
-    padding:10
   },
   historyHeader: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#FFD700',
     textAlign: 'center',
-    marginBottom: 10,
+    marginBottom: 0,
+  },
+  historyListContent: {
+    paddingBottom: 20, // Add space at the bottom for better spacing
+    
   },
   historyItem: {
     flexDirection: 'row',
@@ -177,23 +187,25 @@ const styles = StyleSheet.create({
   },
   reward: {
     marginLeft: 'auto',
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 'bold',
     color: '#FFD700',
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginVertical: 20,
+    marginVertical: 0,
   },
   footerLink: {
     color: '#FFD700',
-    fontSize: 14,
+    fontSize: 10,
     fontWeight: 'bold',
+    marginTop:5
   },
   footerDivider: {
     marginHorizontal: 5,
     color: '#FFD700',
+    
   },
 });
 

@@ -8,20 +8,72 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
+  StatusBar,
 } from "react-native";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { LinearGradient } from "expo-linear-gradient";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Chat = () => {
+  useFocusEffect(
+    React.useCallback(() => {
+      StatusBar.setBarStyle("light-content", true);
+      StatusBar.setBackgroundColor("#1A2B4C", true);
+
+      return () => {
+        StatusBar.setBarStyle("dark-content", true);
+        StatusBar.setBackgroundColor("#FFFFFF", true);
+      };
+    }, [])
+  );
+
   const [messages, setMessages] = useState([
-    { id: "1", text: "Hello! How can I assist you today?", sender: "bot" },
+    { id: "1", text: "Hello! Welcome to GameZone Support. How can we help you today?", sender: "bot" },
   ]);
   const [messageText, setMessageText] = useState("");
+
+  const [options, setOptions] = useState([]);
+
+  const initialOptions = [
+    { id: "1", text: "Withdrawal Issue" },
+    { id: "2", text: "Deposit Issue" },
+    { id: "3", text: "Server Issue" },
+    { id: "4", text: "Game Assistance" },
+  ];
+
+  const subOptions = {
+    "Withdrawal Issue": [
+      { id: "1", text: "Transaction not processed" },
+      { id: "2", text: "Delayed withdrawal time" },
+    ],
+    "Deposit Issue": [
+      { id: "1", text: "Payment failed" },
+      { id: "2", text: "Amount debited but not added" },
+    ],
+    "Server Issue": [
+      { id: "1", text: "Game lagging" },
+      { id: "2", text: "Unable to connect to server" },
+    ],
+    "Game Assistance": [
+      { id: "1", text: "How to play the game?" },
+      { id: "2", text: "How to unlock achievements?" },
+    ],
+  };
+
+  const detailedReplies = {
+    "Transaction not processed": "We're sorry to hear that your withdrawal is not processed. Please ensure that your payment details are correct. If the issue persists, kindly share your transaction ID so we can investigate further.",
+    "Delayed withdrawal time": "Withdrawals may sometimes take longer due to server issues or bank processing times. Usually, it takes 1-3 business days. If it exceeds this period, let us know.",
+    "Payment failed": "A failed payment can happen due to connectivity or payment gateway issues. Please check your bank or wallet statement. If the amount was deducted but not credited, let us know the date and time of the transaction.",
+    "Amount debited but not added": "If the amount was deducted but doesn't reflect in your balance, this might be due to a synchronization delay. Rest assured, the amount should reflect soon. If it doesn't, contact us with your payment reference number.",
+    "Game lagging": "Game lagging can occur due to a poor internet connection or server overload. Please ensure a stable connection and try again. If the issue persists, let us know your game version and device details.",
+    "Unable to connect to server": "This could be a temporary server outage. Check your internet connection and restart the app. If the issue persists, share the error code or time of occurrence.",
+    "How to play the game?": "Our games come with an in-game tutorial. You can access it from the main menu under 'Help' or 'How to Play'. Would you like detailed written instructions?",
+    "How to unlock achievements?": "Achievements can be unlocked by completing specific tasks in the game. Check the 'Achievements' section in your profile for a list of tasks. Let us know if you'd like guidance on a specific achievement.",
+  };
 
   const sendMessage = () => {
     if (messageText.trim() === "") return;
 
-    // Add user's message
     const newMessage = {
       id: `${Date.now()}`,
       text: messageText,
@@ -31,14 +83,55 @@ const Chat = () => {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
     setMessageText("");
 
-    // Simulate bot reply
+    if (messageText.toLowerCase() === "hi" || messageText.toLowerCase() === "hello") {
+      setTimeout(() => {
+        setOptions(initialOptions);
+        addBotMessage("What can we help you with? Please select one of the options below.");
+      }, 1000);
+    } else if (subOptions[messageText]) {
+      setTimeout(() => {
+        setOptions(subOptions[messageText]);
+        addBotMessage(`Thanks for letting us know. Here are some common issues related to "${messageText}":`);
+      }, 1000);
+    } else if (detailedReplies[messageText]) {
+      setTimeout(() => {
+        setOptions([]);
+        addBotMessage(detailedReplies[messageText]);
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        setOptions([]);
+        addBotMessage("Thanks for your message! We'll get back to you soon.");
+      }, 1000);
+    }
+  };
+
+  const addBotMessage = (text) => {
+    const botReply = {
+      id: `${Date.now()}_bot`,
+      text,
+      sender: "bot",
+    };
+    setMessages((prevMessages) => [...prevMessages, botReply]);
+  };
+
+  const selectOption = (optionText) => {
+    const newMessage = {
+      id: `${Date.now()}`,
+      text: optionText,
+      sender: "user",
+    };
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+    setOptions([]);
     setTimeout(() => {
-      const botReply = {
-        id: `${Date.now()}_bot`,
-        text: "Thanks for your message! We'll get back to you soon.",
-        sender: "bot",
-      };
-      setMessages((prevMessages) => [...prevMessages, botReply]);
+      if (subOptions[optionText]) {
+        setOptions(subOptions[optionText]);
+        addBotMessage(`Here are the details for "${optionText}":`);
+      } else if (detailedReplies[optionText]) {
+        addBotMessage(detailedReplies[optionText]);
+      } else {
+        addBotMessage(`Thank you for selecting "${optionText}". We will assist you shortly.`);
+      }
     }, 1000);
   };
 
@@ -56,6 +149,15 @@ const Chat = () => {
       </View>
     );
   };
+
+  const renderOption = ({ item }) => (
+    <TouchableOpacity
+      style={styles.optionButton}
+      onPress={() => selectOption(item.text)}
+    >
+      <Text style={styles.optionText}>{item.text}</Text>
+    </TouchableOpacity>
+  );
 
   return (
     <KeyboardAvoidingView
@@ -77,6 +179,16 @@ const Chat = () => {
         contentContainerStyle={styles.chatListContent}
       />
 
+      {options.length > 0 && (
+        <FlatList
+          data={options}
+          keyExtractor={(item) => item.id}
+          renderItem={renderOption}
+          style={styles.optionsList}
+          contentContainerStyle={styles.optionsListContent}
+        />
+      )}
+
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.textInput}
@@ -92,6 +204,9 @@ const Chat = () => {
     </KeyboardAvoidingView>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -152,7 +267,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   sendButton: {
-    backgroundColor: "#0078ff",
+    backgroundColor: "#006eb0",
     width: 50,
     height: 50,
     borderRadius: 25,

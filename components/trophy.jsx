@@ -36,7 +36,7 @@ const LeaderboardScreen = () => {
 
   return (
     <LinearGradient
-      colors={['#1e3c72', '#2a5298']}
+      colors={['#1e3c72', '#2a5298','pink','white']}
       style={styles.container1}
     >
       <View style={styles.container}>

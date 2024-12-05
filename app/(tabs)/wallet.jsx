@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   Text,
@@ -7,44 +7,45 @@ import {
   StatusBar,
   SafeAreaView,
   Image,
-} from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
+} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import {
   WalletIcon,
   InfoIcon,
   TrophyIcon,
   PercentIcon,
   ChevronRightIcon,
-  IndianRupee
-} from "lucide-react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+  IndianRupee,
+} from 'lucide-react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function GamingWalletScreen({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBarStyle("light-content", true);
-      StatusBar.setBackgroundColor("#1e063c", true);
+      StatusBar.setBarStyle('light-content', true);
+      StatusBar.setBackgroundColor('#1e063c', true);
 
       return () => {
-        StatusBar.setBarStyle("light-content", true);
-        StatusBar.setBackgroundColor("#FFFFFF", true);
+        StatusBar.setBarStyle('light-content', true);
+        StatusBar.setBackgroundColor('#FFFFFF', true);
       };
-    }, [])
+    }, []),
   );
 
   const addcash = () => {
-    navigation.navigate("addCash");
+    navigation.navigate('addCash');
   };
   const earn = () => {
-    navigation.navigate("Refer");
+    navigation.navigate('Refer');
+  };
+  const withdrowall = () => {
+    navigation.navigate('withdroll');
   };
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <LinearGradient
-        colors={["#1e063c", "#4c0080", "#1e063c"]}
+        colors={['#1e063c', '#4c0080', '#1e063c']}
         style={styles.container}
       >
         <View style={styles.container}>
@@ -53,7 +54,7 @@ export default function GamingWalletScreen({ navigation }) {
             {/* <TouchableOpacity onPress={goBack}>
               <FontAwesome5 name="arrow-left" size={20} color="#FFC107" />
             </TouchableOpacity> */}
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
               <TouchableOpacity>
                 {/* <MaterialIcons
                   name="contact-support"
@@ -81,7 +82,6 @@ export default function GamingWalletScreen({ navigation }) {
             <View style={styles.card}>
               <View style={styles.infoRow}>
                 <View style={styles.iconTextContainer}>
-                
                   <IndianRupee size={30} color="yellow" />
                   <View>
                     <View style={styles.labelContainer}>
@@ -129,7 +129,10 @@ export default function GamingWalletScreen({ navigation }) {
                     <Text style={styles.amount}>₹3.53</Text>
                   </View>
                 </View>
-                <TouchableOpacity style={styles.withdrawButton}>
+                <TouchableOpacity
+                  style={styles.withdrawButton}
+                  onPress={withdrowall}
+                >
                   <Text style={styles.buttonText}>WITHDRAW</Text>
                 </TouchableOpacity>
               </View>
@@ -164,9 +167,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bannerImage: {
-    width: "100%",
+    width: '100%',
     height: 150,
-    resizeMode: "cover",
+    resizeMode: 'cover',
     borderRadius: 10,
     marginHorizontal: 18,
     marginTop: 10,
@@ -178,9 +181,9 @@ const styles = StyleSheet.create({
   },
   header: {
     marginTop: 30,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 26,
     marginBottom: 20,
   },
@@ -193,18 +196,18 @@ const styles = StyleSheet.create({
     textShadowRadius: 10,
   },
   balanceContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 15,
   },
   balanceText: {
     fontSize: 35,
-    fontWeight: "bold",
-    color: "#fff",
-    marginTop:10
+    fontWeight: 'bold',
+    color: '#fff',
+    marginTop: 10,
   },
   cardContainer: {
     paddingHorizontal: 18,
-    backgroundColor: "rgba(255, 255, 255, 0.15)", // Translucent background
+    backgroundColor: 'rgba(255, 255, 255, 0.15)', // Translucent background
     padding: 10,
     margin: 20,
     borderRadius: 10,
@@ -215,72 +218,72 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   offerCard: {
-    backgroundColor: "rgba(31, 41, 55, 0.5)", // Translucent background
+    backgroundColor: 'rgba(31, 41, 55, 0.5)', // Translucent background
     borderRadius: 10,
     padding: 18,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between", // Ensures the content is spaced out
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between', // Ensures the content is spaced out
     marginHorizontal: 18,
     marginTop: 10,
-    borderColor:'yellow',
-    borderWidth:1
+    borderColor: 'yellow',
+    borderWidth: 1,
   },
   infoRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   infoRow1: {
-    flexDirection: "row",
-    justifyContent: "space-between", // This ensures that the arrow stays to the right
-    alignItems: "center",
-    width: "100%", // Ensure the row takes full width
+    flexDirection: 'row',
+    justifyContent: 'space-between', // This ensures that the arrow stays to the right
+    alignItems: 'center',
+    width: '100%', // Ensure the row takes full width
   },
   iconTextContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 12,
   },
   labelContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 4,
   },
   label: {
     fontSize: 16,
-    fontWeight: "500",
-    color: "#E5E7EB",
+    fontWeight: '500',
+    color: '#E5E7EB',
   },
   subLabel: {
     fontSize: 12,
-    color: "#9CA3AF",
+    color: '#9CA3AF',
   },
   amount: {
     fontSize: 21,
-    fontWeight: "bold",
-    color: "#FFFFFF",
+    fontWeight: 'bold',
+    color: '#FFFFFF',
   },
   addButton: {
-    backgroundColor: "#2563EB",
+    backgroundColor: '#2563EB',
     paddingVertical: 12,
     paddingHorizontal: 34,
     borderRadius: 10,
   },
   earnButton: {
-    backgroundColor: "#10B981",
+    backgroundColor: '#10B981',
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 10,
   },
   withdrawButton: {
-    backgroundColor: "#EF4444",
+    backgroundColor: '#EF4444',
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 10,
   },
   buttonText: {
-    color: "#fff",
-    fontWeight: "600",
+    color: '#fff',
+    fontWeight: '600',
   },
 });

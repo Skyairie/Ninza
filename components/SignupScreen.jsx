@@ -79,13 +79,13 @@ const SignupScreen = ({ navigation }) => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined} // Adjust behavior for iOS
       keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0} // Offset for iOS
     >
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
         <StatusBar barStyle='light-content' backgroundColor="#1A2B4C"/>
         <View style={styles.formContainer}>
 
           <Text style={styles.TitleText}>Welcome to NinzaGames</Text>
           <Animated.Image
-            source={require('@/assets/images/signup-images/game.png')}
+            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/signup-images/game.png'}}
             style={[styles.illustration, { transform: [{ scale: scaleAnim }] }]} // Animated scale
             resizeMode="contain"
           />
