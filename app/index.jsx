@@ -10,6 +10,7 @@ import PaymentInterface from '@/components/payment';
 import ProfilePage from '@/components/profile';
 import GamingWalletScreen from './(tabs)/wallet';
 import ReferEarn from '@/components/referEarn';
+import WithdrawalPage from '@/components/WithdrawalPage';
 
 const Stack = createStackNavigator();
 
@@ -46,6 +47,12 @@ export default function App() {
           component={ReferEarn}
           options={{ title: "progile"}}
         />
+        <Stack.Screen
+          name="WithdrawalPage"
+          component={WithdrawalPage}
+          options={{ title: "progile"}}
+        />
+      
 
 
         {/* Add other screens here */}
