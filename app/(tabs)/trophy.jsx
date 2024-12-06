@@ -29,16 +29,13 @@ const LeaderboardScreen = () => {
       return () => {
         // Reset the StatusBar when the screen is unfocused
         StatusBar.setBarStyle('dark-content', true); // Reset to dark content style
-        StatusBar.setBackgroundColor("#FFFFFF", true); // Reset to default background color
+        StatusBar.setBackgroundColor('#FFFFFF', true); // Reset to default background color
       };
     }, []),
   );
 
   return (
-    <LinearGradient
-      colors={['#1e3c72', '#2a5298']}
-      style={styles.container1}
-    >
+    <LinearGradient colors={['#1e3c72', '#2a5298']} style={styles.container1}>
       <View style={styles.container}>
         <View style={styles.head}>
           <Text style={styles.headertext1}>LeaderBoard</Text>

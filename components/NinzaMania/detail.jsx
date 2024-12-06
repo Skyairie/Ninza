@@ -104,3 +104,10 @@ Rules of Snake and Ladder
     `,
   },
 ];
+export const manualLudoGames = [
+  {
+    id: 101,
+    name: 'Ludo Classic',
+    image: require('@/assets/images/games-images/ludo.png'),
+  },
+];

@@ -23,7 +23,7 @@ export default function WithdrawInterface({ navigation }) {
         StatusBar.setBarStyle('dark-content', true);
         StatusBar.setBackgroundColor('#ffffff', true);
       };
-    }, [])
+    }, []),
   );
 
   const [amount, setAmount] = useState('');
@@ -63,7 +63,10 @@ export default function WithdrawInterface({ navigation }) {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <LinearGradient colors={['#1e063c', '#4c0080']} style={styles.container}>
+        <LinearGradient
+          colors={['#1e063c', '#4c0080']}
+          style={styles.container}
+        >
           <TouchableOpacity style={styles.backButton} onPress={goBack}>
             <ArrowLeft size={24} color="#fff" />
           </TouchableOpacity>
@@ -105,9 +108,9 @@ export default function WithdrawInterface({ navigation }) {
         <View style={styles.termsContainer}>
           <Text style={styles.termsHeader}>Terms and Conditions</Text>
           <Text style={styles.termsText}>
-            1. The minimum withdrawal amount is ₹50.{"\n"}
-            2. Withdrawals are subject to account balance availability.{"\n"}
-            3. Processing time may vary depending on the bank.{"\n"}
+            1. The minimum withdrawal amount is ₹50.{'\n'}
+            2. Withdrawals are subject to account balance availability.{'\n'}
+            3. Processing time may vary depending on the bank.{'\n'}
           </Text>
         </View>
 
@@ -270,6 +273,8 @@ const styles = StyleSheet.create({
     // elevation: 2,
     borderLeftWidth: 4,
     borderLeftColor: '#22c55e',
+    borderRightWidth: 4,
+    borderRightColor: '#22c55e',
   },
   historyText: {
     fontSize: 16,

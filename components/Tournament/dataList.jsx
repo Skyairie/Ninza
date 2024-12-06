@@ -1,29 +1,49 @@
 // src/components/DataList.js
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
-import DummyData from "../DummyData.json"; // Adjust path as necessary
+import DummyData from '../../DummyData.json'; // Adjust path as necessary
 
 export default function DataList() {
   // Sort DummyData by score in descending order
   const sortedData = DummyData.sort((a, b) => b.score - a.score);
 
   const renderItem = ({ item, index }) => (
-    <View style={[
+    <View
+      style={[
         styles.itemContainer,
         index === 0 && styles.goldBackground,
         index === 1 && styles.silverBackground,
-        index === 2 && styles.bronzeBackground
+        index === 2 && styles.bronzeBackground,
       ]}
     >
-      <Text style={[styles.rank, index === 0 && styles.goldRank, index === 1 && styles.silverRank, index === 2 && styles.bronzeRank]}>
+      <Text
+        style={[
+          styles.rank,
+          index === 0 && styles.goldRank,
+          index === 1 && styles.silverRank,
+          index === 2 && styles.bronzeRank,
+        ]}
+      >
         {index + 1}
       </Text>
       <Image
-        source={require('../assets/profile-user.png')} // Replace with your actual image source
-        style={[styles.userIcon, index === 0 && styles.goldBorder, index === 1 && styles.silverBorder, index === 2 && styles.bronzeBorder]}
+        source={require('../../assets/profile-user.png')} // Replace with your actual image source
+        style={[
+          styles.userIcon,
+          index === 0 && styles.goldBorder,
+          index === 1 && styles.silverBorder,
+          index === 2 && styles.bronzeBorder,
+        ]}
       />
       <View style={styles.textContainer}>
-        <Text style={[styles.name, index === 0 && styles.goldName, index === 1 && styles.silverName, index === 2 && styles.bronzeName]}>
+        <Text
+          style={[
+            styles.name,
+            index === 0 && styles.goldName,
+            index === 1 && styles.silverName,
+            index === 2 && styles.bronzeName,
+          ]}
+        >
           {item.name}
         </Text>
         <Text style={styles.textScore}>Score: {item.score}</Text>
@@ -100,4 +120,3 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
 });
-

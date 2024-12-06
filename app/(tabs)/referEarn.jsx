@@ -29,12 +29,17 @@ const ReferEarn = () => {
         StatusBar.setBarStyle('dark-content', true);
         StatusBar.setBackgroundColor('#FFFFFF', true);
       };
-    }, [])
+    }, []),
   );
 
   const renderHistoryItem = ({ item }) => (
     <View style={styles.historyItem}>
-      <Icon name="account-circle" size={30} color="#FFD700" style={styles.avatar} />
+      <Icon
+        name="account-circle"
+        size={30}
+        color="#FFD700"
+        style={styles.avatar}
+      />
       <View>
         <Text style={styles.historyName}>{item.name}</Text>
         <Text style={styles.historyDate}>Referred on {item.date}</Text>
@@ -45,7 +50,10 @@ const ReferEarn = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <LinearGradient colors={['#3D0057', '#70009A', '#1C0045']} style={styles.container}>
+      <LinearGradient
+        colors={['#3D0057', '#70009A', '#1C0045']}
+        style={styles.container}
+      >
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.headerText}>REFER AND EARN</Text>
@@ -62,7 +70,10 @@ const ReferEarn = () => {
         {/* Earning Info */}
         <View style={styles.earningSection}>
           <TouchableOpacity>
-            <LinearGradient colors={['#FFD700', '#FF4500']} style={styles.earningButton}>
+            <LinearGradient
+              colors={['#FFD700', '#FF4500']}
+              style={styles.earningButton}
+            >
               <Icon name="trophy" size={30} color="#000" />
               <Text style={styles.earningText}>GET ₹30 NOW</Text>
             </LinearGradient>
@@ -117,7 +128,7 @@ const styles = StyleSheet.create({
   banner: {
     alignItems: 'center',
     marginVertical: 0,
-    padding:20
+    padding: 20,
   },
   bannerImage: {
     width: '100%',
@@ -145,7 +156,7 @@ const styles = StyleSheet.create({
   },
   historySection: {
     marginVertical: 0,
-    padding:10
+    padding: 10,
   },
   historyHeader: {
     fontSize: 24,

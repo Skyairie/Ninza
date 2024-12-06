@@ -44,7 +44,7 @@ const OTPScreen = ({ route, navigation }) => {
         StatusBar.setBarStyle('default');
         StatusBar.setBackgroundColor('#FFFFFF'); // Adjust as needed for your app
       };
-    }, [])
+    }, []),
   );
 
   // Start countdown timer for OTP
@@ -97,13 +97,16 @@ const OTPScreen = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.safearea}>
-      <KeyboardAvoidingView 
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
       >
         <Animated.Image
-          source={require('../assets/images/signup-images/pin.png')}
-          style={[styles.illustration, { transform: [{ translateY: slideAnim }], opacity: fadeAnim }]} // Apply animations
+          source={require('../../assets/images/signup-images/pin.png')}
+          style={[
+            styles.illustration,
+            { transform: [{ translateY: slideAnim }], opacity: fadeAnim },
+          ]} // Apply animations
           resizeMode="contain"
         />
         <Text style={styles.title}>Verify OTP</Text>
@@ -125,7 +128,9 @@ const OTPScreen = ({ route, navigation }) => {
         >
           <Text style={styles.buttonText}>SUBMIT OTP</Text>
         </TouchableOpacity>
-        {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
+        {errorMessage ? (
+          <Text style={styles.errorText}>{errorMessage}</Text>
+        ) : null}
 
         <TouchableOpacity
           style={styles.resendButton}
