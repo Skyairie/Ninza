@@ -1,12 +1,20 @@
 import React from 'react';
-import { View, Text, Modal, TouchableOpacity, StyleSheet, Animated, Easing } from 'react-native';
+import {
+  View,
+  Text,
+  Modal,
+  TouchableOpacity,
+  StyleSheet,
+  Animated,
+  Easing,
+} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const NotificationModal = ({ visible, onClose }) => {
   const scaleAnim = new Animated.Value(0.8); // Scale animation
   const fadeAnim = new Animated.Value(0); // Fade-in effect
-  
+
   // Animations for the modal appearance
   React.useEffect(() => {
     if (visible) {
@@ -49,7 +57,9 @@ const NotificationModal = ({ visible, onClose }) => {
       visible={visible}
       onRequestClose={onClose}
     >
-      <Animated.View style={[styles.notificationModalOverlay, { opacity: fadeAnim }]}>
+      <Animated.View
+        style={[styles.notificationModalOverlay, { opacity: fadeAnim }]}
+      >
         <Animated.View
           style={[
             styles.notificationModalContent,
@@ -64,8 +74,10 @@ const NotificationModal = ({ visible, onClose }) => {
           >
             <Icon name="rocket" size={50} color="#fff" style={styles.icon} />
             <Text style={styles.notificationTitle}>🚨 Game Update!</Text>
-            <Text style={styles.notificationMessage}>Something awesome just happened in your game!</Text>
-            
+            <Text style={styles.notificationMessage}>
+              Something awesome just happened in your game!
+            </Text>
+
             <TouchableOpacity style={styles.submitButton} onPress={onClose}>
               <Text style={styles.submitButtonText}>Got it!</Text>
             </TouchableOpacity>

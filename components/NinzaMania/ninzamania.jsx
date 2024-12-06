@@ -9,13 +9,13 @@ import {
   Text,
 } from 'react-native';
 import { XIcon } from 'lucide-react-native';
-import { dummyGames } from './detail';
-import SubMenu from './SubMania/SubMenu';
-import GameSection from './SubMania/GameSection';
-import GameModal from './SubMania/GameModal';
-import styles from './styles';
+import { dummyGames, manualLudoGames } from './detail';
+import SubMenu from '../SubMania/SubMenu';
+import GameSection from '../SubMania/GameSection';
+import GameModal from '../SubMania/GameModal';
+import styles from '../../utils/styles';
 
-const NinzaMania = () => {
+const NinzaMania = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
   const [showBanner, setShowBanner] = useState(true);
@@ -30,10 +30,15 @@ const NinzaMania = () => {
     setSelectedGame(null);
   };
 
+  const handleManualLudoPress = () => {
+    // Navigate to the ManualBattle screen
+    navigation.navigate('ManualBattle');
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ImageBackground
-        source={require('../assets/images/tabback-imgs/1.png')}
+        source={require('../../assets/images/tabback-imgs/1.png')}
         style={styles.container}
       >
         <SubMenu />
@@ -53,6 +58,11 @@ const NinzaMania = () => {
             title="Popular on Ninza"
             items={dummyGames}
             onCardPress={openModal}
+          />
+          <GameSection
+            title="Manual Ludo"
+            items={manualLudoGames} // Use manual ludo-specific data
+            onCardPress={handleManualLudoPress} // Navigate to ManualBattle
           />
         </ScrollView>
 

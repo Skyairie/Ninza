@@ -1,7 +1,7 @@
 // GameSection.js
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
-import styles from '../styles';
+import styles from '../../utils/styles';
 
 const GameSection = ({ title, items, onCardPress }) => (
   <View style={styles.section}>

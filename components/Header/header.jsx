@@ -5,22 +5,16 @@ import {
   StatusBar,
   Image,
   TouchableOpacity,
-  TextInput,
-  Modal,
-  Animated,
   StyleSheet,
   SafeAreaView,
-  Easing,
 } from 'react-native'; // Ensure Easing is imported
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useFocusEffect } from '@react-navigation/native';
 import BoardScreen from '@/app/(tabs)/boardScreen';
-import NinzaMania from './ninzamania';
-import Tournament from './Tournament';
+import NinzaMania from '../NinzaMania/ninzamania';
+import Tournament from '../Tournament/Tournament';
 import { fonts } from '@/utils/fonts';
-import GamingWalletScreen from '@/app/(tabs)/wallet';
-import { LinearGradient } from 'expo-linear-gradient';
 import NotificationModal from './notification';
 import SpinWheel from './spinWheel';
 
@@ -94,8 +88,6 @@ const Header = ({ navigation }) => {
   const closeSpinModal = () => {
     setSpinModalVisible(false);
   };
-
-
 
   return (
     <SafeAreaView

@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import styles from '../styles';
+import styles from '../../utils/styles';
 
 const SubMenu = () => (
   <View style={styles.submenu}>

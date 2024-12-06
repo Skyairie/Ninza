@@ -1,20 +1,79 @@
 {
-    "topPlayers": [
-      { "name": "Kia", "points": 6100, "rank": 2, "avatar": "avatar1" },
-      { "name": "Jim", "points": 7700, "rank": 1, "avatar": "avatar1" },
-      { "name": "Joe", "points": 5713, "rank": 3, "avatar": "avatar1" }
-    ],
-    "otherPlayers": [
-      { "rank": 4, "name": "John Doe", "points": 5000, "status": "up", "avatar": "avatar1" },
-      { "rank": 5, "name": "Shain Lee", "points": 4910, "status": "up", "avatar": "avatar1" },
-      { "rank": 6, "name": "Shally Tan", "points": 4500, "status": "up", "avatar": "avatar1" },
-      { "rank": 7, "name": "Ben Stark", "points": 4444, "status": "down", "avatar": "avatar1" },
-      { "rank": 8, "name": "Joseph M.", "points": 4310, "status": "down", "avatar": "avatar1" },
-      { "rank": 9, "name": "John Doe", "points": 5000, "status": "up", "avatar": "avatar1" },
-      { "rank": 10, "name": "Shain Lee", "points": 4910, "status": "up", "avatar": "avatar1" },
-      { "rank": 11, "name": "Shally Tan", "points": 4500, "status": "up", "avatar": "avatar1" },
-      { "rank": 12, "name": "Ben Stark", "points": 4444, "status": "down", "avatar": "avatar1" },
-      { "rank": 13, "name": "Joseph M.", "points": 4310, "status": "down", "avatar": "avatar1" }
-    ]
-  }
-  
+  "topPlayers": [
+    { "name": "Kia", "points": 6100, "rank": 2, "avatar": "avatar1" },
+    { "name": "Jim", "points": 7700, "rank": 1, "avatar": "avatar1" },
+    { "name": "Joe", "points": 5713, "rank": 3, "avatar": "avatar1" }
+  ],
+  "otherPlayers": [
+    {
+      "rank": 4,
+      "name": "John Doe",
+      "points": 5000,
+      "status": "up",
+      "avatar": "avatar1"
+    },
+    {
+      "rank": 5,
+      "name": "Shain Lee",
+      "points": 4910,
+      "status": "up",
+      "avatar": "avatar1"
+    },
+    {
+      "rank": 6,
+      "name": "Shally Tan",
+      "points": 4500,
+      "status": "up",
+      "avatar": "avatar1"
+    },
+    {
+      "rank": 7,
+      "name": "Ben Stark",
+      "points": 4444,
+      "status": "down",
+      "avatar": "avatar1"
+    },
+    {
+      "rank": 8,
+      "name": "Joseph M.",
+      "points": 4310,
+      "status": "down",
+      "avatar": "avatar1"
+    },
+    {
+      "rank": 9,
+      "name": "John Doe",
+      "points": 5000,
+      "status": "up",
+      "avatar": "avatar1"
+    },
+    {
+      "rank": 10,
+      "name": "Shain Lee",
+      "points": 4910,
+      "status": "up",
+      "avatar": "avatar1"
+    },
+    {
+      "rank": 11,
+      "name": "Shally Tan",
+      "points": 4500,
+      "status": "up",
+      "avatar": "avatar1"
+    },
+    {
+      "rank": 12,
+      "name": "Ben Stark",
+      "points": 4444,
+      "status": "down",
+      "avatar": "avatar1"
+    },
+    {
+      "rank": 13,
+      "name": "Joseph M.",
+      "points": 4310,
+      "status": "down",
+      "avatar": "avatar1"
+    }
+  ]
+}
