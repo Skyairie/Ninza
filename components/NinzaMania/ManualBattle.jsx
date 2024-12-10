@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Info, BadgeIndianRupee, ArrowLeftRight } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { ArrowLeft } from 'lucide-react-native';
 
 export default function ManualBattle({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -20,9 +21,22 @@ export default function ManualBattle({ navigation }) {
 
   return (
     <View style={styles.container}>
+      {/* <View style={styles.header1}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}
+        >
+          <ArrowLeft width={24} height={30} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle1}></Text>
+      </View> */}
       {/* Top Section */}
       <View style={styles.topSection}>
         <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()}
+          >
+          <ArrowLeft width={24} height={30} color="white" />
+          </TouchableOpacity>
           <Text style={styles.headerTitle}>Create a Battle</Text>
           <TouchableOpacity style={styles.rulesButton} onPress={openModal}>
             <Info width={16} height={16} color="#fff" />
@@ -88,10 +102,10 @@ export default function ManualBattle({ navigation }) {
 
       {/* Scrollable Battles */}
       <ScrollView showsVerticalScrollIndicator={false}>
-        {Array.from({ length: 2 }).map((_, index) => (
+        {Array.from({ length: 1 }).map((_, index) => (
           <LinearGradient
             key={index}
-            colors={['#FFB800', '#87CEEB']}
+            colors={['#f8a3ff','#ffff77','#84ffe1']}
             style={styles.gamePlayCard}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
@@ -149,10 +163,10 @@ export default function ManualBattle({ navigation }) {
 
       {/* Scrollable Battles */}
       <ScrollView showsVerticalScrollIndicator={false}>
-        {Array.from({ length: 8 }).map((_, index) => (
+        {Array.from({ length: 4 }).map((_, index) => (
           <LinearGradient
             key={index}
-            colors={['#FFB800', '#87CEEB']}
+            colors={['#f8a3ff','#ffff77','#84ffe1']}
             style={styles.gamePlayCard}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
@@ -251,6 +265,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     flexDirection: 'row',
     marginBottom: '5',
+    
   },
   runningBattlesTitle: {
     fontSize: 16,
@@ -373,4 +388,5 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 12,
   },
+  
 });
