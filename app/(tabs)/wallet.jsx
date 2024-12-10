@@ -18,6 +18,8 @@ import {
   IndianRupee,
 } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function GamingWalletScreen({ navigation }) {
   useFocusEffect(
@@ -38,12 +40,9 @@ export default function GamingWalletScreen({ navigation }) {
   const earn = () => {
     navigation.navigate('Refer');
   };
-  const withdrowall = () => {
-    navigation.navigate('withdroll');
-  };
- 
+
   const withdroll = () => {
-    navigation.navigate("withdraw");
+    navigation.navigate('WithdrawalPage');
   };
 
   return (
@@ -133,7 +132,10 @@ export default function GamingWalletScreen({ navigation }) {
                     <Text style={styles.amount}>₹3.53</Text>
                   </View>
                 </View>
-                <TouchableOpacity style={styles.withdrawButton} onPress={withdroll}>
+                <TouchableOpacity
+                  style={styles.withdrawButton}
+                  onPress={withdroll}
+                >
                   <Text style={styles.buttonText}>WITHDRAW</Text>
                 </TouchableOpacity>
               </View>
@@ -192,7 +194,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 30,
     fontFamily: 'PressStart2P-Regular', // Use a gaming font
-    textShadowColor: 'pink',
+    //textShadowColor: 'pink',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
   },

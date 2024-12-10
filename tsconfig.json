@@ -3,10 +3,11 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
+      "@/*": ["./*"]
+    },
+    "skipLibCheck": true,  // Skip type checking of declaration files
+    "esModuleInterop": true, // Ensures compatibility between CommonJS and ES modules
+    "resolveJsonModule": true // Resolves JSON files as modules
   },
   "include": [
     "**/*.ts",

@@ -15,13 +15,9 @@ import { useFocusEffect } from '@react-navigation/native';
 
 const ReferEarn = () => {
   const [history, setHistory] = useState([
-    { id: '1', name: 'John Doe', date: '2024-11-01', reward: '₹ 30' },
-    { id: '2', name: 'Jane Smith', date: '2024-11-03', reward: '₹ 30' },
-    { id: '3', name: 'Mark Wilson', date: '2024-11-05', reward: '₹ 30' },
-    { id: '4', name: 'Emily Davis', date: '2024-11-06', reward: '₹ 30' },
-    { id: '5', name: 'Michael Brown', date: '2024-11-07', reward: '₹ 30' },
-    { id: '6', name: 'Sarah Lee', date: '2024-11-08', reward: '₹ 30' },
-    { id: '7', name: 'Chris Johnson', date: '2024-11-09', reward: '₹ 30' },
+    { id: '1', name: 'John Doe', date: '2024-11-01', reward: '₹30' },
+    { id: '2', name: 'Jane Smith', date: '2024-11-03', reward: '₹30' },
+    { id: '3', name: 'Mark Wilson', date: '2024-11-05', reward: '₹30' },
   ]);
 
   useFocusEffect(
@@ -33,15 +29,20 @@ const ReferEarn = () => {
         StatusBar.setBarStyle('dark-content', true);
         StatusBar.setBackgroundColor('#FFFFFF', true);
       };
-    }, [])
+    }, []),
   );
 
   const renderHistoryItem = ({ item }) => (
     <View style={styles.historyItem}>
-      <Icon name="account-circle" size={30} color="#FFD700" style={styles.avatar} />
+      <Icon
+        name="account-circle"
+        size={30}
+        color="#FFD700"
+        style={styles.avatar}
+      />
       <View>
         <Text style={styles.historyName}>{item.name}</Text>
-        <Text style={styles.historyDate}>Referred on : {item.date}</Text>
+        <Text style={styles.historyDate}>Referred on {item.date}</Text>
       </View>
       <Text style={styles.reward}>{item.reward}</Text>
     </View>
@@ -49,7 +50,10 @@ const ReferEarn = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <LinearGradient colors={['#3D0057', '#70009A', '#1C0045']} style={styles.container}>
+      <LinearGradient
+        colors={['#3D0057', '#70009A', '#1C0045']}
+        style={styles.container}
+      >
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.headerText}>REFER AND EARN</Text>
@@ -66,7 +70,10 @@ const ReferEarn = () => {
         {/* Earning Info */}
         <View style={styles.earningSection}>
           <TouchableOpacity>
-            <LinearGradient colors={['#FFD700', '#FF4500']} style={styles.earningButton}>
+            <LinearGradient
+              colors={['#FFD700', '#FF4500']}
+              style={styles.earningButton}
+            >
               <Icon name="trophy" size={30} color="#000" />
               <Text style={styles.earningText}>GET ₹30 NOW</Text>
             </LinearGradient>
@@ -78,10 +85,8 @@ const ReferEarn = () => {
           <Text style={styles.historyHeader}>Refer History</Text>
           <FlatList
             data={history}
-            showsVerticalScrollIndicator={false}
             renderItem={renderHistoryItem}
             keyExtractor={(item) => item.id}
-            contentContainerStyle={styles.historyListContent}
           />
         </View>
 
@@ -90,7 +95,7 @@ const ReferEarn = () => {
           <TouchableOpacity>
             <Text style={styles.footerLink}>Terms & Conditions</Text>
           </TouchableOpacity>
-          <Text style={styles.footerDivider}>?</Text>
+          <Text style={styles.footerDivider}>|</Text>
           <TouchableOpacity>
             <Text style={styles.footerLink}>FAQs</Text>
           </TouchableOpacity>
@@ -110,7 +115,7 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    marginVertical: 10,
+    marginVertical: 20,
   },
   headerText: {
     fontSize: 32,
@@ -140,7 +145,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
+    padding: 15,
     borderRadius: 10,
   },
   earningText: {
@@ -150,19 +155,15 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   historySection: {
-    flex: 1,
     marginVertical: 0,
+    padding: 10,
   },
   historyHeader: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#FFD700',
     textAlign: 'center',
-    marginBottom: 0,
-  },
-  historyListContent: {
-    paddingBottom: 20, // Add space at the bottom for better spacing
-    
+    marginBottom: 10,
   },
   historyItem: {
     flexDirection: 'row',
@@ -187,25 +188,23 @@ const styles = StyleSheet.create({
   },
   reward: {
     marginLeft: 'auto',
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: 'bold',
     color: '#FFD700',
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginVertical: 0,
+    marginVertical: 20,
   },
   footerLink: {
     color: '#FFD700',
-    fontSize: 10,
+    fontSize: 14,
     fontWeight: 'bold',
-    marginTop:5
   },
   footerDivider: {
     marginHorizontal: 5,
     color: '#FFD700',
-    
   },
 });
 

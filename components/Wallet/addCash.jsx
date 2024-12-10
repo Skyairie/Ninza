@@ -5,34 +5,19 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  StatusBar
+  StatusBar,
 } from 'react-native';
-import { Shield, Zap, Users ,ArrowLeft } from 'lucide-react-native';
-import { LinearGradient } from "expo-linear-gradient";
-import { useFocusEffect } from '@react-navigation/native';
+import { Shield, Zap, Users, ArrowLeft } from 'lucide-react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import PaymentInterface from './payment';
 
 export default function AddCash({ navigation }) {
-
-  useFocusEffect(
-    React.useCallback(() => {
-      StatusBar.setBarStyle('light-content', true);
-      StatusBar.setBackgroundColor('#1e063c', true);
-
-      return () => {
-        StatusBar.setBarStyle('dark-content', true);
-        StatusBar.setBackgroundColor('#ffff', true);
-      };
-    }, [])
-  );
-
-
-
   const [amount, setAmount] = useState('100');
 
   const quickAmounts = [{ value: '50' }, { value: '200' }, { value: '500' }];
 
   const paymentinterface = () => {
-    navigation.navigate("payment");
+    navigation.navigate('payment');
   };
   const goBack = () => {
     navigation.goBack();
@@ -40,28 +25,25 @@ export default function AddCash({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#1e063c" />
 
-     
-      
+      {/* Header Section */}
+
       <View style={styles.header}>
-      <LinearGradient
-        colors={["#1e063c", "#4c0080"]}
-        style={styles.container}
-      >
-        <TouchableOpacity
-            style={styles.backButton}
-            onPress={goBack}
-          >
+        <LinearGradient
+          colors={['#1e063c', '#4c0080']}
+          style={styles.container}
+        >
+          <TouchableOpacity style={styles.backButton} onPress={goBack}>
             <ArrowLeft size={24} color="#fff" />
           </TouchableOpacity>
-        <Text style={styles.headerTitle}>ADD CASH</Text>
-        <View style={styles.balanceContainer}>
-          <Text style={styles.balanceLabel}>Wallet Balance</Text>
-          <Text style={styles.balanceAmount}>₹23.2</Text>
-        </View>
+          <Text style={styles.headerTitle}>ADD CASH</Text>
+          <View style={styles.balanceContainer}>
+            <Text style={styles.balanceLabel}>Wallet Balance</Text>
+            <Text style={styles.balanceAmount}>₹23.2</Text>
+          </View>
         </LinearGradient>
       </View>
-      
 
       {/* Card Section */}
       <View style={styles.card}>
@@ -123,14 +105,13 @@ const styles = StyleSheet.create({
     padding: 0,
     paddingTop: 0,
     //backgroundColor: '#3f0864',
-    
   },
   headerTitle: {
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop:20
+    marginTop: 20,
   },
   balanceContainer: {
     position: 'absolute',
@@ -145,7 +126,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
-    textAlign: 'center',    
+    textAlign: 'center',
   },
   card: {
     backgroundColor: '#ffff',
@@ -197,7 +178,7 @@ const styles = StyleSheet.create({
   },
   trustIndicators: {
     padding: 20,
-    marginTop:20
+    marginTop: 20,
     //marginBottom:-30
   },
   trustItem: {
@@ -207,14 +188,13 @@ const styles = StyleSheet.create({
   },
   trustText: {
     marginLeft: 12,
-    color: 'black',//#4b5563
+    color: 'black', //#4b5563
     fontSize: 14,
   },
   addButton: {
     margin: 16,
     marginBottom: 0,
     alignItems: 'center',
-    
   },
   addButtonGradient: {
     borderRadius: 10,
@@ -231,6 +211,6 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginLeft: 15,
-    marginTop:10
+    marginTop: 10,
   },
 });

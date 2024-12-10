@@ -6,14 +6,17 @@ import {
   ImageBackground,
 } from 'react-native';
 import React from 'react';
-import DataList from '@/components/dataList';
+import DataList from '@/components/Tournament/dataList';
+import { LinearGradient } from 'expo-linear-gradient';
 const BoardScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
+      {/* <LinearGradient
+          colors={["#004845", "#006d6c", "#00dad7"]}
+          style={styles.container}
+        > */}
       <ImageBackground
-        source={{
-          uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/tabback-imgs/2.png',
-        }} // Your image here
+        source={require('@/assets/images/tabback-imgs/2.png')} // Your image here
         style={styles.container}
       >
         <View style={styles.container}>

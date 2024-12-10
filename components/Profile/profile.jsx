@@ -15,14 +15,16 @@ import {
 import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
 const { width, height } = Dimensions.get('window');
 
-const ProfilePage = ({ navigation }) => {
+const ProfilePage = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [name, setName] = useState('GamerX');
   const [email, setEmail] = useState('gamerx@ggmail.com');
 
+  const navigation = useNavigation(); // Initialize navigation
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
   const saveData = () => closeModal();
@@ -43,10 +45,6 @@ const ProfilePage = ({ navigation }) => {
   const goBack = () => {
     navigation.goBack();
   };
-  
-  
-
-
 
   return (
     <SafeAreaView style={styles.safearea}>
@@ -61,8 +59,8 @@ const ProfilePage = ({ navigation }) => {
           </TouchableOpacity>
           <Image
             style={styles.bannerImage}
-            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/profile-images/banner.jpg'}} // Replace with gaming banner
-          />
+            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/profile-images/banner.jpg'}}
+            />
         </View>
 
         {/* Avatar */}
@@ -89,17 +87,20 @@ const ProfilePage = ({ navigation }) => {
             <FontAwesome5 name="comments" style={styles.icon} />
             <Text style={styles.infoText}>Discord: GamerX#1234</Text>
           </View>
-          <TouchableOpacity>
-            <View style={styles.infoItem}>
-              <FontAwesome5 name="coins" style={styles.icon} />
-              <Text style={styles.infoText}>Transaction History</Text>
-            </View>
+          {/* Replace Link with TouchableOpacity and use navigation.navigate */}
+          <TouchableOpacity
+            style={styles.infoItem}
+            onPress={() => navigation.navigate('Transaction')} // Use navigation.navigate
+          >
+            <FontAwesome5 name="coins" style={styles.icon} />
+            <Text style={styles.infoText}>Transaction History</Text>
           </TouchableOpacity>
-          <TouchableOpacity >
-            <View style={styles.infoItem} >
-              <FontAwesome5 name="gamepad" style={styles.icon} />
-              <Text style={styles.infoText}>Game History</Text>
-            </View>
+          <TouchableOpacity
+            style={styles.infoItem}
+            onPress={() => navigation.navigate('GameHistory')}
+          >
+            <FontAwesome5 name="gamepad" style={styles.icon} />
+            <Text style={styles.infoText}>Game History</Text>
           </TouchableOpacity>
         </View>
 
@@ -168,8 +169,8 @@ const styles = StyleSheet.create({
     marginTop: -50,
   },
   avatarCircle: {
-    width: 100,
-    height: 100,
+    width: 130,
+    height: 130,
     borderRadius: 65,
     backgroundColor: '#444',
     borderWidth: 1,

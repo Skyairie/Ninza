@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Image, StyleSheet, View, Text } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import WalletScreen from '../(tabs)/wallet';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import ReferEarn from '@/components/referEarn';
-import Header from '@/components/header';
-import Trophy from '@/components/trophy';
-import Chat from '@/components/chat';
+import ReferEarn from '@/app/(tabs)/referEarn';
+import Header from '@/components/Header/header';
+import Trophy from '@/app/(tabs)/trophy';
+import Chat from '@/app/(tabs)/chat';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,9 +28,7 @@ export default function Tabs() {
             return (
               <TouchableOpacity style={styles.playButton}>
                 <Image
-                  source={{
-                    uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/logo-images/main-logo.png',
-                  }} // Replace with your logo path
+                  source={require('@/assets/images/logo-images/main-logo.png')} // Replace with your logo path
                   style={{ width: 25, height: 30 }}
                   resizeMode="contain"
                 />
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'yellow',
-    borderWidth: 1,
+    borderWidth: 2,
     marginTop: 10,
   },
 });

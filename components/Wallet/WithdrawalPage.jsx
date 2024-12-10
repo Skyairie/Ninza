@@ -85,7 +85,7 @@ export default function WithdrawInterface({ navigation }) {
           <Text style={styles.enterAmountText}>Enter Any Amount</Text>
           <TextInput
             style={styles.amountInput}
-            value={`₹${amount}`}
+            value={amount ? `₹${amount}` : '₹'}
             onChangeText={(text) => setAmount(text.replace('₹', ''))}
             keyboardType="numeric"
           />
@@ -123,7 +123,6 @@ export default function WithdrawInterface({ navigation }) {
             data={history}
             keyExtractor={(item) => item.id}
             showsVerticalScrollIndicator={false}
-            marginBottom={-16}
             renderItem={({ item }) => (
               <View style={styles.historyItem}>
                 <Text style={styles.historyText}>Amount: ₹{item.amount}</Text>
@@ -137,7 +136,7 @@ export default function WithdrawInterface({ navigation }) {
       {/* Withdraw Button */}
       <View style={styles.footer}>
         <TouchableOpacity style={styles.addButton} onPress={handleWithdraw}>
-          <Text style={styles.addButtonText}>PROCEED</Text>
+          <Text style={styles.addButtonText}>WITHDRAWAL NOW</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -150,7 +149,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#DBD3E0',
   },
   header: {
-    height: 100,
+    height: 130,
+    padding: 0,
+    paddingTop: 0,
   },
   backButton: {
     marginLeft: 20,
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 10,
+    marginTop: 20,
   },
   balanceContainer: {
     position: 'absolute',
@@ -231,26 +232,26 @@ const styles = StyleSheet.create({
     color: '#374151',
   },
   termsContainer: {
-    marginTop: 0,
+    marginTop: 20,
     paddingHorizontal: 16,
     paddingVertical: 10,
     backgroundColor: 'transparent',
   },
   termsHeader: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 10,
   },
   termsText: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#555',
     lineHeight: 22,
   },
   transactionHeader: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 0,
+    marginTop: 20,
     marginBottom: 10,
     color: '#333',
   },
@@ -262,10 +263,10 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   historyItem: {
-    //backgroundColor: '#ffffff',
-    padding: 10,
+    // backgroundColor: '#ffffff',
+    padding: 15,
     borderRadius: 10,
-    marginBottom: 7,
+    marginBottom: 10,
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowRadius: 3,
@@ -282,11 +283,11 @@ const styles = StyleSheet.create({
   historyDate: {
     fontSize: 14,
     color: '#777',
-    marginTop: 5,
+    marginTop: 0,
   },
   footer: {
-    backgroundColor: '#fff',
-    padding: 10,
+    // backgroundColor: '#fff',
+    padding: 20,
   },
   addButton: {
     backgroundColor: '#22c55e',
@@ -298,6 +299,5 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
-    fontStyle:'italic'
   },
 });

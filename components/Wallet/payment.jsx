@@ -8,15 +8,17 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-import { ArrowLeft, ChevronRight, Wallet, LayoutGrid } from 'lucide-react-native';
+import {
+  ArrowLeft,
+  ChevronRight,
+  Wallet,
+  LayoutGrid,
+} from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function PaymentInterface({ navigation }) {
   const goBack = () => {
     navigation.goBack();
-  };
-  const net = () => {
-    navigation.navigate('banks');
   };
 
   return (
@@ -29,10 +31,7 @@ export default function PaymentInterface({ navigation }) {
         style={styles.headerContainer}
       >
         <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={goBack}
-          >
+          <TouchableOpacity style={styles.backButton} onPress={goBack}>
             <ArrowLeft size={24} color="#fff" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Amount to be added ₹100</Text>
@@ -45,7 +44,7 @@ export default function PaymentInterface({ navigation }) {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Image
-              source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/upilogo.png'}}
+              source={require('@/assets/images/payment/upilogo.png')}
               style={styles.upiLogo}
             />
             <Text style={styles.sectionTitle}>Pay by any UPI app</Text>
@@ -53,8 +52,8 @@ export default function PaymentInterface({ navigation }) {
           <TouchableOpacity style={styles.card}>
             <View style={styles.cardContent}>
               <Image
-                source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/gpay.png'}}
-                style={{height:30,width:30,marginRight:18}}
+                source={require('@/assets/images/payment/gpay.png')}
+                style={{ height: 30, width: 30, marginRight: 18 }}
                 resizeMode="contain"
               />
               <Text style={styles.cardText}>GPay</Text>
@@ -70,15 +69,15 @@ export default function PaymentInterface({ navigation }) {
           <View style={styles.card}>
             <View style={styles.cardContent}>
               <Image
-                source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/amazonpay.png'}}
+                source={require('@/assets/images/payment/amazonpay.png')}
                 style={{ height: 30, width: 30, marginRight: 18 }}
                 resizeMode="contain"
               />
               <View style={styles.cardTextContainer}>
                 <Text style={styles.cardText}>Amazon Pay</Text>
                 <Text style={styles.cardSubtitle}>
-                  <Text style={styles.greenDot}>●</Text> Amazon Pay scratch
-                  card of up to ₹25 cashback on min deposit of ₹50.
+                  <Text style={styles.greenDot}>●</Text> Amazon Pay scratch card
+                  of up to ₹25 cashback on min deposit of ₹50.
                 </Text>
               </View>
             </View>
@@ -94,11 +93,14 @@ export default function PaymentInterface({ navigation }) {
             <LayoutGrid size={17} color="#6A0DAD" />
             <Text style={styles.sectionTitle}>More Payment Option</Text>
           </View>
-          <TouchableOpacity style={styles.card} onPress={net}>
+          <TouchableOpacity
+            style={styles.card}
+            onPress={() => navigation.navigate('Bank')}
+          >
             <View style={styles.cardContent}>
               <View style={styles.iconContainer}>
                 <Image
-                  source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/netbanking.png'}}
+                  source={require('@/assets/images/payment/netbanking.png')}
                   style={{ height: 30, width: 25, marginRight: 18 }}
                   resizeMode="contain"
                 />
@@ -114,22 +116,24 @@ export default function PaymentInterface({ navigation }) {
       <View style={styles.footer}>
         <View style={styles.footerIcons}>
           <Image
-            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/visa.png'}}
+            source={require('@/assets/images/payment/visa.png')}
             style={styles.footerIcon}
           />
           <Image
-            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/ss.png'}}
+            source={require('@/assets/images/payment/ss.png')}
             style={styles.footerIcon}
           />
           <Image
-            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/payment/master.png'}}
+            source={require('@/assets/images/payment/master.png')}
             style={styles.footerIcon}
           />
         </View>
       </View>
       <View style={styles.ft}>
         <Text style={styles.footerText}>
-          Card/Bank Details will be handled and processed by a third party & user must understand third party's privacy policies on how data is used. Amount collected from you is inclusive of GST at 28%.
+          Card/Bank Details will be handled and processed by a third party &
+          user must understand third party's privacy policies on how data is
+          used. Amount collected from you is inclusive of GST at 28%.
         </Text>
       </View>
     </View>
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
   upiLogo: {
     height: 15,
     width: 30,
-    borderRadius:2
+    borderRadius: 2,
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -227,13 +231,12 @@ const styles = StyleSheet.create({
     borderColor: '#4afcfc',
     borderRadius: 5,
     marginLeft: 10, // Ensures the button is on the right side
-    borderWidth:1
+    borderWidth: 1,
   },
   linkButtonText: {
     fontSize: 10,
     color: '#4afcfc',
     fontWeight: '500',
-    
   },
   footer: {
     padding: 16,

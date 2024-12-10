@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
 import { ArrowLeft, ChevronRight, Search } from 'lucide-react-native'; // Use the appropriate library for React Native icons
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -49,10 +58,7 @@ export default function BankSelection({ navigation }) {
         style={styles.headerContainer}
       >
         <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={goBack}
-          >
+          <TouchableOpacity style={styles.backButton} onPress={goBack}>
             <ArrowLeft size={24} color="#fff" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Amount to be added ₹100</Text>
@@ -107,7 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    height:50
+    height: 50,
   },
   backButton: {
     marginRight: 16,
