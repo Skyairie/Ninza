@@ -6,9 +6,10 @@ import {
   Image,
   StyleSheet,
   StatusBar,
+  TouchableOpacity,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { ArrowLeft } from 'lucide-react-native';
 
 const gamesData = [
   {
@@ -119,7 +120,7 @@ const statusColors = {
   Draw: '#FFB74D', // Amber
 };
 
-const GameHistory = () => {
+const GameHistory = ({navigation}) => {
   const renderGameItem = ({ item }) => (
     <LinearGradient colors={['#1A2B4C', '#143F62']} style={styles.gameCard}>
       <View style={styles.gameIconContainer}>
@@ -150,8 +151,12 @@ const GameHistory = () => {
 
       {/* Header */}
       <View style={styles.header}>
-        <Icon name="trophy" size={30} color="#FFD700" />
-        <Text style={styles.headerText}>Games History</Text>
+      <TouchableOpacity onPress={() => navigation.goBack()}
+          >
+        <ArrowLeft width={24} height={30} color="#FFD700" />
+      </TouchableOpacity>
+        {/* <Icon name="trophy" size={30} color="#FFD700" /> */}
+        <Text style={styles.headerTitle}>Games History</Text>
       </View>
 
       {/* Games List */}
@@ -171,18 +176,34 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 20,
   },
+  // header: {
+  //   flexDirection: 'row',
+  //   //alignItems: 'center',
+  //   //justifyContent: 'space-between',
+  //   marginBottom: 10,
+  // },
+  // headerText: {
+  //   fontSize: 24,
+  //   color: '#FFD700',
+  //   fontFamily: 'PressStart2P_400Regular', // Ensure custom fonts are linked
+  //   marginLeft: 10,
+  //   textAlign:'center'
+  // },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'row', // Align items horizontally in a row
+    alignItems: 'center', // Vertically center the items
+    justifyContent: 'space-between', // Space between the items
     marginBottom: 20,
   },
-  headerText: {
-    fontSize: 24,
+  
+  headerTitle: {
+    flex: 1, // Take up remaining space in the row
+    textAlign: 'center', // Center the text
+    fontSize: 20,
+    fontWeight: 'bold',
     color: '#FFD700',
-    fontFamily: 'PressStart2P_400Regular', // Ensure custom fonts are linked
-    marginLeft: 10,
   },
+  
   listContainer: {
     paddingBottom: 20,
   },

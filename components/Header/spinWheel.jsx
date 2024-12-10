@@ -76,7 +76,9 @@ const SpinWheel = ({ visible, onClose }) => {
             style={[styles.spinnerContainer, { transform: [{ rotate }] }]}
           >
             <Image
-              source={require('@/assets/images/wheel.png')}
+              source={{
+                uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/wheel.png',
+              }}
               style={styles.spinnerImage}
             />
           </Animated.View>

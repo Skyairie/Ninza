@@ -1,7 +1,9 @@
 export const dummyGames = [
   {
     name: 'Rummy',
-    image: require('@/assets/images/games-images/rummy.png'),
+    image: {
+      uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/rummy.png',
+    },
     howToPlay: `  
 1. Players: 2-6 players. A standard deck of 52 cards is used (2 decks for 4+ players).  
 2. Objective: Form valid sets and sequences to reduce points in your hand to zero.  
@@ -21,7 +23,9 @@ Rules of Rummy
   },
   {
     name: 'Callbreak',
-    image: require('@/assets/images/games-images/callbreak.png'),
+    image: {
+      uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/callbreak.png',
+    },
     howToPlay: ` 
 1. Players: 4 players.  
 2. Objective: Win exactly the number of tricks (rounds) you bid at the beginning of each game.  
@@ -43,7 +47,10 @@ Rules of Call Break
   },
   {
     name: 'Poker',
-    image: require('@/assets/images/games-images/poker.png'),
+    image: {
+      uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/poker.png',
+    },
+
     howToPlay: ` 
 1. Players: 2-10 players.  
 2. Objective: Form the best 5-card hand or bluff opponents to win the pot.  
@@ -65,7 +72,10 @@ Rules of Poker
   },
   {
     name: 'Ludo',
-    image: require('@/assets/images/games-images/ludo.png'),
+    image: {
+      uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/ludo.png',
+    },
+
     howToPlay: `
 How to Play Ludo  
 1. Players: 2-4 players. Each player chooses a color and gets four tokens.  
@@ -84,7 +94,10 @@ Rules of Ludo
   },
   {
     name: 'Snakes & Ladders',
-    image: require('@/assets/images/games-images/snake.jpeg'),
+    image: {
+      uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/snake.jpeg',
+    },
+
     howToPlay: `
 How to Play Snake and Ladder  
 1. Players: 2 or more players.  
@@ -108,6 +121,8 @@ export const manualLudoGames = [
   {
     id: 101,
     name: 'Ludo Classic',
-    image: require('@/assets/images/games-images/ludo.png'),
+    image: {
+      uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/games-images/manual_ludo.png',
+    },
   },
 ];

@@ -133,7 +133,8 @@ const Header = ({ navigation }) => {
             </TouchableOpacity>
             <TouchableOpacity onPress={openSpinModal}>
               <Image
-                source={require('@/assets/images/spin.png')}
+                          source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/wheel.png'}}
+
                 style={styles.spin}
               />
             </TouchableOpacity>
@@ -210,8 +211,8 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   spin: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     marginLeft: 10,
   },
   tabBar: {
@@ -221,12 +222,14 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   tabLabel: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#A9C1E8',
-    fontFamily: fonts.Poppins,
-  },
+    fontWeight: 'bold',
+
+ },
   activeTabLabel: {
-    fontSize: 16.5,
+    fontSize: 17,
+    fontFamily: fonts.Poppins,
     color: '#e4be00',
     fontWeight: 'bold',
   },

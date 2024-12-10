@@ -59,6 +59,7 @@ export default function DataList() {
       data={sortedData}
       keyExtractor={(item) => item.id.toString()}
       renderItem={renderItem}
+      showsVerticalScrollIndicator={false}
     />
   );
 }

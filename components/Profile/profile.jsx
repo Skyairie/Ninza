@@ -59,14 +59,14 @@ const ProfilePage = () => {
           </TouchableOpacity>
           <Image
             style={styles.bannerImage}
-            source={require('@/assets/images/profile-images/banner.jpg')} // Replace with gaming banner
-          />
+            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/profile-images/banner.jpg'}}
+            />
         </View>
 
         {/* Avatar */}
         <View style={styles.avatarContainer}>
           <Image
-            source={require('@/assets/images/logo-images/app.png')} // Replace with a gaming avatar
+            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/logo-images/app.png'}} // Replace with a gaming avatar
             style={styles.avatarCircle}
           />
           <Text style={styles.userName}>{name}</Text>

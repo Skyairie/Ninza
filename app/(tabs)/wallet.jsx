@@ -40,6 +40,7 @@ export default function GamingWalletScreen({ navigation }) {
   const earn = () => {
     navigation.navigate('Refer');
   };
+
   const withdroll = () => {
     navigation.navigate('WithdrawalPage');
   };
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 30,
     fontFamily: 'PressStart2P-Regular', // Use a gaming font
-    textShadowColor: 'pink',
+    //textShadowColor: 'pink',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
   },
