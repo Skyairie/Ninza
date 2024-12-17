@@ -63,7 +63,9 @@ const ReferEarn = () => {
         <View style={styles.banner}>
           <Image
             style={styles.bannerImage}
-            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/bring-friend.jpg'}}
+            source={{
+              uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/bring-friend.jpg',
+            }}
           />
         </View>
 

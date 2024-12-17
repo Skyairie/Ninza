@@ -40,10 +40,7 @@ export default function RoomTournament({ navigation }) {
 
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          
-        >
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <ArrowLeft width={24} height={30} color="black" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Room Code</Text>
@@ -199,7 +196,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  
+
   headerTitle: {
     flex: 1,
     textAlign: 'center',

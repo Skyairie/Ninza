@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,83 +8,55 @@ import {
   SafeAreaView,
   StyleSheet,
   ImageBackground,
+  ActivityIndicator,
 } from 'react-native';
 import { UserIcon, ClockIcon, FilterIcon, XIcon } from 'lucide-react-native';
+import axios from 'axios';
 
 export default function Tournament() {
   const [showBanner, setShowBanner] = useState(true);
+  const [tournaments, setTournaments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Tournament data with local images using `require`
-  const tournaments = [
-    {
-      game: 'LUDO',
-      image: {
-        uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/tournment-images/ludo.jpg',
-      },
-      prizePool: 140,
-      winUpto: 60,
-      participants: '8/16',
-      startingIn: '10 mins',
-      entryFee: 10,
-      rounds: 4,
-    },
-    {
-      game: 'Chess',
-      image: {
-        uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/tournment-images/ludo.jpg',
-      },
-      prizePool: 200,
-      winUpto: 80,
-      participants: '10/20',
-      startingIn: '20 mins',
-      entryFee: 15,
-      rounds: 3,
-    },
-    {
-      game: 'Carrom',
-      image: {
-        uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/tournment-images/ludo.jpg',
-      },
-      prizePool: 120,
-      winUpto: 50,
-      participants: '5/16',
-      startingIn: '5 mins',
-      entryFee: 8,
-      rounds: 2,
-    },
-    {
-      game: 'PUBG',
-      image: {
-        uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/tournment-images/ludo.jpg',
-      },
-      prizePool: 500,
-      winUpto: 250,
-      participants: '30/50',
-      startingIn: '15 mins',
-      entryFee: 10,
-      rounds: 5,
-    },
-    {
-      game: 'Call of Duty',
-      image: {
-        uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/tournment-images/ludo.jpg',
-      },
-      prizePool: 400,
-      winUpto: 180,
-      participants: '18/30',
-      startingIn: '25 mins',
-      entryFee: 18,
-      rounds: 4,
-    },
-  ];
+  // Fetch tournaments from the API
+  useEffect(() => {
+    fetchTournaments();
+  }, []);
+
+  const fetchTournaments = async () => {
+    try {
+      const response = await axios.get(
+        'http://192.168.1.14:3000/api/getTournament',
+      );
+      const { data } = response.data; // Access the "data" object inside the response
+      console.log(data);
+
+      // Map API data to match the structure of the local tournament array
+      setTournaments([
+        {
+          game: data.name,
+          image: {
+            uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/tournment-images/ludo.jpg',
+          },
+          prizePool: data.prizePool,
+          winUpto: data.prizePool / 2, // Example calculation
+          startingIn: '10 mins', // Static for demonstration
+          entryFee: 10, // Example static fee
+          rounds: 4, // Example static rounds
+          participants: `${data.teams.length} teams`, // Count of teams participating
+        },
+      ]);
+    } catch (err) {
+      console.error(err);
+      setError('Failed to load tournaments. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      {/* <StatusBar barStyle="light-content" backgroundColor="#58003b" /> */}
-      {/* <LinearGradient
-        colors={["#58003b", "#b8007a", "#006eb0"]}
-        style={styles.container1}
-      > */}
       <ImageBackground
         source={{
           uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/tabback-imgs/3.png',
@@ -93,14 +65,7 @@ export default function Tournament() {
       >
         <View style={{ flex: 1 }}>
           {/* Header */}
-          <View
-            style={{
-              position: 'sticky',
-              top: 0,
-              zIndex: 50,
-              //backgroundColor: "#2d0014",
-            }}
-          >
+          <View style={{ position: 'sticky', top: 0, zIndex: 50 }}>
             <View
               style={{
                 padding: 10,
@@ -125,114 +90,124 @@ export default function Tournament() {
           {/* Tournament List */}
           <ScrollView style={{ flex: 1, paddingBottom: 80 }}>
             <View style={{ padding: 10 }}>
-              {tournaments.map((tournament, i) => (
-                <View
-                  key={i}
-                  style={{
-                    borderRadius: 20,
-                    marginBottom: 10,
-                    overflow: 'hidden',
-                  }}
-                >
-                  {/* Semi-transparent background */}
+              {loading ? (
+                <ActivityIndicator size="large" color="#FFB800" />
+              ) : error ? (
+                <Text style={{ color: 'red', textAlign: 'center' }}>
+                  {error}
+                </Text>
+              ) : (
+                tournaments.map((tournament, i) => (
                   <View
+                    key={i}
                     style={{
-                      ...StyleSheet.absoluteFillObject,
-                      backgroundColor: 'rgba(0, 0, 0, 0.2)', // Black with 20% opacity
-                    }}
-                  />
-
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      gap: 16,
-                      padding: 10,
-                      borderWidth: 0,
-                      borderColor: 'black',
+                      borderRadius: 20,
+                      marginBottom: 10,
+                      overflow: 'hidden',
                     }}
                   >
-                    <View style={{ position: 'relative' }}>
-                      <Image
-                        source={tournament.image}
-                        style={{ width: 96, height: 96, borderRadius: 10 }}
-                      />
-                      <View style={styles.roundsLabel}>
-                        <Text style={{ color: 'black', textAlign: 'center' }}>
-                          {tournament.rounds} rounds
-                        </Text>
-                      </View>
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                        }}
-                      >
-                        <View>
-                          <Text style={{ color: 'white', fontSize: 12 }}>
-                            Prize pool
-                          </Text>
-                          <Text
-                            style={{
-                              color: 'white',
-                              fontSize: 18,
-                              fontWeight: 'bold',
-                            }}
-                          >
-                            ₹{tournament.prizePool}
-                          </Text>
-                        </View>
-                        <View style={{ alignItems: 'flex-end' }}>
-                          <Text style={{ color: 'white', fontSize: 12 }}>
-                            Starting in
-                          </Text>
-                          <Text style={{ color: '#FFB800' }}>
-                            {tournament.startingIn}
-                          </Text>
-                        </View>
-                      </View>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          marginTop: 16,
-                        }}
-                      >
-                        <View>
-                          <Text style={{ color: 'white', fontSize: 12 }}>
-                            Win Upto
-                          </Text>
-                          <Text style={{ color: 'white' }}>
-                            ₹{tournament.winUpto}
-                          </Text>
-                        </View>
-                        <TouchableOpacity style={styles.entryButton}>
-                          <Text style={{ color: 'white', fontWeight: 'bold' }}>
-                            ₹{tournament.entryFee}
-                          </Text>
-                        </TouchableOpacity>
-                      </View>
-                      <View
-                        style={{
-                          marginTop: 8,
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                        }}
-                      >
-                        <UserIcon
-                          size={16}
-                          color="white"
-                          style={{ marginRight: 4 }}
+                    {/* Semi-transparent background */}
+                    <View
+                      style={{
+                        ...StyleSheet.absoluteFillObject,
+                        backgroundColor: 'rgba(0, 0, 0, 0.2)', // Black with 20% opacity
+                      }}
+                    />
+
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        gap: 16,
+                        padding: 10,
+                        borderWidth: 0,
+                        borderColor: 'black',
+                      }}
+                    >
+                      <View style={{ position: 'relative' }}>
+                        <Image
+                          source={tournament.image}
+                          style={{ width: 96, height: 96, borderRadius: 10 }}
                         />
-                        <Text style={{ color: 'white', fontSize: 12 }}>
-                          {tournament.participants}
-                        </Text>
+                        <View style={styles.roundsLabel}>
+                          <Text style={{ color: 'black', textAlign: 'center' }}>
+                            {tournament.rounds} rounds
+                          </Text>
+                        </View>
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                          }}
+                        >
+                          <View>
+                            <Text style={{ color: 'white', fontSize: 12 }}>
+                              Prize pool
+                            </Text>
+                            <Text
+                              style={{
+                                color: 'white',
+                                fontSize: 18,
+                                fontWeight: 'bold',
+                              }}
+                            >
+                              ₹{tournament.prizePool}
+                            </Text>
+                          </View>
+                          <View style={{ alignItems: 'flex-end' }}>
+                            <Text style={{ color: 'white', fontSize: 12 }}>
+                              Starting in
+                            </Text>
+                            <Text style={{ color: '#FFB800' }}>
+                              {tournament.startingIn}
+                            </Text>
+                          </View>
+                        </View>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            marginTop: 16,
+                          }}
+                        >
+                          <View>
+                            <Text style={{ color: 'white', fontSize: 12 }}>
+                              Win Upto
+                            </Text>
+                            <Text style={{ color: 'white' }}>
+                              ₹{tournament.winUpto}
+                            </Text>
+                          </View>
+                          <TouchableOpacity style={styles.entryButton}>
+                            <Text
+                              style={{ color: 'white', fontWeight: 'bold' }}
+                            >
+                              ₹{tournament.entryFee}
+                            </Text>
+                          </TouchableOpacity>
+                        </View>
+                        <View
+                          style={{
+                            marginTop: 8,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <UserIcon
+                            size={16}
+                            color="white"
+                            style={{ marginRight: 4 }}
+                          />
+                          <Text style={{ color: 'white', fontSize: 12 }}>
+                            {tournament.participants}
+                          </Text>
+                        </View>
                       </View>
                     </View>
                   </View>
-                </View>
-              ))}
+                ))
+              )}
             </View>
           </ScrollView>
 
