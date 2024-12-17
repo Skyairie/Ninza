@@ -120,7 +120,7 @@ const statusColors = {
   Draw: '#FFB74D', // Amber
 };
 
-const GameHistory = ({navigation}) => {
+const GameHistory = ({ navigation }) => {
   const renderGameItem = ({ item }) => (
     <LinearGradient colors={['#1A2B4C', '#143F62']} style={styles.gameCard}>
       <View style={styles.gameIconContainer}>
@@ -151,10 +151,9 @@ const GameHistory = ({navigation}) => {
 
       {/* Header */}
       <View style={styles.header}>
-      <TouchableOpacity onPress={() => navigation.goBack()}
-          >
-        <ArrowLeft width={24} height={30} color="#FFD700" />
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <ArrowLeft width={24} height={30} color="#FFD700" />
+        </TouchableOpacity>
         {/* <Icon name="trophy" size={30} color="#FFD700" /> */}
         <Text style={styles.headerTitle}>Games History</Text>
       </View>
@@ -195,7 +194,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between', // Space between the items
     marginBottom: 20,
   },
-  
+
   headerTitle: {
     flex: 1, // Take up remaining space in the row
     textAlign: 'center', // Center the text
@@ -203,7 +202,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFD700',
   },
-  
+
   listContainer: {
     paddingBottom: 20,
   },

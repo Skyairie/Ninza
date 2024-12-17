@@ -33,9 +33,8 @@ export default function ManualBattle({ navigation }) {
       {/* Top Section */}
       <View style={styles.topSection}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}
-          >
-          <ArrowLeft width={24} height={30} color="white" />
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <ArrowLeft width={24} height={30} color="white" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Create a Battle</Text>
           <TouchableOpacity style={styles.rulesButton} onPress={openModal}>
@@ -105,7 +104,7 @@ export default function ManualBattle({ navigation }) {
         {Array.from({ length: 1 }).map((_, index) => (
           <LinearGradient
             key={index}
-            colors={['#f8a3ff','#ffff77','#84ffe1']}
+            colors={['#f8a3ff', '#ffff77', '#84ffe1']}
             style={styles.gamePlayCard}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
@@ -166,7 +165,7 @@ export default function ManualBattle({ navigation }) {
         {Array.from({ length: 4 }).map((_, index) => (
           <LinearGradient
             key={index}
-            colors={['#f8a3ff','#ffff77','#84ffe1']}
+            colors={['#f8a3ff', '#ffff77', '#84ffe1']}
             style={styles.gamePlayCard}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
@@ -265,7 +264,6 @@ const styles = StyleSheet.create({
     marginTop: 16,
     flexDirection: 'row',
     marginBottom: '5',
-    
   },
   runningBattlesTitle: {
     fontSize: 16,
@@ -388,5 +386,4 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 12,
   },
-  
 });

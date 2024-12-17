@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
     width: '100%',
-    height: '80%',
+    height: '60%',
   },
   modalImage: {
     width: 130,
@@ -88,19 +88,37 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingHorizontal: 10,
   },
+  // howToPlayTitle: {
+  //   fontSize: 30,
+  //   fontWeight: 'bold',
+  //   color: '#E6F7FF',
+  //   fontFamily: fonts.Poppins,
+  //   marginBottom: -15,
+  // },
+  // howToPlayText: {
+  //   fontSize: 12,
+  //   color: '#E6F7FF',
+  //   fontFamily: fonts.Poppins,
+  //   lineHeight: 20,
+  // },
+  comingSoonContainer: {
+    backgroundColor: 'transparent', // Make background transparent to highlight neon
+    padding: 10,
+    borderRadius: 10,
+    marginVertical: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   howToPlayTitle: {
-    fontSize: 16,
+    color: '#0ff', // Neon cyan color
+    fontSize: 24, // Larger font size for emphasis
     fontWeight: 'bold',
-    color: '#E6F7FF',
-    fontFamily: fonts.Poppins,
-    marginBottom: -15,
+    textAlign: 'center',
+    textShadowColor: 'rgba(0, 255, 255, 0.8)', // Glowing neon shadow
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 10,
   },
-  howToPlayText: {
-    fontSize: 12,
-    color: '#E6F7FF',
-    fontFamily: fonts.Poppins,
-    lineHeight: 20,
-  },
+
   inputContainer: {
     marginVertical: 10,
     paddingHorizontal: 10,

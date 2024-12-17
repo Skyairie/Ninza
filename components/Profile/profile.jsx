@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Image,
@@ -11,23 +11,58 @@ import {
   TextInput,
   SafeAreaView,
   StatusBar,
+  ActivityIndicator,
 } from 'react-native';
+import axios from 'axios'; // Import Axios
 import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import { useNavigation } from '@react-navigation/native'; // Import useNavigation
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 
 const ProfilePage = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [name, setName] = useState('GamerX');
-  const [email, setEmail] = useState('gamerx@ggmail.com');
+  const [profileData, setProfileData] = useState(null); // State for profile data
+  const [isLoading, setIsLoading] = useState(true); // State for loading
+  const [name, setName] = useState(''); // Editable name field
+  const [email, setEmail] = useState(''); // Editable email field
 
-  const navigation = useNavigation(); // Initialize navigation
+  const navigation = useNavigation();
+
+  // Fetch data from API
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await axios.get(
+          'http://192.168.1.14:3000/api/profile/12345',
+        ); // Replace with your API URL
+        const data = response.data.data;
+
+        setProfileData(data); // Set the profile data
+        setName(data.Name); // Set initial name
+        setEmail(data.Email); // Set initial email
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching profile data:', error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchProfileData();
+  }, []);
+
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
-  const saveData = () => closeModal();
+  const saveData = () => {
+    // Update the state with edited data
+    setProfileData((prevData) => ({
+      ...prevData,
+      Name: name,
+      Email: email,
+    }));
+    closeModal();
+  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -46,6 +81,14 @@ const ProfilePage = () => {
     navigation.goBack();
   };
 
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#f06543" />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.safearea}>
       <LinearGradient
@@ -59,17 +102,21 @@ const ProfilePage = () => {
           </TouchableOpacity>
           <Image
             style={styles.bannerImage}
-            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/profile-images/banner.jpg'}}
-            />
+            source={{
+              uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/profile-images/banner.jpg',
+            }}
+          />
         </View>
 
         {/* Avatar */}
         <View style={styles.avatarContainer}>
           <Image
-            source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/logo-images/app.png'}} // Replace with a gaming avatar
+            source={{
+              uri: profileData.avatar,
+            }}
             style={styles.avatarCircle}
           />
-          <Text style={styles.userName}>{name}</Text>
+          <Text style={styles.userName}>{profileData.Name}</Text>
           <Text style={styles.userLevel}>Level 20 • Champion</Text>
         </View>
 
@@ -77,23 +124,24 @@ const ProfilePage = () => {
         <View style={styles.infoSection}>
           <View style={styles.infoItem}>
             <FontAwesome5 name="user-circle" style={styles.icon} />
-            <Text style={styles.infoText}>{name}</Text>
+            <Text style={styles.infoText}>{profileData.Name}</Text>
           </View>
           <View style={styles.infoItem}>
-            <FontAwesome5 name="trophy" style={styles.icon} />
-            <Text style={styles.infoText}>Highest Score: 9999</Text>
+            <FontAwesome5 name="envelope" style={styles.icon} />
+            <Text style={styles.infoText}>{profileData.Email}</Text>
           </View>
           <View style={styles.infoItem}>
-            <FontAwesome5 name="comments" style={styles.icon} />
-            <Text style={styles.infoText}>Discord: GamerX#1234</Text>
+            <FontAwesome5 name="phone" style={styles.icon} />
+            <Text style={styles.infoText}>{profileData.Phone}</Text>
           </View>
-          {/* Replace Link with TouchableOpacity and use navigation.navigate */}
           <TouchableOpacity
             style={styles.infoItem}
-            onPress={() => navigation.navigate('Transaction')} // Use navigation.navigate
+            onPress={() => navigation.navigate('Transaction')}
           >
             <FontAwesome5 name="coins" style={styles.icon} />
-            <Text style={styles.infoText}>Transaction History</Text>
+            <Text style={styles.infoText}>
+              Wallet Balance: ${profileData.Wallet_balance}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.infoItem}
@@ -143,7 +191,6 @@ const ProfilePage = () => {
     </SafeAreaView>
   );
 };
-
 const styles = StyleSheet.create({
   safearea: {
     flex: 1,

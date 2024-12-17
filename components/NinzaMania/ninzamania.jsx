@@ -38,27 +38,29 @@ const NinzaMania = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ImageBackground
-        source={{uri:'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/tabback-imgs/1.png'}}
+        source={{
+          uri: 'https://ninza-game.s3.eu-north-1.amazonaws.com/logo/tabback-imgs/1.png',
+        }}
         style={styles.container}
       >
         <SubMenu />
 
         <ScrollView style={styles.scrollContainer}>
-        <GameSection
+          <GameSection
             title="Manual Ludo"
             items={manualLudoGames} // Use manual ludo-specific data
             onCardPress={handleManualLudoPress} // Navigate to ManualBattle
           />
           <GameSection
-            title="Trending"
+            title="Coming Soon..."
             items={dummyGames}
             onCardPress={openModal}
           />
-          <GameSection
-            title="For you"
+          {/* <GameSections
+            title="Coming Soon!!!!!!!!"
             items={dummyGames}
             onCardPress={openModal}
-          />
+          /> */}
           {/* <GameSection
             title="Popular on Ninza"
             items={dummyGames}
